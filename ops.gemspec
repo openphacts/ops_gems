@@ -8,10 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Thomas Marek"]
   s.email       = ["thomas.marek@biosolveit.de"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
-
-  s.rubyforge_project = "ops"
+  s.summary     = %q{Toolkit for the OPS Platform}
+  s.description = %q{Toolkit for the OPS Platform}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -21,5 +19,6 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec"
   s.add_development_dependency "webmock"
-  # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency "rdf"
+  s.add_runtime_dependency "activemodel"
 end
