@@ -1,4 +1,4 @@
-require 'coreapi_response_parser'
+require 'ops/coreapi_response_parser'
 require 'net/http'
 require 'uri'
 

@@ -6,8 +6,8 @@ require 'webmock/rspec'
 WebMock.disable_net_connect!
 
 require 'active_model'
-$:.unshift File.expand_path('../../lib/ops', __FILE__)
-require 'core_api_call'
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'ops/core_api_call'
 
 RSpec.configure do |config|
   # some (optional) config here
