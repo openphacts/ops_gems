@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CoreApiCall do
+describe OPS::CoreApiCall do
   it "calls the OPS core API and parses the result" do
     stubbed_request = stub_request(:post, "http://ops.few.vu.nl:9183/opsapi").
          with(:body => {"method"=>"compoundLookup", "substring"=>"Sora", "limit"=>"2", "offset"=>"0"},
@@ -39,7 +39,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   </results>
 </sparql>})
 
-    core_api_call = CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new
     options = Hash.new
     options[:substring] = "Sora"
     options[:limit] = 2

@@ -1,17 +1,18 @@
   require 'rubygems'
   require 'rdf'
 
-class CoreApiResponseParser
+module OPS
+  class CoreApiResponseParser
 
-  RESULT_BOOL = 'text/boolean'.freeze # Sesame-specific
-  RESULT_JSON = 'application/sparql-results+json'.freeze
-  RESULT_XML  = 'application/sparql-results+xml'.freeze
-  ACCEPT_JSON = {'Accept' => RESULT_JSON}.freeze
-  ACCEPT_XML  = {'Accept' => RESULT_XML}.freeze
-  
+    RESULT_BOOL = 'text/boolean'.freeze # Sesame-specific
+    RESULT_JSON = 'application/sparql-results+json'.freeze
+    RESULT_XML  = 'application/sparql-results+xml'.freeze
+    ACCEPT_JSON = {'Accept' => RESULT_JSON}.freeze
+    ACCEPT_XML  = {'Accept' => RESULT_XML}.freeze
+
     # Methods below lifted from sparql-client.rb by Arto Bendiken, Ben Lavender and others
     # @see http://sparql.rubyforge.org/client/
-  
+
     ##
     # @param  [Net::HTTPSuccess] response
     # @param  [Hash{Symbol => Object}] options
@@ -122,12 +123,12 @@ class CoreApiResponseParser
         reader.new(response.body)
       end
     end
-   
+
     ##
     # A mapping of blank node results for this client
     # @private
     def self.nodes
       @nodes ||= {}
     end
-
+  end
 end
