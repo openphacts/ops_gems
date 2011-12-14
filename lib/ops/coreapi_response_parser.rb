@@ -1,9 +1,8 @@
-  require 'rubygems'
-  require 'rdf'
+require 'rubygems'
+require 'rdf'
 
 module OPS
   class CoreApiResponseParser
-
     RESULT_BOOL = 'text/boolean'.freeze # Sesame-specific
     RESULT_JSON = 'application/sparql-results+json'.freeze
     RESULT_XML  = 'application/sparql-results+xml'.freeze
