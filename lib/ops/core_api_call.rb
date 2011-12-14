@@ -4,9 +4,6 @@ require 'uri'
 
 module OPS
   class CoreApiCall
-    include ActiveModel::Validations
-    extend ActiveModel::Naming
-
     CORE_API_URL = "http://ops.few.vu.nl:9183/opsapi"
 
     attr :success
