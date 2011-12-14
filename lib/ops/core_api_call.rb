@@ -9,19 +9,14 @@ module OPS
 
     CORE_API_URL = "http://ops.few.vu.nl:9183/opsapi"
 
-    def initialize(url = CORE_API_URL, open_timeout = 1, read_timeout = 1)
+    def initialize(url = CORE_API_URL, open_timeout = 10, read_timeout = 10)
       # Configuring the connection
       @uri = URI.parse(url)
       @http = Net::HTTP.new(@uri.host, @uri.port)
       @http.open_timeout = open_timeout # in seconds
       @http.read_timeout = read_timeout # in seconds
-                                        # Setting up the request
-      @request = Net::HTTP::Post.new(@uri.request_uri)
-                                        # Tweak headers, removing this will default to application/x-www-form-urlencoded
-      @request["Content-Type"] = "application/json"
-
-      # Errrgh!
-      @temp_uri = URI(url)
+      @open_timeout = open_timeout
+      @read_timeout = read_timeout
 
       # For timing the transaction
       @request_time = nil
@@ -68,14 +63,17 @@ module OPS
       end
       puts "\nIssues call to coreAPI on #{CORE_API_URL} with options: #{options.inspect}\n"
 
-      # setting the options for the api call
-      @request.set_form_data(options)
-      # start of call
-      #   begin
       @request_time = Time.now
 
-      #      @response = @http.request(@request)
-      @response = Net::HTTP.post_form(@uri, options)
+      @http.start do |http|
+        request = Net::HTTP::Post.new(@uri.path)
+        # Tweak headers, removing this will default to application/x-www-form-urlencoded
+        request["Content-Type"] = "application/json"
+        request.form_data = options
+
+        @response = http.request(request)
+      end
+
       @response_time = Time.now
       @query_time = @response_time - @request_time
       puts "Call took #{@query_time} seconds"
@@ -108,9 +106,6 @@ module OPS
           @http_error = "HTTP {status.to_s}-error"
           return nil
       end
-      #    rescue StandardError => the_exception
-      #         raise "OPS API error #{the_exception} - #{the_exception.backtrace.inspect.to_s}"
-      #    end
     end
   end
 end
