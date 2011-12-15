@@ -9,7 +9,7 @@ module OPS
     attr :success
     attr :http_error
 
-    def initialize(url = CORE_API_URL, open_timeout = 10, read_timeout = 10)
+    def initialize(url = CORE_API_URL, open_timeout = 60, read_timeout = 300)
       # Configuring the connection
       @uri = URI.parse(url)
       @success = false
