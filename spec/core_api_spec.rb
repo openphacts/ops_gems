@@ -49,14 +49,14 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   end
 
   it "calls the OPS core API with all specified options and parses the result" do
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new("http://myserver:1234/opsapi")
     options = {
       :substring => "Sora",
       :limit => 2,
       :offset => 3
     }
 
-    stubbed_request = stub_core_api_request("compoundLookup", options).to_return(@http_response_compound_lookup)
+    stubbed_request = stub_core_api_request("compoundLookup", options, "http://myserver:1234/opsapi").to_return(@http_response_compound_lookup)
 
     results = core_api_call.request("compoundLookup", options)
 
@@ -67,7 +67,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   end
 
   it "should set the offset to 0 by default" do
-    core_api_call = OPS::CoreApiCall.new("http://ops.few.vu.nl:9183/opsapi")
+    core_api_call = OPS::CoreApiCall.new
     options = {
       :substring => "Sora",
       :limit => 100
@@ -81,7 +81,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   end
 
   it "should set the limit to 100 by default" do
-    core_api_call = OPS::CoreApiCall.new("http://ops.few.vu.nl:9183/opsapi")
+    core_api_call = OPS::CoreApiCall.new
     options = {
       :substring => "Sora",
       :offset => 0

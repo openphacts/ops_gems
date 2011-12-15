@@ -27,7 +27,7 @@ module OPS
       options[:limit] ||= 100
       options[:offset] ||= 0
 
-      puts "\nIssues call to coreAPI on #{CORE_API_URL} with options: #{options.inspect}\n"
+      puts "\nIssues call to coreAPI on #{@uri} with options: #{options.inspect}\n"
 
       response = nil
       start_time = Time.now
