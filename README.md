@@ -4,7 +4,7 @@ Installation
 With bundler
 ------------
 
-    gem "ops", :git => "git@github.com:openphacts/ops_gems.git"
+    gem "ops", :git => "git://github.com/openphacts/ops_gems.git"
 
 
 Development
