@@ -4,7 +4,7 @@ require "ops/version"
 
 Gem::Specification.new do |s|
   s.name        = "ops"
-  s.version     = Ops::VERSION
+  s.version     = OPS::VERSION
   s.authors     = ["Thomas Marek"]
   s.email       = ["thomas.marek@biosolveit.de"]
   s.homepage    = ""

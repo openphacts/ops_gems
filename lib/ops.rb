@@ -1,5 +1,5 @@
 require "ops/version"
 
-module Ops
+module OPS
   # Your code goes here...
 end
