@@ -27,7 +27,7 @@ module OPS
       options[:limit] ||= 100
       options[:offset] ||= 0
 
-      puts "\nIssues call to coreAPI on #{@uri} with options: #{options.inspect}\n"
+      OPS.log(self, "Issues call to coreAPI on #{@uri} with options: #{options.inspect}")
 
       response = nil
       start_time = Time.now
@@ -43,33 +43,37 @@ module OPS
 
       response_time = Time.now
       query_time = Time.now - start_time
-      puts "Call took #{query_time} seconds"
+      OPS.log(self, "Call took #{query_time} seconds")
 
       status = case response.code.to_i
         when 100..199 then
           @http_error = "HTTP {status.to_s}-error"
-          puts @http_error
+          OPS.log(self, @http_error)
           return nil
         when 200 then #HTTPOK =>  Success
           @success = true
           parsed_responce = OPS::CoreApiResponseParser.parse_response(response)
-          puts parsed_responce.inspect
-          return parsed_responce.collect do |solution|
+
+          result = parsed_responce.collect do |solution|
             rdf = solution.to_hash
             rdf.each { |key, value| rdf[key] = value.to_s }
             rdf
           end
+
+          OPS.log(self, result.inspect)
+
+          return result
         when 201..407 then
           @http_error = "HTTP {status.to_s}-error"
-          puts @http_error
+          OPS.log(self, @http_error)
           return nil
         when 408 then
           @http_error = "HTTP post to core API timed out"
-          puts @http_error
+          OPS.log(self, @http_error)
           return nil
         when 409..600 then
           @http_error = "HTTP {status.to_s}-error"
-          puts @http_error
+          OPS.log(self, @http_error)
           return nil
       end
     end

@@ -1,5 +1,6 @@
 require "ops/version"
+require "ops/config"
 
 module OPS
-  # Your code goes here...
+  extend Config
 end
