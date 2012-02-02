@@ -32,13 +32,19 @@ module OPS
       response = nil
       start_time = Time.now
 
-      @http.start do |http|
-        request = Net::HTTP::Post.new(@uri.path)
-        # Tweak headers, removing this will default to application/x-www-form-urlencoded
-        request["Content-Type"] = "application/json"
-        request.form_data = options
+      request = Net::HTTP::Post.new(@uri.path)
+      # Tweak headers, removing this will default to application/x-www-form-urlencoded
+      request["Content-Type"] = "application/json"
+      request.form_data = options
 
-        response = http.request(request)
+      begin
+        @http.start do |http|
+          response = http.request(request)
+        end
+      rescue Timeout::Error
+        query_time = Time.now - start_time
+        OPS.log(self, "Timeout after #{query_time} seconds")
+        raise
       end
 
       response_time = Time.now
