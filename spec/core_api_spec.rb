@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe OPS::CoreApiCall do
   before(:all) do
+    @default_url = "http://ops.server:9183/opsapi"
     @http_response_compound_lookup = %{HTTP/1.1 200 OK
 Date: Tue, 06 Dec 2011 11:21:25 GMT
 Accept-Ranges: bytes
@@ -37,9 +38,10 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 </sparql>}
   end
 
-  def stub_core_api_request(method, options, url="http://ops.few.vu.nl:9183/opsapi")
+  def stub_core_api_request(method, options, url=nil)
     stringified_options = {}
     options.each { |key, value| stringified_options[key.to_s] = value.to_s }
+    url ||= @default_url
 
     stringified_options = { "offset" => "0", "limit" => "100" }.merge(stringified_options)
     stringified_options["method"] = method
@@ -67,7 +69,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   end
 
   it "sets the offset to 0 by default" do
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     options = {
       :substring => "Sora",
       :limit => 100
@@ -81,7 +83,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
   end
 
   it "sets the limit to 100 by default" do
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     options = {
       :substring => "Sora",
       :offset => 0
@@ -131,7 +133,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 </ArrayOfInt>))
 
 
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     stubbed_request = stub_core_api_request("compoundInfo", { :uri => "<http://rdf.chemspider.com/2157>" }).to_return(@http_response_compound_lookup)
 
     results = core_api_call.request("chemicalExactStructureSearch",
@@ -183,7 +185,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 </ArrayOfInt>))
 
 
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     stubbed_request = stub_core_api_request("compoundInfo", { :uri => "<http://rdf.chemspider.com/2157>" }).to_return(@http_response_compound_lookup)
     stubbed_request2 = stub_core_api_request("compoundInfo", { :uri => "<http://rdf.chemspider.com/123>" }).to_return(@http_response_compound_lookup)
 
@@ -236,7 +238,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 </ArrayOfInt>))
 
 
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     results = core_api_call.request("chemicalSubstructureSearch",
                                     :smiles => "CC(=O)Oc1ccccc1C(=O)O",
                                     :chemspider_token => "00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
@@ -294,7 +296,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 </ArrayOfInt>))
 
 
-    core_api_call = OPS::CoreApiCall.new
+    core_api_call = OPS::CoreApiCall.new(@default_url)
     stubbed_request = stub_core_api_request("compoundInfo", { :uri => "<http://rdf.chemspider.com/2157>" }).to_return(@http_response_compound_lookup)
 
     results = core_api_call.request("chemicalExactStructureSearch",
@@ -339,7 +341,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 <ERequestStatus xmlns="http://www.chemspider.com/">Failed</ERequestStatus>))
 
     expect do
-      core_api_call = OPS::CoreApiCall.new
+      core_api_call = OPS::CoreApiCall.new(@default_url)
       core_api_call.request("chemicalExactStructureSearch",
                             :smiles => "CC(=O)Oc1ccccc1C(=O)O",
                             :chemspider_token => "00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
@@ -377,7 +379,7 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
 <ERequestStatus xmlns="http://www.chemspider.com/">TooManyRecords</ERequestStatus>))
 
     expect do
-      core_api_call = OPS::CoreApiCall.new
+      core_api_call = OPS::CoreApiCall.new(@default_url)
       core_api_call.request("chemicalExactStructureSearch",
                             :smiles => "CC(=O)Oc1ccccc1C(=O)O",
                             :chemspider_token => "00000000-aaaa-2222-bbbb-aaa2ccc00000aa")

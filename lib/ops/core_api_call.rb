@@ -5,8 +5,6 @@ require 'uri'
 
 module OPS
   class CoreApiCall
-    CORE_API_URL = "http://ops.few.vu.nl:9183/opsapi"
-
     attr :success
     attr :http_error
 
@@ -14,7 +12,7 @@ module OPS
                              "chemicalSimilaritySearch" => :similarity_search,
                              "chemicalSubstructureSearch" => :substructure_search }
 
-    def initialize(url = CORE_API_URL, open_timeout = 60, read_timeout = 300)
+    def initialize(url, open_timeout = 60, read_timeout = 300)
       # Configuring the connection
       @uri = URI.parse(url)
       @success = false
