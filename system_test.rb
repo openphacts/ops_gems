@@ -4,11 +4,15 @@ require 'bundler/setup'
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'ops'
 
+
+OPS_URL = "http://ops.few.vu.nl:9187/opsapi"
+CHEMSPIDER_TOKEN = ""
+
+
 OPS.log = true
 
-
 def make_core_api_call(method, options)
-  OPS::CoreApiCall.new("http://ops.few.vu.nl:9187/opsapi").request(method, options)
+  OPS::CoreApiCall.new(OPS_URL).request(method, options)
 end
 
 
@@ -17,7 +21,7 @@ make_core_api_call("compoundLookup",
 make_core_api_call("proteinLookup",
                    :substring => "leukemia")
 make_core_api_call("compoundInfo",
-                   :uri => "<http://rdf.chemspider.com/187440>")
+                   :uri => "<http://chem2bio2rdf.org/chembl/resource/chembl_compounds/276734>")
 make_core_api_call("proteinInfo",
                    :uri => "<http://wiki.openphacts.org/index.php/PDSP_DB#54410>")
 make_core_api_call("compoundPharmacology",
@@ -26,13 +30,13 @@ make_core_api_call("proteinPharmacology",
                    :uri => "<http://wiki.openphacts.org/index.php/PDSP_DB#54410>")
 make_core_api_call("chemicalSimilaritySearch",
                    :smiles => "CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl",
-                   :chemspider_token => "5d749a0a-f4b0-444b-8287-aba2c2800ebaXt")
+                   :chemspider_token => CHEMSPIDER_TOKEN)
 make_core_api_call("chemicalSubstructureSearch",
                    :smiles => "CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl",
-                   :chemspider_token => "5d749a0a-f4b0-444b-8287-aba2c2800ebaXt")
+                   :chemspider_token => CHEMSPIDER_TOKEN)
 make_core_api_call("chemicalExactStructureSearch",
                    :smiles => "CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl",
-                   :chemspider_token => "5d749a0a-f4b0-444b-8287-aba2c2800ebaXt")
+                   :chemspider_token => CHEMSPIDER_TOKEN)
 make_core_api_call("superclasses",
                    :uri => "<http://purl.uniprot.org/enzyme/1.8.5.->")
 make_core_api_call("subclasses",
