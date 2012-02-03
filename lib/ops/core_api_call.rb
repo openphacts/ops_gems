@@ -53,7 +53,7 @@ module OPS
       options[:limit] ||= 100
       options[:offset] ||= 0
 
-      OPS.log(self, "Issues call to coreAPI on #{@uri} with options: #{options.inspect}")
+      OPS.log(self, :info, "Issues call to coreAPI on #{@uri} with options: #{options.inspect}")
 
       response = nil
       start_time = Time.now
@@ -69,18 +69,18 @@ module OPS
         end
       rescue Timeout::Error
         query_time = Time.now - start_time
-        OPS.log(self, "Timeout after #{query_time} seconds")
+        OPS.log(self, :error, "Timeout after #{query_time} seconds")
         raise
       end
 
       response_time = Time.now
       query_time = Time.now - start_time
-      OPS.log(self, "Call took #{query_time} seconds")
+      OPS.log(self, :debug, "Call took #{query_time} seconds")
 
       status = case response.code.to_i
         when 100..199 then
           @http_error = "HTTP {status.to_s}-error"
-          OPS.log(self, @http_error)
+          OPS.log(self, :error, @http_error)
           return nil
         when 200 then #HTTPOK =>  Success
           @success = true
@@ -92,20 +92,21 @@ module OPS
             rdf
           end
 
-          OPS.log(self, result.inspect)
+          OPS.log(self, :info, "Result: #{result.nil? ? 0 : result.length} items")
+          OPS.log(self, :debug, "Result: #{result.inspect}")
 
           return result
         when 201..407 then
           @http_error = "HTTP {status.to_s}-error"
-          OPS.log(self, @http_error)
+          OPS.log(self, :error, @http_error)
           return nil
         when 408 then
           @http_error = "HTTP post to core API timed out"
-          OPS.log(self, @http_error)
+          OPS.log(self, :error, @http_error)
           return nil
         when 409..600 then
           @http_error = "HTTP {status.to_s}-error"
-          OPS.log(self, @http_error)
+          OPS.log(self, :error, @http_error)
           return nil
       end
     end

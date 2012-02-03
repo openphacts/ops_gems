@@ -9,8 +9,6 @@ OPS_URL = "http://ops.few.vu.nl:9187/opsapi"
 CHEMSPIDER_TOKEN = ""
 
 
-OPS.log = true
-
 def make_core_api_call(method, options)
   OPS::CoreApiCall.new(OPS_URL).request(method, options)
 end

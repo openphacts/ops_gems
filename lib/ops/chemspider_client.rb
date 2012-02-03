@@ -31,7 +31,7 @@ module OPS
 </soap12:Envelope>)
       response = nil
 
-      OPS.log(self, "Issues call to ChemSpider for 'StructureSearch' with smiles '#{smiles}'")
+      OPS.log(self, :info, "Issues call to ChemSpider for 'StructureSearch' with smiles '#{smiles}'")
       start_time = Time.now
 
       http.start do |http|
@@ -42,7 +42,7 @@ module OPS
       transaction_id = doc.xpath("//cs:StructureSearchResponse/cs:StructureSearchResult", "cs" => "http://www.chemspider.com/").first.content
 
       query_time = Time.now - start_time
-      OPS.log(self, "(#{transaction_id}) Call took #{query_time} seconds")
+      OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
 
       wait_for_search_result(transaction_id)
     end
@@ -69,7 +69,7 @@ module OPS
 </soap12:Envelope>)
       response = nil
 
-      OPS.log(self, "Issues call to ChemSpider for 'SimilaritySearch' with smiles '#{smiles}'")
+      OPS.log(self, :info, "Issues call to ChemSpider for 'SimilaritySearch' with smiles '#{smiles}'")
       start_time = Time.now
 
       http.start do |http|
@@ -80,7 +80,7 @@ module OPS
       transaction_id = doc.xpath("//cs:SimilaritySearchResponse/cs:SimilaritySearchResult", "cs" => "http://www.chemspider.com/").first.content
 
       query_time = Time.now - start_time
-      OPS.log(self, "(#{transaction_id}) Call took #{query_time} seconds")
+      OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
 
       wait_for_search_result(transaction_id)
     end
@@ -106,7 +106,7 @@ module OPS
 </soap12:Envelope>)
       response = nil
 
-      OPS.log(self, "Issues call to ChemSpider for 'SubstructureSearch' with smiles '#{smiles}'")
+      OPS.log(self, :info, "Issues call to ChemSpider for 'SubstructureSearch' with smiles '#{smiles}'")
       start_time = Time.now
 
       http.start do |http|
@@ -117,7 +117,7 @@ module OPS
       transaction_id = doc.xpath("//cs:SubstructureSearchResponse/cs:SubstructureSearchResult", "cs" => "http://www.chemspider.com/").first.content
 
       query_time = Time.now - start_time
-      OPS.log(self, "(#{transaction_id}) Call took #{query_time} seconds")
+      OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
 
       wait_for_search_result(transaction_id)
     end
@@ -136,13 +136,13 @@ module OPS
     end
 
     def wait_for_search_result(transaction_id)
-      OPS.log(self, "(#{transaction_id}) Wait for search result for transaction")
+      OPS.log(self, :debug, "(#{transaction_id}) Wait for search result for transaction")
 
       search_status = nil
       while search_status != "ResultReady" do
         sleep(0.5) unless search_status.nil?
         search_status = get_async_search_status(transaction_id)
-        OPS.log(self, "(#{transaction_id}) Search status: '#{search_status}'")
+        OPS.log(self, :debug, "(#{transaction_id}) Search status: '#{search_status}'")
 
         if search_status == "Failed"
           raise Failed.new("ChemSpider returned request status 'Failed'")
@@ -153,7 +153,7 @@ module OPS
 
       result = get_async_search_result(transaction_id)
 
-      OPS.log(self, "(#{transaction_id}) Search result: #{result}")
+      OPS.log(self, :info, "(#{transaction_id}) Search result: #{result}")
 
       result
     end

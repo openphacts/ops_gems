@@ -4,23 +4,17 @@ module OPS
   module Config
     attr_writer :log
     attr_writer :logger
-    attr_writer :log_level
 
-    def log?
-      !@log.nil? and @log != false
+    def logging_disabled?
+      @log == false
     end
 
     def logger
       @logger ||= ::Logger.new STDOUT
     end
 
-    def log_level
-      @log_level ||= :debug
-    end
-
-    def log(sender, message)
-      return unless log?
-      logger.send(log_level, "[#{sender.class.name}] #{message}")
+    def log(sender, log_level, message)
+      logger.send(log_level, "[#{sender.class.name}] #{message}") unless logging_disabled?
     end
   end
 end
