@@ -1,4 +1,5 @@
 require 'ops/coreapi_response_parser'
+require 'ops/chemspider_client'
 require 'net/http'
 require 'uri'
 
@@ -8,6 +9,10 @@ module OPS
 
     attr :success
     attr :http_error
+
+    @@chemspider_methods = { "chemicalExactStructureSearch" => :structure_search,
+                             "chemicalSimilaritySearch" => :similarity_search,
+                             "chemicalSubstructureSearch" => :substructure_search }
 
     def initialize(url = CORE_API_URL, open_timeout = 60, read_timeout = 300)
       # Configuring the connection
@@ -23,6 +28,27 @@ module OPS
     def request(api_method, options)
       raise "No method API method selected! Please specify a OPS coreAPI method" if api_method.nil?
 
+      return request_core_api(api_method, options) unless @@chemspider_methods.has_key?(api_method)
+
+      chemspider_client = ChemSpiderClient.new(options.fetch(:chemspider_token))
+      chemspider_ids = chemspider_client.send(@@chemspider_methods[api_method], options.fetch(:smiles))
+
+      options.delete(:chemspider_token)
+      options.delete(:smiles)
+
+      result = []
+
+      chemspider_ids.each do |chemspider_id|
+        options[:uri] = "<http://rdf.chemspider.com/#{chemspider_id}>"
+        r = request_core_api("compoundInfo", options)
+        result.concat(r) if r
+      end
+
+      result
+    end
+
+  private
+    def request_core_api(api_method, options)
       options[:method] = api_method
       options[:limit] ||= 100
       options[:offset] ||= 0
