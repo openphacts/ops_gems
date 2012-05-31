@@ -184,6 +184,48 @@ describe OPS::ChemSpiderClient do
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
     end
+
+    it "raises an exception on unauthorized ChemSpider web service usage" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+           with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <SearchType>ExactMatch</SearchType>
+        <MatchType>ExactMatch</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+           to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <soap:Fault>
+      <soap:Code>
+        <soap:Value>soap:Sender</soap:Value>
+      </soap:Code>
+      <soap:Reason>
+        <soap:Text xml:lang="en">
+          Unauthorized web service usage. Please request access to this service. ---&gt; Unauthorized web service usage. Please request access to this service.
+        </soap:Text>
+      </soap:Reason>
+      <soap:Detail />
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>),
+                     :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expect do
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
+      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+
+      expected_search_request.should have_been_made.once
+    end
   end
 
   describe "similarity_search" do
@@ -373,6 +415,49 @@ describe OPS::ChemSpiderClient do
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
     end
+
+    it "raises an exception on unauthorized ChemSpider web service usage" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+           with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <SearchType>Similarity</SearchType>
+        <SimilarityType>Tanimoto</SimilarityType>
+        <Threshold>0.99</Threshold>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </SimilaritySearch>
+  </soap12:Body>
+</soap12:Envelope>),
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+           to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <soap:Fault>
+      <soap:Code>
+        <soap:Value>soap:Sender</soap:Value>
+      </soap:Code>
+      <soap:Reason>
+        <soap:Text xml:lang="en">
+          Unauthorized web service usage. Please request access to this service. ---&gt; Unauthorized web service usage. Please request access to this service.
+        </soap:Text>
+      </soap:Reason>
+      <soap:Detail />
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>),
+                     :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expect do
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+
+      expected_search_request.should have_been_made.once
+    end
   end
 
   describe "substructure_search" do
@@ -557,6 +642,48 @@ describe OPS::ChemSpiderClient do
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
+    end
+
+    it "raises an exception on unauthorized ChemSpider web service usage" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+           with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <SearchType>Substructure</SearchType>
+        <MatchTautomers>false</MatchTautomers>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </SubstructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+           to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <soap:Fault>
+      <soap:Code>
+        <soap:Value>soap:Sender</soap:Value>
+      </soap:Code>
+      <soap:Reason>
+        <soap:Text xml:lang="en">
+          Unauthorized web service usage. Please request access to this service. ---&gt; Unauthorized web service usage. Please request access to this service.
+        </soap:Text>
+      </soap:Reason>
+      <soap:Detail />
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>),
+                     :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expect do
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        results = chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
+      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+
+      expected_search_request.should have_been_made.once
     end
   end
 end

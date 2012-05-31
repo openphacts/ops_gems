@@ -385,4 +385,46 @@ Content-Type: application/sparql-results+xml; charset=UTF-8
                             :chemspider_token => "00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
     end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
   end
+
+  it "raises an exception on unauthorized ChemSpider web service usage" do
+    stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <SearchType>ExactMatch</SearchType>
+        <MatchType>ExactMatch</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+        to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+ <soap:Fault>
+   <soap:Code>
+     <soap:Value>soap:Sender</soap:Value>
+   </soap:Code>
+   <soap:Reason>
+     <soap:Text xml:lang="en">
+       Unauthorized web service usage. Please request access to this service. ---&gt; Unauthorized web service usage. Please request access to this service.
+     </soap:Text>
+   </soap:Reason>
+   <soap:Detail />
+ </soap:Fault>
+</soap:Body>
+</soap:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+    expect do
+      core_api_call = OPS::CoreApiCall.new(@default_url)
+      core_api_call.request("chemicalExactStructureSearch",
+                            :smiles => "CC(=O)Oc1ccccc1C(=O)O",
+                            :chemspider_token => "00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+    end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+  end
 end

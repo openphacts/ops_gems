@@ -3,6 +3,7 @@ require 'nokogiri'
 module OPS
   class ChemSpiderClient
     class Error < StandardError; end
+    class Unauthorized < ChemSpiderClient::Error; end
     class Failed < ChemSpiderClient::Error; end
     class TooManyRecords < ChemSpiderClient::Error; end
 
@@ -11,12 +12,7 @@ module OPS
     end
 
     def structure_search(smiles)
-      uri = URI.parse("http://www.chemspider.com/Search.asmx")
-      http = Net::HTTP.new(uri.host, uri.port)
-
-      request = Net::HTTP::Post.new(uri.path)
-      request["Content-Type"] = "application/soap+xml; charset=utf-8"
-      request.body = %(<?xml version="1.0" encoding="utf-8"?>
+      request_body = %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
     <StructureSearch xmlns="http://www.chemspider.com/">
@@ -29,31 +25,12 @@ module OPS
     </StructureSearch>
   </soap12:Body>
 </soap12:Envelope>)
-      response = nil
 
-      OPS.log(self, :info, "Issues call to ChemSpider for 'StructureSearch' with smiles '#{smiles}'")
-      start_time = Time.now
-
-      http.start do |http|
-        response = http.request(request)
-      end
-
-      doc = Nokogiri::XML(response.body)
-      transaction_id = doc.xpath("//cs:StructureSearchResponse/cs:StructureSearchResult", "cs" => "http://www.chemspider.com/").first.content
-
-      query_time = Time.now - start_time
-      OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
-
-      wait_for_search_result(transaction_id)
+      make_smiles_based_search(request_body, "StructureSearch", smiles)
     end
 
     def similarity_search(smiles)
-      uri = URI.parse("http://www.chemspider.com/Search.asmx")
-      http = Net::HTTP.new(uri.host, uri.port)
-
-      request = Net::HTTP::Post.new(uri.path)
-      request["Content-Type"] = "application/soap+xml; charset=utf-8"
-      request.body = %(<?xml version="1.0" encoding="utf-8"?>
+      request_body = %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
     <SimilaritySearch xmlns="http://www.chemspider.com/">
@@ -67,31 +44,12 @@ module OPS
     </SimilaritySearch>
   </soap12:Body>
 </soap12:Envelope>)
-      response = nil
 
-      OPS.log(self, :info, "Issues call to ChemSpider for 'SimilaritySearch' with smiles '#{smiles}'")
-      start_time = Time.now
-
-      http.start do |http|
-        response = http.request(request)
-      end
-
-      doc = Nokogiri::XML(response.body)
-      transaction_id = doc.xpath("//cs:SimilaritySearchResponse/cs:SimilaritySearchResult", "cs" => "http://www.chemspider.com/").first.content
-
-      query_time = Time.now - start_time
-      OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
-
-      wait_for_search_result(transaction_id)
+      make_smiles_based_search(request_body, "SimilaritySearch", smiles)
     end
 
     def substructure_search(smiles)
-      uri = URI.parse("http://www.chemspider.com/Search.asmx")
-      http = Net::HTTP.new(uri.host, uri.port)
-
-      request = Net::HTTP::Post.new(uri.path)
-      request["Content-Type"] = "application/soap+xml; charset=utf-8"
-      request.body = %(<?xml version="1.0" encoding="utf-8"?>
+      request_body = %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
     <SubstructureSearch xmlns="http://www.chemspider.com/">
@@ -104,17 +62,33 @@ module OPS
     </SubstructureSearch>
   </soap12:Body>
 </soap12:Envelope>)
-      response = nil
 
-      OPS.log(self, :info, "Issues call to ChemSpider for 'SubstructureSearch' with smiles '#{smiles}'")
+      make_smiles_based_search(request_body, "SubstructureSearch", smiles)
+    end
+
+  private
+    def make_smiles_based_search(request_body, type, smiles)
+      uri = URI.parse("http://www.chemspider.com/Search.asmx")
+      http = Net::HTTP.new(uri.host, uri.port)
+
+      request = Net::HTTP::Post.new(uri.path)
+      request["Content-Type"] = "application/soap+xml; charset=utf-8"
+      request.body = request_body
+
+      OPS.log(self, :info, "Issues call to ChemSpider for '#{type}' with smiles '#{smiles}'")
       start_time = Time.now
 
+      response = nil
       http.start do |http|
         response = http.request(request)
       end
 
+      if response.body.include?("Unauthorized web service usage. Please request access to this service.")
+        raise Unauthorized.new("ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+      end
+
       doc = Nokogiri::XML(response.body)
-      transaction_id = doc.xpath("//cs:SubstructureSearchResponse/cs:SubstructureSearchResult", "cs" => "http://www.chemspider.com/").first.content
+      transaction_id = doc.xpath("//cs:#{type}Response/cs:#{type}Result", "cs" => "http://www.chemspider.com/").first.content
 
       query_time = Time.now - start_time
       OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
@@ -122,7 +96,6 @@ module OPS
       wait_for_search_result(transaction_id)
     end
 
-  private
     def get_async_search_status(transaction_id)
       response = Net::HTTP.get_response(URI.parse("http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=#{transaction_id}&token=#{@token}"))
       doc = Nokogiri::XML(response.body)
