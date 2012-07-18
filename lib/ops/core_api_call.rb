@@ -77,7 +77,7 @@ module OPS
 
       status = case response.code.to_i
         when 100..199 then
-          @http_error = "HTTP {status.to_s}-error"
+          @http_error = "HTTP #{status.to_s}-error"
           OPS.log(self, :error, @http_error)
           return nil
         when 200 then #HTTPOK =>  Success
@@ -95,7 +95,7 @@ module OPS
 
           return result
         when 201..407 then
-          @http_error = "HTTP {status.to_s}-error"
+          @http_error = "HTTP #{status.to_s}-error"
           OPS.log(self, :error, @http_error)
           return nil
         when 408 then
@@ -103,7 +103,7 @@ module OPS
           OPS.log(self, :error, @http_error)
           return nil
         when 409..600 then
-          @http_error = "HTTP {status.to_s}-error"
+          @http_error = "HTTP #{status.to_s}-error"
           OPS.log(self, :error, @http_error)
           return nil
       end
