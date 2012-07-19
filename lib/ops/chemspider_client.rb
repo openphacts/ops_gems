@@ -18,7 +18,6 @@ module OPS
     <StructureSearch xmlns="http://www.chemspider.com/">
       <options>
         <Molecule>#{smiles}</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>#{@token}</token>
@@ -36,7 +35,6 @@ module OPS
     <SimilaritySearch xmlns="http://www.chemspider.com/">
       <options>
         <Molecule>#{smiles}</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -55,7 +53,6 @@ module OPS
     <SubstructureSearch xmlns="http://www.chemspider.com/">
       <options>
         <Molecule>#{smiles}</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>#{@token}</token>

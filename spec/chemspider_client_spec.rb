@@ -10,7 +10,6 @@ describe OPS::ChemSpiderClient do
     <StructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -57,7 +56,6 @@ describe OPS::ChemSpiderClient do
     <StructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CCCCCC</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>00000000-CCCC-2222-bbbb-aaa2ccc00000aa</token>
@@ -115,7 +113,6 @@ describe OPS::ChemSpiderClient do
     <StructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -154,7 +151,6 @@ describe OPS::ChemSpiderClient do
     <StructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -193,7 +189,6 @@ describe OPS::ChemSpiderClient do
     <StructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>ExactMatch</SearchType>
         <MatchType>ExactMatch</MatchType>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -237,7 +232,6 @@ describe OPS::ChemSpiderClient do
     <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -285,7 +279,6 @@ describe OPS::ChemSpiderClient do
     <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CCCCCC</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -344,7 +337,6 @@ describe OPS::ChemSpiderClient do
     <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -384,7 +376,6 @@ describe OPS::ChemSpiderClient do
     <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -424,7 +415,6 @@ describe OPS::ChemSpiderClient do
     <SimilaritySearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Similarity</SearchType>
         <SimilarityType>Tanimoto</SimilarityType>
         <Threshold>0.99</Threshold>
       </options>
@@ -469,7 +459,6 @@ describe OPS::ChemSpiderClient do
     <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -516,7 +505,6 @@ describe OPS::ChemSpiderClient do
     <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CCCCCC</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>00000000-CCCC-2222-bbbb-aaa2ccc00000aa</token>
@@ -574,7 +562,6 @@ describe OPS::ChemSpiderClient do
     <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -613,7 +600,6 @@ describe OPS::ChemSpiderClient do
     <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
@@ -652,7 +638,6 @@ describe OPS::ChemSpiderClient do
     <SubstructureSearch xmlns=\"http://www.chemspider.com/\">
       <options>
         <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
-        <SearchType>Substructure</SearchType>
         <MatchTautomers>false</MatchTautomers>
       </options>
       <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
