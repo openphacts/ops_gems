@@ -1,3 +1,4 @@
+require 'httpclient'
 require 'nokogiri'
 
 module OPS
@@ -9,6 +10,7 @@ module OPS
 
     def initialize(token)
       @token = token
+      @http_client = HTTPClient.new
     end
 
     def structure_search(smiles)
@@ -65,20 +67,10 @@ module OPS
 
   private
     def make_smiles_based_search(request_body, type, smiles)
-      uri = URI.parse("http://www.chemspider.com/Search.asmx")
-      http = Net::HTTP.new(uri.host, uri.port)
-
-      request = Net::HTTP::Post.new(uri.path)
-      request["Content-Type"] = "application/soap+xml; charset=utf-8"
-      request.body = request_body
-
       OPS.log(self, :info, "Issues call to ChemSpider for '#{type}' with smiles '#{smiles}'")
       start_time = Time.now
 
-      response = nil
-      http.start do |http|
-        response = http.request(request)
-      end
+      response = @http_client.post('http://www.chemspider.com/Search.asmx', request_body, 'Content-Type' => 'application/soap+xml; charset=utf-8')
 
       if response.body.include?("Unauthorized web service usage. Please request access to this service.")
         raise Unauthorized.new("ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
@@ -94,13 +86,13 @@ module OPS
     end
 
     def get_async_search_status(transaction_id)
-      response = Net::HTTP.get_response(URI.parse("http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=#{transaction_id}&token=#{@token}"))
+      response = @http_client.get("http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=#{transaction_id}&token=#{@token}")
       doc = Nokogiri::XML(response.body)
       doc.xpath("//cs:ERequestStatus", "cs" => "http://www.chemspider.com/").first.content
     end
 
     def get_async_search_result(transaction_id)
-      response = Net::HTTP.get_response(URI.parse("http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=#{transaction_id}&token=#{@token}"))
+      response = @http_client.get("http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=#{transaction_id}&token=#{@token}")
       doc = Nokogiri::XML(response.body)
       doc.xpath("//cs:ArrayOfInt/cs:int", "cs" => "http://www.chemspider.com/").collect(&:content)
     end

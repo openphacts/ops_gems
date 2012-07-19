@@ -16,7 +16,7 @@ describe OPS::ChemSpiderClient do
     </StructureSearch>
   </soap12:Body>
 </soap12:Envelope>),
-                :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/soap+xml; charset=utf-8', 'User-Agent'=>'Ruby'}).
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
            to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
@@ -239,7 +239,7 @@ describe OPS::ChemSpiderClient do
     </SimilaritySearch>
   </soap12:Body>
 </soap12:Envelope>),
-                :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/soap+xml; charset=utf-8', 'User-Agent'=>'Ruby'}).
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
            to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
@@ -465,7 +465,7 @@ describe OPS::ChemSpiderClient do
     </SubstructureSearch>
   </soap12:Body>
 </soap12:Envelope>),
-                :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/soap+xml; charset=utf-8', 'User-Agent'=>'Ruby'}).
+                :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
            to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
