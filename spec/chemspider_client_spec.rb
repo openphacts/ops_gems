@@ -221,6 +221,243 @@ describe OPS::ChemSpiderClient do
 
       expected_search_request.should have_been_made.once
     end
+
+    it "can search with match type 'exact_match'" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <MatchType>ExactMatch</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <StructureSearchResponse xmlns="http://www.chemspider.com/">
+      <StructureSearchResult>9629dbb8-0ca2-4884-aa8b-f4e7f521e25f</StructureSearchResult>
+    </StructureSearchResponse>
+  </soap12:Body>
+</soap12:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expected_status_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ERequestStatus xmlns="http://www.chemspider.com/">ResultReady</ERequestStatus>))
+
+      expected_result_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfInt xmlns="http://www.chemspider.com/">
+  <int>2157</int>
+</ArrayOfInt>))
+
+
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :exact_match)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      results.should == ["2157"]
+    end
+
+    it "can search with match type 'all_tautomers'" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <MatchType>AllTautomers</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <StructureSearchResponse xmlns="http://www.chemspider.com/">
+      <StructureSearchResult>9629dbb8-0ca2-4884-aa8b-f4e7f521e25f</StructureSearchResult>
+    </StructureSearchResponse>
+  </soap12:Body>
+</soap12:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expected_status_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ERequestStatus xmlns="http://www.chemspider.com/">ResultReady</ERequestStatus>))
+
+      expected_result_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfInt xmlns="http://www.chemspider.com/">
+  <int>2157</int>
+</ArrayOfInt>))
+
+
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :all_tautomers)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      results.should == ["2157"]
+    end
+
+    it "can search with match type 'same_skeleton_including_h'" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <MatchType>SameSkeletonIncludingH</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <StructureSearchResponse xmlns="http://www.chemspider.com/">
+      <StructureSearchResult>9629dbb8-0ca2-4884-aa8b-f4e7f521e25f</StructureSearchResult>
+    </StructureSearchResponse>
+  </soap12:Body>
+</soap12:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expected_status_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ERequestStatus xmlns="http://www.chemspider.com/">ResultReady</ERequestStatus>))
+
+      expected_result_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfInt xmlns="http://www.chemspider.com/">
+  <int>2157</int>
+</ArrayOfInt>))
+
+
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :same_skeleton_including_h)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      results.should == ["2157"]
+    end
+
+    it "can search with match type 'same_skeleton_excluding_h'" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <MatchType>SameSkeletonExcludingH</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <StructureSearchResponse xmlns="http://www.chemspider.com/">
+      <StructureSearchResult>9629dbb8-0ca2-4884-aa8b-f4e7f521e25f</StructureSearchResult>
+    </StructureSearchResponse>
+  </soap12:Body>
+</soap12:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expected_status_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ERequestStatus xmlns="http://www.chemspider.com/">ResultReady</ERequestStatus>))
+
+      expected_result_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfInt xmlns="http://www.chemspider.com/">
+  <int>2157</int>
+</ArrayOfInt>))
+
+
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :same_skeleton_excluding_h)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      results.should == ["2157"]
+    end
+
+    it "can search with match type 'all_isomers'" do
+      expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
+         with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">
+  <soap12:Body>
+    <StructureSearch xmlns=\"http://www.chemspider.com/\">
+      <options>
+        <Molecule>CC(=O)Oc1ccccc1C(=O)O</Molecule>
+        <MatchType>AllIsomers</MatchType>
+      </options>
+      <token>00000000-aaaa-2222-bbbb-aaa2ccc00000aa</token>
+    </StructureSearch>
+  </soap12:Body>
+</soap12:Envelope>),
+              :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'}).
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <StructureSearchResponse xmlns="http://www.chemspider.com/">
+      <StructureSearchResult>9629dbb8-0ca2-4884-aa8b-f4e7f521e25f</StructureSearchResult>
+    </StructureSearchResponse>
+  </soap12:Body>
+</soap12:Envelope>),
+                   :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
+
+      expected_status_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ERequestStatus xmlns="http://www.chemspider.com/">ResultReady</ERequestStatus>))
+
+      expected_result_request = stub_request(:get, "http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=9629dbb8-0ca2-4884-aa8b-f4e7f521e25f&token=00000000-aaaa-2222-bbbb-aaa2ccc00000aa").
+         to_return(:status => 200, :body => %(<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfInt xmlns="http://www.chemspider.com/">
+  <int>2157</int>
+</ArrayOfInt>))
+
+
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :all_isomers)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      results.should == ["2157"]
+    end
+
+    it "raises an exception if an unknown match type gets used" do
+      expect do
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :unknown_bla)
+      end.to raise_error(OPS::ChemSpiderClient::InvalidOption, "Value 'unknown_bla' is not valid for option 'match_type'")
+    end
   end
 
   describe "similarity_search" do

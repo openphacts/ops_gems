@@ -7,20 +7,35 @@ module OPS
     class Unauthorized < ChemSpiderClient::Error; end
     class Failed < ChemSpiderClient::Error; end
     class TooManyRecords < ChemSpiderClient::Error; end
+    class InvalidOption < StandardError; end
+
+    STRUCTURE_SEARCH_MATCH_TYPES = {
+      :exact_match => 'ExactMatch',
+      :all_tautomers => 'AllTautomers',
+      :same_skeleton_including_h => 'SameSkeletonIncludingH',
+      :same_skeleton_excluding_h => 'SameSkeletonExcludingH',
+      :all_isomers => 'AllIsomers'
+    }
 
     def initialize(token)
       @token = token
       @http_client = HTTPClient.new
     end
 
-    def structure_search(smiles)
+    def structure_search(smiles, options={})
+      options[:match_type] ||= :exact_match
+
+      unless STRUCTURE_SEARCH_MATCH_TYPES.has_key?(options[:match_type])
+        raise InvalidOption.new("Value '#{options[:match_type]}' is not valid for option 'match_type'")
+      end
+
       request_body = %(<?xml version="1.0" encoding="utf-8"?>
 <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
     <StructureSearch xmlns="http://www.chemspider.com/">
       <options>
         <Molecule>#{smiles}</Molecule>
-        <MatchType>ExactMatch</MatchType>
+        <MatchType>#{STRUCTURE_SEARCH_MATCH_TYPES[options[:match_type]]}</MatchType>
       </options>
       <token>#{@token}</token>
     </StructureSearch>
