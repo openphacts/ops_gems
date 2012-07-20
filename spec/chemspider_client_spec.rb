@@ -95,7 +95,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.structure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -556,7 +556,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.similarity_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -781,7 +781,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.substructure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once

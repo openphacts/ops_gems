@@ -17,8 +17,9 @@ module OPS
       :all_isomers => 'AllIsomers'
     }
 
-    def initialize(token)
+    def initialize(token, search_status_wait_duration=0.5)
       @token = token
+      @search_status_wait_duration = search_status_wait_duration
       @http_client = HTTPClient.new
     end
 
@@ -117,7 +118,7 @@ module OPS
 
       search_status = nil
       while search_status != "ResultReady" do
-        sleep(0.5) unless search_status.nil?
+        sleep(@search_status_wait_duration) unless search_status.nil?
         search_status = get_async_search_status(transaction_id)
         OPS.log(self, :debug, "(#{transaction_id}) Search status: '#{search_status}'")
 
