@@ -8,7 +8,7 @@ module OPS
 
     def initialize(url)
       @url = url
-      @url = @url[0..-1] if @url.end_with?('/')
+      @url = @url[0..-2] if @url.end_with?('/')
       @http_client = HTTPClient.new
     end
 

@@ -12,6 +12,15 @@ describe OPS::LinkedDataCacheClient, :vcr do
         OPS::LinkedDataCacheClient.new
       }.to raise_exception(ArgumentError)
     end
+
+    it "removes trailing backslash form the server URL" do
+      client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
+
+      stub_request(:get, "http://ops.few.vu.nl/compound.xml?uri=http://rdf.chemspider.com/1111").
+        to_return(:body => "", :headers => {"Content-Type"=>"application/soap+xml; charset=utf-8"})
+
+      client.compound_info("http://rdf.chemspider.com/1111")
+    end
   end
 
   describe "#compound_info" do
