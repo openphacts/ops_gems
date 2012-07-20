@@ -1,5 +1,4 @@
 require 'ops/coreapi_response_parser'
-require 'ops/chemspider_client'
 require 'net/http'
 require 'uri'
 
@@ -7,10 +6,6 @@ module OPS
   class CoreApiCall
     attr :success
     attr :http_error
-
-    @@chemspider_methods = { "chemicalExactStructureSearch" => :structure_search,
-                             "chemicalSimilaritySearch" => :similarity_search,
-                             "chemicalSubstructureSearch" => :substructure_search }
 
     def initialize(url, open_timeout = 60, read_timeout = 300)
       # Configuring the connection
@@ -26,23 +21,7 @@ module OPS
     def request(api_method, options)
       raise "No method API method selected! Please specify a OPS coreAPI method" if api_method.nil?
 
-      return request_core_api(api_method, options) unless @@chemspider_methods.has_key?(api_method)
-
-      chemspider_client = ChemSpiderClient.new(options.fetch(:chemspider_token))
-      chemspider_ids = chemspider_client.send(@@chemspider_methods[api_method], options.fetch(:smiles))
-
-      options.delete(:chemspider_token)
-      options.delete(:smiles)
-
-      result = []
-
-      chemspider_ids.each do |chemspider_id|
-        options[:uri] = "<http://rdf.chemspider.com/#{chemspider_id}>"
-        r = request_core_api("compoundInfo", options)
-        result.concat(r) if r
-      end
-
-      result
+      request_core_api(api_method, options)
     end
 
   private
@@ -75,6 +54,7 @@ module OPS
       query_time = Time.now - start_time
       OPS.log(self, :debug, "Call took #{query_time} seconds")
 
+      status = response.code.to_i
       status = case response.code.to_i
         when 100..199 then
           @http_error = "HTTP #{status.to_s}-error"
