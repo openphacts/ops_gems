@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'awesome_print'
 
 describe OPS::LinkedDataCacheClient, :vcr do
   describe "initialization" do
