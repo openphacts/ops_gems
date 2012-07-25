@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyMCBKdWwgMjAxMiAxODo1NjozOSBHTVQ=
+        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NTo1OSBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
@@ -30,7 +30,7 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyMCBKdWwgMjAxMiAxODo1Njo0MCBHTVQ=
+        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NTo1OSBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
@@ -87,7 +87,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 20 Jul 2012 18:56:40 GMT
+  recorded_at: Wed, 25 Jul 2012 10:56:03 GMT
 - request:
     method: get
     uri: http://ops.few.vu.nl/compound.xml?uri=http://rdf.chemspider.com/187440
@@ -103,7 +103,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyMCBKdWwgMjAxMiAxODo1Njo0MCBHTVQ=
+        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NjowMCBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
@@ -118,7 +118,7 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyMCBKdWwgMjAxMiAxODo1Njo0MCBHTVQ=
+        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NjowMCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
@@ -174,5 +174,5 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 20 Jul 2012 18:56:41 GMT
+  recorded_at: Wed, 25 Jul 2012 10:56:03 GMT
 recorded_with: VCR 2.2.3

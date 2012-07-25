@@ -49,15 +49,19 @@ module OPS
       unless primary_topics.children.empty?
         primary_topic = primary_topics.first
 
-        result = parse_property_nodes(primary_topic.xpath('./*[not(self::exactMatch) and not(self::inDataset)]'))
+        result = {
+          primary_topic.xpath('./inDataset').first['href'] => {
+            :href => primary_topic['href'],
+            :properties => parse_property_nodes(primary_topic.xpath('./*[not(self::exactMatch) and not(self::inDataset)]'))
+          }
+        }
 
         primary_topic.xpath("./exactMatch/item[@href != '#{primary_topic['href']}']").each do |item|
-          result.merge!(parse_property_nodes(item.xpath('./*[not(self::exactMatch) and not(self::inDataset)]')))
+          result[item.xpath('./inDataset').first['href']] = {
+            :href => item['href'],
+            :properties => parse_property_nodes(item.xpath('./*[not(self::exactMatch) and not(self::inDataset)]'))
+          }
         end
-
-        chemspider_uri = find_chemspider_uri(primary_topic)
-        result[:csid_uri] = chemspider_uri if chemspider_uri
-        result[:compound_name] = result.delete(:prefLabel) if result.has_key?(:prefLabel)
       end
 
       OPS.log(self, :info, "Result: #{result.nil? ? 0 : result.length} items")
@@ -74,14 +78,6 @@ module OPS
       end
 
       properties
-    end
-
-    def find_chemspider_uri(primary_topic)
-      if primary_topic.xpath("./inDataset[@href = 'http://www.chemspider.com']").empty?
-        primary_topic.xpath("./exactMatch/item/inDataset[@href = 'http://www.chemspider.com']").first.parent['href']
-      else
-        primary_topic['href']
-      end
     end
   end
 end
