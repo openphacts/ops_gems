@@ -1,3 +1,4 @@
+require 'active_support/core_ext/string/inflections'
 require 'httpclient'
 require 'nokogiri'
 
@@ -74,7 +75,7 @@ module OPS
       properties = {}
 
       property_nodes.each do |property_node|
-        properties[property_node.name.to_sym] = property_node.content
+        properties[property_node.name.underscore.to_sym] = property_node.content
       end
 
       properties
