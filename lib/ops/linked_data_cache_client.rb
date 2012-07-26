@@ -75,10 +75,22 @@ module OPS
       properties = {}
 
       property_nodes.each do |property_node|
-        properties[property_node.name.underscore.to_sym] = property_node.content
+        properties[property_node.name.underscore.to_sym] = parse_property_value(property_node.content)
       end
 
       properties
+    end
+
+    def parse_property_value(value)
+      begin
+        Integer(value)
+      rescue ArgumentError, TypeError
+        begin
+          Float(value)
+        rescue ArgumentError, TypeError
+          value
+        end
+      end
     end
   end
 end

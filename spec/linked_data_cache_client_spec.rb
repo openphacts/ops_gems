@@ -37,14 +37,14 @@ describe OPS::LinkedDataCacheClient, :vcr do
         "http://data.kasabi.com/dataset/chembl-rdf" => {
           :href => "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734",
           :properties => {
-            :rtb => "6",
-            :psa => "92.35",
-            :mw_freebase => "464.825",
+            :rtb => 6,
+            :psa => 92.35,
+            :mw_freebase => 464.825,
             :molform => "C21H16ClF3N4O3",
-            :hbd => "3",
-            :hba => "4",
-            :full_mwt => "464.825",
-            :alogp => "4.175"
+            :hbd => 3,
+            :hba => 4,
+            :full_mwt => 464.825,
+            :alogp => 4.175
           }
         },
         "http://linkedlifedata.com/resource/drugbank" => {
