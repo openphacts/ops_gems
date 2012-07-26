@@ -19,6 +19,12 @@ module OPS
       parse_response(response)
     end
 
+    def compound_pharmacology_info(compound_uri)
+      response = execute_request("#{@url}/compound/pharmacology.xml", :uri => compound_uri)
+
+      parse_response(response)
+    end
+
   private
     def execute_request(url, options)
       OPS.log(self, :info, "Issues call to Linked Data Cache API URL '#{url}' with options: #{options.inspect}")
@@ -51,17 +57,11 @@ module OPS
         primary_topic = primary_topics.first
 
         result = {
-          primary_topic.xpath('./inDataset').first['href'] => {
-            :href => primary_topic['href'],
-            :properties => parse_property_nodes(primary_topic.xpath('./*[not(self::exactMatch) and not(self::inDataset)]'))
-          }
+          primary_topic.xpath('./inDataset').first['href'] => parse_item_node(primary_topic)
         }
 
         primary_topic.xpath("./exactMatch/item[@href != '#{primary_topic['href']}']").each do |item|
-          result[item.xpath('./inDataset').first['href']] = {
-            :href => item['href'],
-            :properties => parse_property_nodes(item.xpath('./*[not(self::exactMatch) and not(self::inDataset)]'))
-          }
+          result[item.xpath('./inDataset').first['href']] = parse_item_node(item)
         end
       end
 
@@ -69,6 +69,63 @@ module OPS
       OPS.log(self, :debug, "Result: #{result.inspect}")
 
       result
+    end
+
+    def parse_item_node(item_node)
+      result = {
+        :href => item_node['href'],
+        :properties => parse_property_nodes(item_node.xpath('./*[not(self::exactMatch) and not(self::inDataset) and not(*)]'))
+      }
+
+      activity = item_node.xpath('./activity')
+
+      unless activity.children.empty?
+        activity = activity.first
+
+        result[:activity] = []
+
+        activity.children.each do |a|
+          result[:activity] << parse_activity_node(a) unless a.xpath('./*[not(self::forMolecule)]').children.empty?
+        end
+      end
+
+      result
+    end
+
+    def parse_activity_node(activity_node)
+      on_assay_node = activity_node.xpath('./onAssay').first
+
+      result = {
+        :href => activity_node['href'],
+        :on_assay => {
+          :href => on_assay_node['href'],
+          :organism => on_assay_node.xpath('./assay_organism').first.content,
+          :targets => []
+        },
+        :relation => activity_node.xpath('./relation').first.content,
+        :standard_units => activity_node.xpath('./standardUnits').first.content,
+        :standard_value => activity_node.xpath('./standardValue').first.content.to_f,
+        :type => activity_node.xpath('./activity_type').first.content,
+      }
+
+      target_node = on_assay_node.xpath('./target').first
+
+      if target_node.has_attribute?('href')
+        result[:on_assay][:targets] << parse_assey_target_node(target_node)
+      else
+        target_node.children.each do |target_node|
+          result[:on_assay][:targets] << parse_assey_target_node(target_node)
+        end
+      end
+
+      result
+    end
+
+    def parse_assey_target_node(target_node)
+      {
+        :href => target_node['href'],
+        :title => target_node.xpath('./title').first.content
+      }
     end
 
     def parse_property_nodes(property_nodes)

@@ -1,0 +1,218 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ops.few.vu.nl/compound/pharmacology.xml?uri=http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyNiBKdWwgMjAxMiAxNToyNjoyMyBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
+      !binary "QWNjZXB0LVJhbmdlcw==":
+      - !binary |-
+        Ynl0ZXM=
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuNC41LWRldg==
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        VGh1LCAyNiBKdWwgMjAxMiAxNToyNjoyMyBHTVQ=
+      !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
+      - !binary |-
+        ZmFsc2U=
+      !binary "RXRhZw==":
+      - !binary |-
+        YmY1ZDA2ZTI4YWJmMDdhOWQ1YmQ5NjJjNDBmYmViNjc=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24veG1s
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version="1.0" encoding="utf-8"?>
+
+        <result format="linked-data-api" version="0.2" href="http://ops.few.vu.nl/compound/pharmacology.xml?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5"><primaryTopic
+        href="http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"><prefLabel
+        xml:lang="en">Sorafenib</prefLabel><exactMatch><item href="http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"/><item
+        href="http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398"><genericName>Sorafenib</genericName><drugType>approved</drugType><inDataset
+        href="http://linkedlifedata.com/resource/drugbank"/></item><item href="http://rdf.chemspider.com/187440"><inDataset
+        href="http://www.chemspider.com"/><smiles>CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl</smiles><inchikey>MLDQJTXFUGDVEO-UHFFFAOYSA-N</inchikey><inchi>InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)</inchi></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"><activity><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650177"><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650168"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">3400.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325048"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30003"><assay_organism>Homo
+        sapiens</assay_organism><title>Serine/threonine-protein kinase PLK4</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650015"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">6200.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325057"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t12947"><assay_organism>Homo
+        sapiens</assay_organism><title>Cyclin-dependent kinase 5</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650114"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">250.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325017"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30037"><assay_organism>Homo
+        sapiens</assay_organism><title>MAP kinase signal-integrating kinase 2</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650150"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">1700.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325031"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30020"><assay_organism>Homo
+        sapiens</assay_organism><title>Ephrin type-B receptor 1</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1442151"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>IC50</activity_type><standardValue
+        datatype="float">3300.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a311891"><assay_organism>Homo
+        sapiens</assay_organism><target><item href="http://data.kasabi.com/dataset/chembl-rdf/target/t11409"><assay_organism>Homo
+        sapiens</assay_organism><title>Dual specificity mitogen-activated protein
+        kinase kinase 1</title></item><item href="http://data.kasabi.com/dataset/chembl-rdf/target/t10904"><assay_organism>Homo
+        sapiens</assay_organism><title>Serine/threonine-protein kinase RAF</title></item></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1442152"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>GI50</activity_type><standardValue
+        datatype="float">5.4</standardValue><standardUnits>uM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a311323"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t80928"><assay_organism>Homo
+        sapiens</assay_organism><title>HCT-116 (Colon carcinoma cells)</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item></activity><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><full_mwt datatype="double">464.825</full_mwt></item></exactMatch><inDataset
+        href="http://www.conceptwiki.org"/></primaryTopic><extendedMetadataVersion
+        href="http://ops.few.vu.nl/compound/pharmacology.xml?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5&amp;_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite"/><definition
+        href="http://ops.few.vu.nl/api-config"/></result>
+
+'
+    http_version: 
+  recorded_at: Thu, 26 Jul 2012 15:26:24 GMT
+- request:
+    method: get
+    uri: http://ops.few.vu.nl/compound/pharmacology.xml?uri=http://rdf.chemspider.com/187440
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyNiBKdWwgMjAxMiAxNToyNjoyNCBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
+      !binary "QWNjZXB0LVJhbmdlcw==":
+      - !binary |-
+        Ynl0ZXM=
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuNC41LWRldg==
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        VGh1LCAyNiBKdWwgMjAxMiAxNToyNjoyNCBHTVQ=
+      !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
+      - !binary |-
+        ZmFsc2U=
+      !binary "RXRhZw==":
+      - !binary |-
+        OTA0NzczMmQ4MDZmNDMyYTBjNzEwNTI3OGVkMjMxYTc=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24veG1s
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version="1.0" encoding="utf-8"?>
+
+        <result format="linked-data-api" version="0.2" href="http://ops.few.vu.nl/compound/pharmacology.xml?uri=http%3A%2F%2Frdf.chemspider.com%2F187440"><primaryTopic
+        href="http://rdf.chemspider.com/187440"><exactMatch><item href="http://rdf.chemspider.com/187440"/><item
+        href="http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398"><genericName>Sorafenib</genericName><drugType>approved</drugType><inDataset
+        href="http://linkedlifedata.com/resource/drugbank"/></item><item href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"><activity><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650177"><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650168"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">3400.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325048"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30003"><assay_organism>Homo
+        sapiens</assay_organism><title>Serine/threonine-protein kinase PLK4</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650015"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">6200.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325057"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t12947"><assay_organism>Homo
+        sapiens</assay_organism><title>Cyclin-dependent kinase 5</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650114"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">250.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325017"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30037"><assay_organism>Homo
+        sapiens</assay_organism><title>MAP kinase signal-integrating kinase 2</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1650150"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>Kd</activity_type><standardValue
+        datatype="float">1700.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a325031"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t30020"><assay_organism>Homo
+        sapiens</assay_organism><title>Ephrin type-B receptor 1</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1442151"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>IC50</activity_type><standardValue
+        datatype="float">3300.0</standardValue><standardUnits>nM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a311891"><assay_organism>Homo
+        sapiens</assay_organism><target><item href="http://data.kasabi.com/dataset/chembl-rdf/target/t11409"><assay_organism>Homo
+        sapiens</assay_organism><title>Dual specificity mitogen-activated protein
+        kinase kinase 1</title></item><item href="http://data.kasabi.com/dataset/chembl-rdf/target/t10904"><assay_organism>Homo
+        sapiens</assay_organism><title>Serine/threonine-protein kinase RAF</title></item></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item><item
+        href="http://data.kasabi.com/dataset/chembl-rdf/activity/a1442152"><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><activity_type>GI50</activity_type><standardValue
+        datatype="float">5.4</standardValue><standardUnits>uM</standardUnits><relation>=</relation><onAssay
+        href="http://data.kasabi.com/dataset/chembl-rdf/assay/a311323"><assay_organism>Homo
+        sapiens</assay_organism><target href="http://data.kasabi.com/dataset/chembl-rdf/target/t80928"><assay_organism>Homo
+        sapiens</assay_organism><title>HCT-116 (Colon carcinoma cells)</title></target></onAssay><forMolecule
+        href="http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734"/></item></activity><inDataset
+        href="http://data.kasabi.com/dataset/chembl-rdf"/><full_mwt datatype="double">464.825</full_mwt></item><item
+        href="http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"><prefLabel
+        xml:lang="en">Sorafenib</prefLabel><inDataset href="http://www.conceptwiki.org"/></item></exactMatch><inDataset
+        href="http://www.chemspider.com"/><smiles>CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl</smiles><inchikey>MLDQJTXFUGDVEO-UHFFFAOYSA-N</inchikey><inchi>InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)</inchi></primaryTopic><extendedMetadataVersion
+        href="http://ops.few.vu.nl/compound/pharmacology.xml?uri=http%3A%2F%2Frdf.chemspider.com%2F187440&amp;_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite"/><definition
+        href="http://ops.few.vu.nl/api-config"/></result>
+
+'
+    http_version: 
+  recorded_at: Thu, 26 Jul 2012 15:26:25 GMT
+recorded_with: VCR 2.2.3
