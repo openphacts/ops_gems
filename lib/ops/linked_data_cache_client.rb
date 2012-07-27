@@ -73,7 +73,7 @@ module OPS
 
     def parse_item_node(item_node)
       result = {
-        :href => item_node['href'],
+        :uri => item_node['href'],
         :properties => parse_property_nodes(item_node.xpath('./*[not(self::exactMatch) and not(self::inDataset) and not(*)]'))
       }
 
@@ -96,9 +96,9 @@ module OPS
       on_assay_node = activity_node.xpath('./onAssay').first
 
       result = {
-        :href => activity_node['href'],
+        :uri => activity_node['href'],
         :on_assay => {
-          :href => on_assay_node['href'],
+          :uri => on_assay_node['href'],
           :organism => on_assay_node.xpath('./assay_organism').first.content,
           :targets => []
         },
@@ -123,7 +123,7 @@ module OPS
 
     def parse_assey_target_node(target_node)
       {
-        :href => target_node['href'],
+        :uri => target_node['href'],
         :title => target_node.xpath('./title').first.content
       }
     end

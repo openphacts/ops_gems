@@ -27,7 +27,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     it "returns the compound info if the compound is known to OPS" do
       @client.compound_info("http://rdf.chemspider.com/187440").should == {
         "http://www.chemspider.com" => {
-          :href => "http://rdf.chemspider.com/187440",
+          :uri => "http://rdf.chemspider.com/187440",
           :properties => {
             :smiles => "CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl",
             :inchikey => "MLDQJTXFUGDVEO-UHFFFAOYSA-N",
@@ -35,7 +35,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
           }
         },
         "http://data.kasabi.com/dataset/chembl-rdf" => {
-          :href => "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734",
+          :uri => "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734",
           :properties => {
             :rtb => 6,
             :psa => 92.35,
@@ -48,7 +48,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
           }
         },
         "http://linkedlifedata.com/resource/drugbank" => {
-          :href => "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398",
+          :uri => "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398",
           :properties => {
             :toxicity => "The highest dose of sorafenib studied clinically is 800 mg twice daily. The adverse reactions observed at this dose were primarily diarrhea and dermatologic events. No information is available on symptoms of acute overdose in animals because of the saturation of absorption in oral acute toxicity studies conducted in animals.",
             :protein_binding => "99.5%",
@@ -57,7 +57,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
           }
         },
         "http://www.conceptwiki.org" => {
-          :href=>"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5",
+          :uri => "http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5",
           :properties => {
             :pref_label => "Sorafenib"
           }
@@ -116,7 +116,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     it "returns the compound pharmacology info if the compound is known to OPS" do
       @client.compound_pharmacology_info("http://rdf.chemspider.com/187440").should == {
         "http://www.chemspider.com" => {
-          :href => "http://rdf.chemspider.com/187440",
+          :uri => "http://rdf.chemspider.com/187440",
           :properties => {
             :smiles => "CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl",
             :inchikey => "MLDQJTXFUGDVEO-UHFFFAOYSA-N",
@@ -124,106 +124,106 @@ describe OPS::LinkedDataCacheClient, :vcr do
           }
         },
         "http://data.kasabi.com/dataset/chembl-rdf" => {
-          :href => "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734",
+          :uri => "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734",
           :properties => {
             :full_mwt => 464.825
           },
           :activity => [
             {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650168",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650168",
               :relation => "=",
               :standard_units => "nM",
               :standard_value => 3400.0,
               :type => "Kd",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325048",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325048",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t30003",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t30003",
                     :title => "Serine/threonine-protein kinase PLK4"
                   }
                 ]
               }
             }, {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650015",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650015",
               :relation => "=",
               :standard_units => "nM",
               :standard_value => 6200.0,
               :type => "Kd",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325057",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325057",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t12947",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t12947",
                     :title => "Cyclin-dependent kinase 5"
                   }
                 ]
               }
             }, {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650114",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650114",
               :relation => "=",
               :standard_units => "nM",
               :standard_value => 250.0,
               :type => "Kd",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325017",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325017",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t30037",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t30037",
                     :title => "MAP kinase signal-integrating kinase 2"
                   }
                 ]
               }
             }, {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650150",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1650150",
               :relation => "=",
               :standard_units => "nM",
               :standard_value => 1700.0,
               :type => "Kd",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325031",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a325031",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t30020",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t30020",
                     :title => "Ephrin type-B receptor 1"
                   }
                 ]
               }
             }, {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1442151",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1442151",
               :relation => "=",
               :standard_units => "nM",
               :standard_value => 3300.0,
               :type => "IC50",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a311891",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a311891",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t11409",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t11409",
                     :title => "Dual specificity mitogen-activated protein kinase kinase 1"
                   }, {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t10904",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t10904",
                     :title => "Serine/threonine-protein kinase RAF"
                   }
                 ]
               }
             }, {
-              :href => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1442152",
+              :uri => "http://data.kasabi.com/dataset/chembl-rdf/activity/a1442152",
               :relation => "=",
               :standard_units => "uM",
               :standard_value => 5.4,
               :type => "GI50",
               :on_assay => {
-                :href => "http://data.kasabi.com/dataset/chembl-rdf/assay/a311323",
+                :uri => "http://data.kasabi.com/dataset/chembl-rdf/assay/a311323",
                 :organism => "Homo sapiens",
                 :targets => [
                   {
-                    :href => "http://data.kasabi.com/dataset/chembl-rdf/target/t80928",
+                    :uri => "http://data.kasabi.com/dataset/chembl-rdf/target/t80928",
                     :title => "HCT-116 (Colon carcinoma cells)"
                   }
                 ]
@@ -232,14 +232,14 @@ describe OPS::LinkedDataCacheClient, :vcr do
           ]
         },
         "http://linkedlifedata.com/resource/drugbank" => {
-          :href => "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398",
+          :uri => "http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398",
           :properties => {
             :generic_name => "Sorafenib",
             :drug_type => "approved"
           }
         },
         "http://www.conceptwiki.org" => {
-          :href=>"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5",
+          :uri => "http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5",
           :properties => {
             :pref_label => "Sorafenib"
           }
