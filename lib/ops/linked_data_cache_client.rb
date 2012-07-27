@@ -63,11 +63,11 @@ module OPS
       return nil unless primary_topic.has_key?('inDataset')
 
       result = {
-        primary_topic['inDataset'] => parse_item(primary_topic)
+        primary_topic['inDataset'].to_sym => parse_item(primary_topic)
       }
 
       primary_topic['exactMatch'].each do |item|
-        result[item['inDataset']] = parse_item(item) if item.is_a?(Hash)
+        result[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
       end
 
       OPS.log(self, :info, "Result: #{result.nil? ? 0 : result.length} items")
