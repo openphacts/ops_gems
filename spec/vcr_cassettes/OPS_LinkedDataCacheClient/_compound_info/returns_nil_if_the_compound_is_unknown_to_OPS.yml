@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://ops.few.vu.nl/compound.xml?uri=http://unknown.com/1111
+    uri: http://ops.few.vu.nl/compound.json?uri=http://unknown.com/1111
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NjowMSBHTVQ=
+        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
@@ -30,28 +30,22 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        V2VkLCAyNSBKdWwgMjAxMiAxMDo1NjowMSBHTVQ=
+        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        N2IzNDc1ZGQwYjI3NTI2NWVhMzUwOWYwN2E0NzcwZDQ=
+        ODkyYjQyMmMwZDE0MmQ1NzYzMmI2YzJjNDljNmQ2NzA=
       !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
       - !binary |-
         Y2h1bmtlZA==
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
-        YXBwbGljYXRpb24veG1s
+        YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '<?xml version="1.0" encoding="utf-8"?>
-
-        <result format="linked-data-api" version="0.2" href="http://ops.few.vu.nl/compound.xml?uri=http%3A%2F%2Funknown.com%2F1111"><primaryTopic
-        href="http://unknown.com/1111"/><extendedMetadataVersion href="http://ops.few.vu.nl/compound.xml?uri=http%3A%2F%2Funknown.com%2F1111&amp;_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite"/><definition
-        href="http://ops.few.vu.nl/api-config"/></result>
-
-'
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound.json?uri=http%3A%2F%2Funknown.com%2F1111","definition":"http://ops.few.vu.nl/api-config","extendedMetadataVersion":"http://ops.few.vu.nl/compound.json?uri=http%3A%2F%2Funknown.com%2F1111&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://unknown.com/1111","isPrimaryTopicOf":"http://ops.few.vu.nl/compound.json?uri=http%3A%2F%2Funknown.com%2F1111"}}}'
     http_version: 
-  recorded_at: Wed, 25 Jul 2012 10:56:04 GMT
+  recorded_at: Fri, 27 Jul 2012 16:35:49 GMT
 recorded_with: VCR 2.2.3

@@ -79,19 +79,21 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "raises an exception if response can't be parsed" do
-      stub_request(:get, "http://ops.few.vu.nl/compound.xml?uri=http://unknown.com/1111").
-        to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/soap+xml; charset=utf-8"})
+      stub_request(:get, "http://ops.few.vu.nl/compound.json?uri=http://unknown.com/1111").
+        to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
-      @client.compound_info("http://unknown.com/1111").should be_nil
+      expect {
+        @client.compound_info("http://unknown.com/1111")
+      }.to raise_exception(OPS::LinkedDataCacheClient::InvalidResponse, "Could not parse response")
     end
 
     it "raises an exception if the HTTP return code is not 200" do
-      stub_request(:get, "http://ops.few.vu.nl/compound.xml?uri=http://unknown.com/1111").
+      stub_request(:get, "http://ops.few.vu.nl/compound.json?uri=http://unknown.com/1111").
         to_return(:status => 500,
-                  :headers => {"Content-Type"=>"application/soap+xml; charset=utf-8"})
+                  :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
       expect {
-        @client.compound_info("http://unknown.com/1111").should be_nil
+        @client.compound_info("http://unknown.com/1111")
       }.to raise_exception(OPS::LinkedDataCacheClient::BadStatusCode, "Response with status code 500")
     end
 
@@ -261,19 +263,21 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "raises an exception if response can't be parsed" do
-      stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.xml?uri=http://unknown.com/1111").
-        to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/soap+xml; charset=utf-8"})
+      stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.json?uri=http://unknown.com/1111").
+        to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
-      @client.compound_pharmacology_info("http://unknown.com/1111").should be_nil
+      expect {
+        @client.compound_pharmacology_info("http://unknown.com/1111")
+      }.to raise_exception(OPS::LinkedDataCacheClient::InvalidResponse, "Could not parse response")
     end
 
     it "raises an exception if the HTTP return code is not 200" do
-      stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.xml?uri=http://unknown.com/1111").
+      stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.json?uri=http://unknown.com/1111").
         to_return(:status => 500,
-                  :headers => {"Content-Type"=>"application/soap+xml; charset=utf-8"})
+                  :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
       expect {
-        @client.compound_pharmacology_info("http://unknown.com/1111").should be_nil
+        @client.compound_pharmacology_info("http://unknown.com/1111")
       }.to raise_exception(OPS::LinkedDataCacheClient::BadStatusCode, "Response with status code 500")
     end
 

@@ -1,11 +1,14 @@
 require 'active_support/core_ext/string/inflections'
 require 'httpclient'
-require 'nokogiri'
+require 'multi_json'
 
 module OPS
   class LinkedDataCacheClient
     class Error < StandardError; end
     class BadStatusCode < LinkedDataCacheClient::Error; end
+    class InvalidResponse < LinkedDataCacheClient::Error; end
+
+    NON_PROPERTY_KEYS = ['_about', 'exactMatch', 'inDataset', 'isPrimaryTopicOf', 'activity'].freeze
 
     def initialize(url)
       @url = url
@@ -14,13 +17,13 @@ module OPS
     end
 
     def compound_info(compound_uri)
-      response = execute_request("#{@url}/compound.xml", :uri => compound_uri)
+      response = execute_request("#{@url}/compound.json", :uri => compound_uri)
 
       parse_response(response)
     end
 
     def compound_pharmacology_info(compound_uri)
-      response = execute_request("#{@url}/compound/pharmacology.xml", :uri => compound_uri)
+      response = execute_request("#{@url}/compound/pharmacology.json", :uri => compound_uri)
 
       parse_response(response)
     end
@@ -49,20 +52,22 @@ module OPS
     def parse_response(response)
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
 
-      result = nil
-      document = Nokogiri::XML(response.body)
-      primary_topics = document.xpath('//result/primaryTopic[1]')
+      begin
+        json = MultiJson.load(response.body)
+      rescue MultiJson::DecodeError
+        raise InvalidResponse.new("Could not parse response")
+      end
 
-      unless primary_topics.children.empty?
-        primary_topic = primary_topics.first
+      primary_topic = json['result']['primaryTopic']
 
-        result = {
-          primary_topic.xpath('./inDataset').first['href'] => parse_item_node(primary_topic)
-        }
+      return nil unless primary_topic.has_key?('inDataset')
 
-        primary_topic.xpath("./exactMatch/item[@href != '#{primary_topic['href']}']").each do |item|
-          result[item.xpath('./inDataset').first['href']] = parse_item_node(item)
-        end
+      result = {
+        primary_topic['inDataset'] => parse_item(primary_topic)
+      }
+
+      primary_topic['exactMatch'].each do |item|
+        result[item['inDataset']] = parse_item(item) if item.is_a?(Hash)
       end
 
       OPS.log(self, :info, "Result: #{result.nil? ? 0 : result.length} items")
@@ -71,83 +76,64 @@ module OPS
       result
     end
 
-    def parse_item_node(item_node)
+    def parse_item(item)
       result = {
-        :uri => item_node['href'],
-        :properties => parse_property_nodes(item_node.xpath('./*[not(self::exactMatch) and not(self::inDataset) and not(*)]'))
+        :uri => item['_about'],
+        :properties => parse_item_properties(item)
       }
 
-      activity = item_node.xpath('./activity')
-
-      unless activity.children.empty?
-        activity = activity.first
-
+      if item.has_key?('activity')
         result[:activity] = []
 
-        activity.children.each do |a|
-          result[:activity] << parse_activity_node(a) unless a.xpath('./*[not(self::forMolecule)]').children.empty?
+        item['activity'].each do |a|
+          result[:activity] << parse_activity(a) if a.has_key?('inDataset')
         end
       end
 
       result
     end
 
-    def parse_activity_node(activity_node)
-      on_assay_node = activity_node.xpath('./onAssay').first
-
-      result = {
-        :uri => activity_node['href'],
-        :on_assay => {
-          :uri => on_assay_node['href'],
-          :organism => on_assay_node.xpath('./assay_organism').first.content,
-          :targets => []
-        },
-        :relation => activity_node.xpath('./relation').first.content,
-        :standard_units => activity_node.xpath('./standardUnits').first.content,
-        :standard_value => activity_node.xpath('./standardValue').first.content.to_f,
-        :type => activity_node.xpath('./activity_type').first.content,
-      }
-
-      target_node = on_assay_node.xpath('./target').first
-
-      if target_node.has_attribute?('href')
-        result[:on_assay][:targets] << parse_assey_target_node(target_node)
-      else
-        target_node.children.each do |target_node|
-          result[:on_assay][:targets] << parse_assey_target_node(target_node)
-        end
-      end
-
-      result
-    end
-
-    def parse_assey_target_node(target_node)
-      {
-        :uri => target_node['href'],
-        :title => target_node.xpath('./title').first.content
-      }
-    end
-
-    def parse_property_nodes(property_nodes)
+    def parse_item_properties(item)
       properties = {}
 
-      property_nodes.each do |property_node|
-        properties[property_node.name.underscore.to_sym] = parse_property_value(property_node.content)
+      item.each do |key, value|
+        properties[key.underscore.to_sym] = value unless NON_PROPERTY_KEYS.include?(key)
       end
 
       properties
     end
 
-    def parse_property_value(value)
-      begin
-        Integer(value)
-      rescue ArgumentError, TypeError
-        begin
-          Float(value)
-        rescue ArgumentError, TypeError
-          value
+    def parse_activity(activity)
+      on_assay = activity['onAssay']
+      targets = if on_assay['target'].is_a?(Hash)
+        [parse_assey_target(on_assay['target'])]
+      else
+        on_assay['target'].collect do |target|
+          parse_assey_target(target)
         end
       end
+
+      result = {
+        :uri => activity['_about'],
+        :on_assay => {
+          :uri => on_assay['_about'],
+          :organism => on_assay['assay_organism'],
+          :targets => targets
+        },
+        :relation => activity['relation'],
+        :standard_units => activity['standardUnits'],
+        :standard_value => activity['standardValue'],
+        :type => activity['activity_type'],
+      }
+
+      result
+    end
+
+    def parse_assey_target(target)
+      {
+        :uri => target['_about'],
+        :title => target['title']
+      }
     end
   end
 end

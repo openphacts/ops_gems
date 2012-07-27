@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rdf"
   s.add_runtime_dependency "nokogiri"
   s.add_runtime_dependency "httpclient"
+  s.add_runtime_dependency "multi_json"
+  s.add_runtime_dependency "oj"
 
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
