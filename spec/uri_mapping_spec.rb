@@ -6,11 +6,19 @@ describe OPS::URIMapping do
   end
 
   it "resolves a Chembl RDF molecule URI" do
-    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734").should == "http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734.html"
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734").should == "http://linkedchemistry.info/chembl/molecule/m276734"
   end
 
   it "resolves a Chembl RDF target URI" do
-    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/target/t30003").should == "http://data.kasabi.com/dataset/chembl-rdf/target/t30003.html"
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/target/t30003").should == "http://linkedchemistry.info/chembl/target/t30003"
+  end
+
+  it "resolves a Chembl RDF activity URI" do
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/activity/a1650150").should == "http://linkedchemistry.info/chembl/activity/a1650150"
+  end
+
+  it "resolves a Chembl RDF assay URI" do
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/assay/a325031").should == "http://linkedchemistry.info/chembl/assay/a325031"
   end
 
   it "resolves a DrukBank URI" do
