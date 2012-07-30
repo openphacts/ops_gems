@@ -25,6 +25,10 @@ describe OPS::URIMapping do
     OPS::URIMapping.new.resolve_uri("http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398").should == "http://www4.wiwiss.fu-berlin.de/drugbank/page/drugs/DB00398"
   end
 
+  it "resolves a ConceptWiki URI" do
+    OPS::URIMapping.new.resolve_uri("http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5").should == "http://staging.conceptwiki.org/wiki/#/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5/view"
+  end
+
   it "returns nil if the URI can't be resolved" do
     OPS::URIMapping.new.resolve_uri("http://www.unknown.com/molecule/1234").should be_nil
   end
