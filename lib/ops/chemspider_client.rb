@@ -4,6 +4,7 @@ require 'nokogiri'
 module OPS
   class ChemSpiderClient
     class Error < StandardError; end
+    class BadStatusCode < ChemSpiderClient::Error; end
     class Unauthorized < ChemSpiderClient::Error; end
     class Failed < ChemSpiderClient::Error; end
     class TooManyRecords < ChemSpiderClient::Error; end
@@ -88,6 +89,8 @@ module OPS
 
       response = @http_client.post('http://www.chemspider.com/Search.asmx', request_body, 'Content-Type' => 'application/soap+xml; charset=utf-8')
 
+      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+
       if response.body.include?("Unauthorized web service usage. Please request access to this service.")
         raise Unauthorized.new("ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
       end
@@ -103,12 +106,18 @@ module OPS
 
     def get_async_search_status(transaction_id)
       response = @http_client.get("http://www.chemspider.com/Search.asmx/GetAsyncSearchStatus?rid=#{transaction_id}&token=#{@token}")
+
+      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+
       doc = Nokogiri::XML(response.body)
       doc.xpath("//cs:ERequestStatus", "cs" => "http://www.chemspider.com/").first.content
     end
 
     def get_async_search_result(transaction_id)
       response = @http_client.get("http://www.chemspider.com/Search.asmx/GetAsyncSearchResult?rid=#{transaction_id}&token=#{@token}")
+
+      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+
       doc = Nokogiri::XML(response.body)
       doc.xpath("//cs:ArrayOfInt/cs:int", "cs" => "http://www.chemspider.com/").collect(&:content)
     end

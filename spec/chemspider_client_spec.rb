@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe OPS::ChemSpiderClient do
-  describe "structure_search" do
+  describe "#structure_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
            with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
@@ -458,9 +458,19 @@ describe OPS::ChemSpiderClient do
         results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :unknown_bla)
       end.to raise_error(OPS::ChemSpiderClient::InvalidOption, "Value 'unknown_bla' is not valid for option 'match_type'")
     end
+
+    it "raises an exception if the HTTP return code is not 200" do
+      stub_request(:post, "http://www.chemspider.com/Search.asmx").
+        to_return(:status => 500)
+
+      expect {
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
+      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 500")
+    end
   end
 
-  describe "similarity_search" do
+  describe "#similarity_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
            with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
@@ -685,9 +695,19 @@ describe OPS::ChemSpiderClient do
 
       expected_search_request.should have_been_made.once
     end
+
+    it "raises an exception if the HTTP return code is not 200" do
+      stub_request(:post, "http://www.chemspider.com/Search.asmx").
+        to_return(:status => 503)
+
+      expect {
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 503")
+    end
   end
 
-  describe "substructure_search" do
+  describe "#substructure_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
            with(:body => %(<?xml version=\"1.0\" encoding=\"utf-8\"?>
@@ -906,6 +926,16 @@ describe OPS::ChemSpiderClient do
       end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
+    end
+
+    it "raises an exception if the HTTP return code is not 200" do
+      stub_request(:post, "http://www.chemspider.com/Search.asmx").
+        to_return(:status => 504)
+
+      expect {
+        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
+      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 504")
     end
   end
 end
