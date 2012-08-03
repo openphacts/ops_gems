@@ -136,7 +136,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
@@ -174,7 +174,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
@@ -216,7 +216,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
@@ -455,7 +455,7 @@ describe OPS::ChemSpiderClient do
     it "raises an exception if an unknown match type gets used" do
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :unknown_bla)
+        chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :unknown_bla)
       end.to raise_error(OPS::ChemSpiderClient::InvalidOption, "Value 'unknown_bla' is not valid for option 'match_type'")
     end
 
@@ -608,7 +608,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
@@ -647,7 +647,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
@@ -690,7 +690,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
@@ -842,7 +842,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
@@ -880,7 +880,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
@@ -922,7 +922,7 @@ describe OPS::ChemSpiderClient do
 
       expect do
         chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
-        results = chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
       end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once

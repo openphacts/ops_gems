@@ -8,7 +8,7 @@ module OPS
     class BadStatusCode < LinkedDataCacheClient::Error; end
     class InvalidResponse < LinkedDataCacheClient::Error; end
 
-    NON_PROPERTY_KEYS = ['_about', 'exactMatch', 'inDataset', 'isPrimaryTopicOf', 'activity'].freeze
+    NON_PROPERTY_KEYS = %w(_about exactMatch inDataset isPrimaryTopicOf activity).freeze
 
     def initialize(url)
       @url = url
@@ -113,7 +113,7 @@ module OPS
         end
       end
 
-      result = {
+      {
         :uri => activity['_about'],
         :on_assay => {
           :uri => on_assay['_about'],
@@ -125,8 +125,6 @@ module OPS
         :standard_value => activity['standardValue'],
         :type => activity['activity_type'],
       }
-
-      result
     end
 
     def parse_assey_target(target)
