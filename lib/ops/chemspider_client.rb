@@ -98,10 +98,12 @@ module OPS
       doc = Nokogiri::XML(response.body)
       transaction_id = doc.xpath("//cs:#{type}Response/cs:#{type}Result", "cs" => "http://www.chemspider.com/").first.content
 
+      result = wait_for_search_result(transaction_id)
       query_time = Time.now - start_time
+
       OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
 
-      wait_for_search_result(transaction_id)
+      result
     end
 
     def get_async_search_status(transaction_id)
