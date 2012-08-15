@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OPS::ChemSpiderClient do
+describe OPS::ChemspiderClient do
   describe "#structure_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:post, "http://www.chemspider.com/Search.asmx").
@@ -38,7 +38,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
 
       expected_search_request.should have_been_made.once
@@ -95,7 +95,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
+      chemspider_client = OPS::ChemspiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.structure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -135,9 +135,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">Failed</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
+      end.to raise_error(OPS::ChemspiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -173,9 +173,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">TooManyRecords</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
+      end.to raise_error(OPS::ChemspiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -215,9 +215,9 @@ describe OPS::ChemSpiderClient do
                      :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+      end.to raise_error(OPS::ChemspiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
     end
@@ -258,7 +258,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :exact_match)
 
       expected_search_request.should have_been_made.once
@@ -304,7 +304,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :all_tautomers)
 
       expected_search_request.should have_been_made.once
@@ -350,7 +350,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :same_skeleton_including_h)
 
       expected_search_request.should have_been_made.once
@@ -396,7 +396,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :same_skeleton_excluding_h)
 
       expected_search_request.should have_been_made.once
@@ -442,7 +442,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :all_isomers)
 
       expected_search_request.should have_been_made.once
@@ -454,9 +454,9 @@ describe OPS::ChemSpiderClient do
 
     it "raises an exception if an unknown match type gets used" do
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O", :match_type => :unknown_bla)
-      end.to raise_error(OPS::ChemSpiderClient::InvalidOption, "Value 'unknown_bla' is not valid for option 'match_type'")
+      end.to raise_error(OPS::ChemspiderClient::InvalidOption, "Value 'unknown_bla' is not valid for option 'match_type'")
     end
 
     it "raises an exception if the HTTP return code is not 200" do
@@ -464,9 +464,9 @@ describe OPS::ChemSpiderClient do
         to_return(:status => 500)
 
       expect {
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.structure_search("CC(=O)Oc1ccccc1C(=O)O")
-      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 500")
+      }.to raise_exception(OPS::ChemspiderClient::BadStatusCode, "Response with status code 500")
     end
   end
 
@@ -508,7 +508,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
 
       expected_search_request.should have_been_made.once
@@ -566,7 +566,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
+      chemspider_client = OPS::ChemspiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.similarity_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -607,9 +607,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">Failed</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
+      end.to raise_error(OPS::ChemspiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -646,9 +646,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">TooManyRecords</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
+      end.to raise_error(OPS::ChemspiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -689,9 +689,9 @@ describe OPS::ChemSpiderClient do
                      :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+      end.to raise_error(OPS::ChemspiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
     end
@@ -701,9 +701,9 @@ describe OPS::ChemSpiderClient do
         to_return(:status => 503)
 
       expect {
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
-      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 503")
+      }.to raise_exception(OPS::ChemspiderClient::BadStatusCode, "Response with status code 503")
     end
   end
 
@@ -744,7 +744,7 @@ describe OPS::ChemSpiderClient do
 </ArrayOfInt>))
 
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+      chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
       results = chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
 
       expected_search_request.should have_been_made.once
@@ -801,7 +801,7 @@ describe OPS::ChemSpiderClient do
   <int>3344</int>
 </ArrayOfInt>))
 
-      chemspider_client = OPS::ChemSpiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
+      chemspider_client = OPS::ChemspiderClient.new("00000000-CCCC-2222-bbbb-aaa2ccc00000aa", 0)
       results = chemspider_client.substructure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -841,9 +841,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">Failed</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Failed, "ChemSpider returned request status 'Failed'")
+      end.to raise_error(OPS::ChemspiderClient::Failed, "ChemSpider returned request status 'Failed'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -879,9 +879,9 @@ describe OPS::ChemSpiderClient do
 <ERequestStatus xmlns="http://www.chemspider.com/">TooManyRecords</ERequestStatus>))
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
+      end.to raise_error(OPS::ChemspiderClient::TooManyRecords, "ChemSpider returned request status 'TooManyRecords'")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.once
@@ -921,9 +921,9 @@ describe OPS::ChemSpiderClient do
                      :headers => {'Content-Type'=>'application/soap+xml; charset=utf-8'})
 
       expect do
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
-      end.to raise_error(OPS::ChemSpiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
+      end.to raise_error(OPS::ChemspiderClient::Unauthorized, "ChemSpider returned 'Unauthorized web service usage. Please request access to this service.'")
 
       expected_search_request.should have_been_made.once
     end
@@ -933,9 +933,9 @@ describe OPS::ChemSpiderClient do
         to_return(:status => 504)
 
       expect {
-        chemspider_client = OPS::ChemSpiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
+        chemspider_client = OPS::ChemspiderClient.new("00000000-aaaa-2222-bbbb-aaa2ccc00000aa")
         chemspider_client.substructure_search("CC(=O)Oc1ccccc1C(=O)O")
-      }.to raise_exception(OPS::ChemSpiderClient::BadStatusCode, "Response with status code 504")
+      }.to raise_exception(OPS::ChemspiderClient::BadStatusCode, "Response with status code 504")
     end
   end
 end

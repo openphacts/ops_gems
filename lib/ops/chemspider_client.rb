@@ -2,12 +2,12 @@ require 'httpclient'
 require 'nokogiri'
 
 module OPS
-  class ChemSpiderClient
+  class ChemspiderClient
     class Error < StandardError; end
-    class BadStatusCode < ChemSpiderClient::Error; end
-    class Unauthorized < ChemSpiderClient::Error; end
-    class Failed < ChemSpiderClient::Error; end
-    class TooManyRecords < ChemSpiderClient::Error; end
+    class BadStatusCode < ChemspiderClient::Error; end
+    class Unauthorized < ChemspiderClient::Error; end
+    class Failed < ChemspiderClient::Error; end
+    class TooManyRecords < ChemspiderClient::Error; end
     class InvalidOption < StandardError; end
 
     STRUCTURE_SEARCH_MATCH_TYPES = {
