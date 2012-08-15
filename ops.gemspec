@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.require_paths = %w(lib)
 
   s.add_runtime_dependency "activesupport", "~> 3.2.0"
-  s.add_runtime_dependency "rdf", "~> 0.3.7"
   s.add_runtime_dependency "nokogiri", "~> 1.5.5"
   s.add_runtime_dependency "httpclient", "~> 2.2.5"
   s.add_runtime_dependency "multi_json", "~> 1.3.6"
