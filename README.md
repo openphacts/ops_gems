@@ -13,7 +13,7 @@ Installation
 Usage
 -----
 
-See [system_test.rb](https://github.com/openphacts/ops_gems/blob/master/system_test.rb)
+See [example.rb](https://github.com/openphacts/ops_gems/blob/master/example.rb)
 
 Development
 -----------
