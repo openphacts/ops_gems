@@ -1,24 +1,33 @@
+OPS Gem
+=======
+
 [![Build Status](https://secure.travis-ci.org/openphacts/ops_gems.png)](http://travis-ci.org/openphacts/ops_gems)
 
 Installation
-============
-
-With bundler
 ------------
+
+### With bundler
 
     gem "ops", :git => "git://github.com/openphacts/ops_gems.git"
 
+Usage
+-----
+
+See [system_test.rb](https://github.com/openphacts/ops_gems/blob/master/system_test.rb)
 
 Development
-===========
+-----------
 
-Setting up the environment
---------------------------
+### Setting up the environment
 
     gem install bundle
     bundle install
 
-Running the tests
------------------
+### Running the tests
 
     bundle exec rspec spec
+
+Author
+------
+
+Thomas Marek ([http://github.com/tmak](http://github.com/tmak))
