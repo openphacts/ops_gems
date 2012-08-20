@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 1.9.2
+  - 1.8.7
+  - jruby-19mode
+  - jruby-18mode
+  - ree
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - cbn@zbh.uni-hamburg.de
