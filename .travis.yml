@@ -9,6 +9,10 @@ rvm:
 branches:
   only:
     - master
+matrix:
+  allow_failures:
+    - rvm: jruby-19mode
+    - rvm: jruby-18mode
 notifications:
   email:
     recipients:
