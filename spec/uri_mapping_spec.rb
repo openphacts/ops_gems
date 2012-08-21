@@ -5,6 +5,10 @@ describe OPS::URIMapping do
     OPS::URIMapping.new.resolve_uri("http://rdf.chemspider.com/187440").should == "http://www.chemspider.com/Chemical-Structure.187440.html"
   end
 
+  it "resolves a Chembl RDF chemblid URI" do
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL833860").should == "http://linkedchemistry.info/chembl/chemblid/CHEMBL833860"
+  end
+
   it "resolves a Chembl RDF molecule URI" do
     OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734").should == "http://linkedchemistry.info/chembl/molecule/m276734"
   end
