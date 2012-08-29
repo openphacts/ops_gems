@@ -6,7 +6,7 @@ describe OPS::URIMapping do
   end
 
   it "resolves a Chembl RDF chemblid URI" do
-    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL833860").should == "http://linkedchemistry.info/chembl/chemblid/CHEMBL833860"
+    OPS::URIMapping.new.resolve_uri("http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL833860").should == "https://www.ebi.ac.uk/chembldb/compound/inspect/CHEMBL833860"
   end
 
   it "resolves a Chembl RDF molecule URI" do
@@ -30,7 +30,7 @@ describe OPS::URIMapping do
   end
 
   it "resolves a ConceptWiki URI" do
-    OPS::URIMapping.new.resolve_uri("http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5").should == "http://staging.conceptwiki.org/wiki/#/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5/view"
+    OPS::URIMapping.new.resolve_uri("http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5").should == "http://www.conceptwiki.org/wiki/#/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5/view"
   end
 
   it "returns nil if the URI can't be resolved" do
