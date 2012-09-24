@@ -62,17 +62,11 @@ module OPS
 
       return nil unless primary_topic.has_key?('inDataset')
 
-      # TODO: That's a dirty workaround until the API is fixed
-      primary_topic['inDataset'] = primary_topic['inDataset'].first if primary_topic['inDataset'].is_a?(Array)
-
       result = {
         primary_topic['inDataset'].to_sym => parse_item(primary_topic)
       }
 
       primary_topic['exactMatch'].each do |item|
-        # TODO: That's a dirty workaround until the API is fixed
-        item['inDataset'] = item['inDataset'].first if item['inDataset'].is_a?(Array)
-
         result[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
       end
 
