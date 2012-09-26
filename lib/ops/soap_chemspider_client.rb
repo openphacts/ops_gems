@@ -2,13 +2,13 @@ require 'httpclient'
 require 'nokogiri'
 
 module OPS
-  class ChemspiderClient
+  class SoapChemspiderClient
     class Error < StandardError; end
-    class BadStatusCode < ChemspiderClient::Error; end
-    class Unauthorized < ChemspiderClient::Error; end
-    class Failed < ChemspiderClient::Error; end
-    class TooManyRecords < ChemspiderClient::Error; end
-    class InvalidOption < StandardError; end
+    class BadStatusCode < SoapChemspiderClient::Error; end
+    class Unauthorized < SoapChemspiderClient::Error; end
+    class Failed < SoapChemspiderClient::Error; end
+    class TooManyRecords < SoapChemspiderClient::Error; end
+    class InvalidOption < SoapChemspiderClient::Error; end
 
     STRUCTURE_SEARCH_MATCH_TYPES = {
       :exact_match => 'ExactMatch',

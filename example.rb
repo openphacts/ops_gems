@@ -17,7 +17,7 @@ raise "No ChemSpider Token defined" if CHEMSPIDER_TOKEN.empty?
 
 
 
-chemspider_client = OPS::ChemspiderClient.new(CHEMSPIDER_TOKEN)
+chemspider_client = OPS::SoapChemspiderClient.new(CHEMSPIDER_TOKEN)
 
 chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
 chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_tautomers)
