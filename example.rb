@@ -17,17 +17,24 @@ raise "No ChemSpider Token defined" if CHEMSPIDER_TOKEN.empty?
 
 
 
-chemspider_client = OPS::SoapChemspiderClient.new(CHEMSPIDER_TOKEN)
+json_chemspider_client = OPS::JsonChemspiderClient.new
 
-chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
-chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_tautomers)
-chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_including_h)
-chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_excluding_h)
-chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_isomers)
+json_chemspider_client.exact_structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
+json_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl))
+
+
+
+soap_chemspider_client = OPS::SoapChemspiderClient.new(CHEMSPIDER_TOKEN)
+
+soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
+soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_tautomers)
+soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_including_h)
+soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_excluding_h)
+soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_isomers)
 # Note: Takes some time
-chemspider_client.substructure_search(%(O=C(O)c2c(OCCN1C(=O)\\C=C/C1=O)cccc2))
+soap_chemspider_client.substructure_search(%(O=C(O)c2c(OCCN1C(=O)\\C=C/C1=O)cccc2))
 # Note: Takes some time
-chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl))
+soap_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl))
 
 
 
