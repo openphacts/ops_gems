@@ -20,8 +20,10 @@ raise "No ChemSpider Token defined" if CHEMSPIDER_TOKEN.empty?
 json_chemspider_client = OPS::JsonChemspiderClient.new
 
 json_chemspider_client.exact_structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
-json_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl))
-json_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl), :threshold => 0.95)
+json_chemspider_client.exact_structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :result_type => :compounds)
+json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3))
+json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3), :result_type => :compounds)
+json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3), :threshold => 0.95)
 
 
 

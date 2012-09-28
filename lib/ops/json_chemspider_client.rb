@@ -9,13 +9,20 @@ module OPS
     class InvalidResponse < JsonChemspiderClient::Error; end
 
     URL = 'http://www.chemspider.com/JSON.ashx'
+    RESULTS_OPERATIONS = {
+      :ids => 'GetSearchResult',
+      :compounds => 'GetSearchResultAsCompounds',
+    }
+    DEFAULT_RESULT_TYPE = :ids
+    DEFAULT_SIMILARITY_SEARCH_THRESHOLD = 0.99
 
     def initialize(search_status_wait_duration=0.5)
       @search_status_wait_duration = search_status_wait_duration
       @http_client = HTTPClient.new
     end
 
-    def exact_structure_search(smiles)
+    def exact_structure_search(smiles, options = nil)
+      options ||= {}
       params = {
         'op' => 'ExactStructureSearch',
         'searchOptions.Molecule' => smiles,
@@ -26,7 +33,7 @@ module OPS
         'scopeOptions.DataSources[4]' => 'MeSH'
       }
 
-      make_smiles_based_search(params, "ExactStructureSearch", smiles)
+      make_smiles_based_search(params, "ExactStructureSearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
 
     def similarity_search(smiles, options = nil)
@@ -35,7 +42,7 @@ module OPS
         'op' => 'SimilaritySearch',
         'searchOptions.Molecule' => smiles,
         'searchOptions.SimilarityType' => 'Tanimoto',
-        'searchOptions.Threshold' => options.fetch(:threshold, 0.99),
+        'searchOptions.Threshold' => options.fetch(:threshold, DEFAULT_SIMILARITY_SEARCH_THRESHOLD),
         'scopeOptions.DataSources[0]' => 'DrugBank',
         'scopeOptions.DataSources[1]' => 'ChEMBL',
         'scopeOptions.DataSources[2]' => 'ChEBI',
@@ -43,11 +50,11 @@ module OPS
         'scopeOptions.DataSources[4]' => 'MeSH'
       }
 
-      make_smiles_based_search(params, "SimilaritySearch", smiles)
+      make_smiles_based_search(params, "SimilaritySearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
 
   private
-    def make_smiles_based_search(params, type, smiles)
+    def make_smiles_based_search(params, type, smiles, result_type)
       OPS.log(self, :info, "Issues call to ChemSpider for '#{type}' with smiles '#{smiles}'")
       start_time = Time.now
 
@@ -57,7 +64,7 @@ module OPS
 
       transaction_id = response.body
 
-      result = wait_for_search_result(transaction_id)
+      result = wait_for_search_result(transaction_id, result_type)
       query_time = Time.now - start_time
 
       OPS.log(self, :debug, "(#{transaction_id}) Call took #{query_time} seconds")
@@ -78,8 +85,8 @@ module OPS
       end
     end
 
-    def get_async_search_result(transaction_id)
-      response = @http_client.get(URL, { 'op' => 'GetSearchResult', 'rid' => transaction_id },
+    def get_async_search_result(transaction_id, result_type)
+      response = @http_client.get(URL, { 'op' => RESULTS_OPERATIONS[result_type], 'rid' => transaction_id },
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
@@ -91,7 +98,7 @@ module OPS
       end
     end
 
-    def wait_for_search_result(transaction_id)
+    def wait_for_search_result(transaction_id, result_type)
       OPS.log(self, :debug, "(#{transaction_id}) Wait for search result for transaction")
 
       search_status = nil
@@ -107,7 +114,7 @@ module OPS
         end
       end
 
-      result = get_async_search_result(transaction_id)
+      result = get_async_search_result(transaction_id, result_type)
 
       OPS.log(self, :info, "(#{transaction_id}) Search result: #{result}")
 
