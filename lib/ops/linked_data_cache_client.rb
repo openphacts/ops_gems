@@ -10,10 +10,11 @@ module OPS
 
     NON_PROPERTY_KEYS = %w(_about exactMatch inDataset isPrimaryTopicOf activity).freeze
 
-    def initialize(url)
+    def initialize(url, options={})
       @url = url
       @url = @url[0..-2] if @url.end_with?('/')
       @http_client = HTTPClient.new
+      @http_client.receive_timeout = options.fetch(:receive_timeout, 60)
     end
 
     def compound_info(compound_uri)

@@ -11,6 +11,18 @@ describe OPS::LinkedDataCacheClient, :vcr do
         OPS::LinkedDataCacheClient.new
       }.to raise_exception(ArgumentError)
     end
+
+    it "sets the receiving timeout to 60 by default" do
+      flexmock(HTTPClient).new_instances.should_receive(:receive_timeout=).with(60).once
+
+      OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
+    end
+
+    it "uses a defined receiving timeout" do
+      flexmock(HTTPClient).new_instances.should_receive(:receive_timeout=).with(23).once
+
+      OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl", :receive_timeout => 23)
+    end
   end
 
   describe "#compound_info" do
