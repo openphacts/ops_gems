@@ -6,11 +6,7 @@ require 'webmock/rspec'
 
 WebMock.disable_net_connect!
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'ops'
-
-OPS.log = false
-
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each {|f| require f}
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
@@ -25,3 +21,9 @@ RSpec.configure do |config|
   # in RSpec 3 this will no longer be necessary.
   config.treat_symbols_as_metadata_keys_with_true_values = true
 end
+
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'ops'
+
+OPS.log = false
