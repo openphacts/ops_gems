@@ -33,13 +33,13 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new
-      results = chemspider_client.exact_structure_search("CC(=O)Oc1ccccc1C(=O)O")
+      result = chemspider_client.exact_structure_search("CC(=O)Oc1ccccc1C(=O)O")
 
       expected_search_request.should have_been_made.once
       expected_status_request.should have_been_made.once
       expected_result_request.should have_been_made.once
 
-      results.should == [2157]
+      result.should == [2157]
     end
 
     it "waits until a result from ChemSpider is available" do
@@ -85,13 +85,13 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new(0)
-      results = chemspider_client.exact_structure_search("CCCCCC")
+      result = chemspider_client.exact_structure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.times(7)
       expected_result_request.should have_been_made.once
 
-      results.should == [3344]
+      result.should == [3344]
     end
 
     it "raises an exception if the HTTP return code is not 200" do
@@ -149,13 +149,13 @@ describe OPS::JsonChemspiderClient do
 
 
       chemspider_client = OPS::JsonChemspiderClient.new
-      results = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC")
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC")
 
       expected_search_request.should have_been_made.once
       expected_status_request.should have_been_made.once
       expected_result_request.should have_been_made.once
 
-      results.should == [8888, 213]
+      result.should == [8888, 213]
     end
 
     it "waits until a result from ChemSpider is available" do
@@ -203,13 +203,13 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new(0)
-      results = chemspider_client.similarity_search("CCCCCC")
+      result = chemspider_client.similarity_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.times(7)
       expected_result_request.should have_been_made.once
 
-      results.should == [112]
+      result.should == [112]
     end
 
     it "raises an exception if the HTTP return code is not 200" do
