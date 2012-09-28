@@ -234,5 +234,43 @@ describe OPS::JsonChemspiderClient do
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
       }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Response with status code 504")
     end
+
+    it "uses a given threshold" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => {
+              'op' => 'SimilaritySearch',
+              'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
+              'searchOptions.SimilarityType' => 'Tanimoto',
+              'searchOptions.Threshold' => 0.73,
+              'scopeOptions.DataSources[0]' => 'DrugBank',
+              'scopeOptions.DataSources[1]' => 'ChEMBL',
+              'scopeOptions.DataSources[2]' => 'ChEBI',
+              'scopeOptions.DataSources[3]' => 'PDB',
+              'scopeOptions.DataSources[4]' => 'MeSH'
+            },
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([2157]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O", :threshold => 0.73)
+
+      result.should == [2157]
+    end
   end
 end

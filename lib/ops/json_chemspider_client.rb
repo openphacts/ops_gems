@@ -29,12 +29,13 @@ module OPS
       make_smiles_based_search(params, "ExactStructureSearch", smiles)
     end
 
-    def similarity_search(smiles)
+    def similarity_search(smiles, options = nil)
+      options ||= {}
       params = {
         'op' => 'SimilaritySearch',
         'searchOptions.Molecule' => smiles,
         'searchOptions.SimilarityType' => 'Tanimoto',
-        'searchOptions.Threshold' => 0.99,
+        'searchOptions.Threshold' => options.fetch(:threshold, 0.99),
         'scopeOptions.DataSources[0]' => 'DrugBank',
         'scopeOptions.DataSources[1]' => 'ChEMBL',
         'scopeOptions.DataSources[2]' => 'ChEBI',
