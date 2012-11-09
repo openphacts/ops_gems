@@ -1,6 +1,7 @@
 require 'active_support/core_ext/string/inflections'
 require 'httpclient'
 require 'multi_json'
+require 'awesome_print'
 
 module OPS
   class LinkedDataCacheClient
@@ -19,14 +20,56 @@ module OPS
 
     def compound_info(compound_uri)
       response = execute_request("#{@url}/compound.json", :uri => compound_uri)
+      check_response(response)
+      json = decode_response(response)
 
-      parse_response(response)
+      result = parse_items_json(json)
+
+      OPS.log(self, :debug, "Result: #{result.inspect}")
+
+      result
+    end
+
+    def compound_pharmacology_info_count(compound_uri)
+      response = execute_request("#{@url}/compound/pharmacology/count.json", :uri => compound_uri)
+      check_response(response)
+      json = decode_response(response)
+
+      result = json['result']['primaryTopic']['compoundPharmacologyTotalResults']
+
+      OPS.log(self, :debug, "Result: #{result.inspect}")
+
+      result
     end
 
     def compound_pharmacology_info(compound_uri)
       response = execute_request("#{@url}/compound/pharmacology.json", :uri => compound_uri)
+      check_response(response)
+      json = decode_response(response)
 
-      parse_response(response)
+      result = parse_items_json(json)
+
+      OPS.log(self, :debug, "Result: #{result.inspect}")
+
+      result
+    end
+
+    def compound_pharmacology_info_pages(compound_uri)
+      response = execute_request("#{@url}/compound/pharmacology/pages.json", :uri => compound_uri)
+      check_response(response)
+      json = decode_response(response)
+
+      activity_items = json['result']['items']
+
+      result = {}
+
+      activity_items.each do |activity_item|
+        ap activity_item
+      end
+
+      OPS.log(self, :debug, "Result: #{result.inspect}")
+
+      result
     end
 
   private
@@ -50,15 +93,17 @@ module OPS
       response
     end
 
-    def parse_response(response)
+    def check_response(response)
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+    end
 
-      begin
-        json = MultiJson.load(response.body)
-      rescue MultiJson::DecodeError
-        raise InvalidResponse.new("Could not parse response")
-      end
+    def decode_response(response)
+      MultiJson.load(response.body)
+    rescue MultiJson::DecodeError
+      raise InvalidResponse.new("Could not parse response")
+    end
 
+    def parse_items_json(json)
       primary_topic = json['result']['primaryTopic']
 
       return nil unless primary_topic.has_key?('inDataset')
@@ -70,9 +115,6 @@ module OPS
       primary_topic['exactMatch'].each do |item|
         result[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
       end
-
-      OPS.log(self, :info, "Result: #{result.nil? ? 0 : result.length} items")
-      OPS.log(self, :debug, "Result: #{result.inspect}")
 
       result
     end
@@ -108,6 +150,11 @@ module OPS
       on_assay = activity['onAssay']
       targets = if on_assay['target'].is_a?(Hash)
         [parse_assey_target(on_assay['target'])]
+      elsif on_assay['target'].is_a?(String)
+        [{
+          :uri => on_assay['target'],
+          :title => ""
+        }]
       else
         on_assay['target'].collect do |target|
           parse_assey_target(target)
@@ -118,13 +165,13 @@ module OPS
         :uri => activity['_about'],
         :on_assay => {
           :uri => on_assay['_about'],
-          :organism => on_assay['assay_organism'],
+          :assay_organism => on_assay['assay_organism'],
           :targets => targets
         },
         :relation => activity['relation'],
         :standard_units => activity['standardUnits'],
         :standard_value => activity['standardValue'],
-        :type => activity['activity_type'],
+        :activity_type => activity['activity_type'],
       }
     end
 
