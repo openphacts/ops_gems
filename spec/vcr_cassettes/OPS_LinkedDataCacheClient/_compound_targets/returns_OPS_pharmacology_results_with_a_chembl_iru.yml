@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ops.few.vu.nl/compound/pharmacology.json?uri=http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        RnJpLCAwOSBOb3YgMjAxMiAxMjo0NTo1MSBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4z
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        RnJpLCAwOSBOb3YgMjAxMiAxMjo0NTo1MiBHTVQ=
+      !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
+      - !binary |-
+        ZmFsc2U=
+      !binary "RXRhZw==":
+      - !binary |-
+        NGUxMWI1YjM1NmYyNjZhMjk1MGIwMTdjZGNhMmNkNDk=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        Njkw
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fdata.kasabi.com%2Fdataset%2Fchembl-rdf%2Fchemblid%2FCHEMBL25","definition":"http://ops.few.vu.nl/api-config","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fdata.kasabi.com%2Fdataset%2Fchembl-rdf%2Fchemblid%2FCHEMBL25&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","isPrimaryTopicOf":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fdata.kasabi.com%2Fdataset%2Fchembl-rdf%2Fchemblid%2FCHEMBL25"}}}'
+    http_version: 
+  recorded_at: Fri, 09 Nov 2012 12:45:52 GMT
+recorded_with: VCR 2.2.3

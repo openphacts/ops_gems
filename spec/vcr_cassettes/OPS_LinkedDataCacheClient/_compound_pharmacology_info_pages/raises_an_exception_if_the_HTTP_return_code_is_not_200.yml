@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http://unknown.com/1111
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        RnJpLCAwOSBOb3YgMjAxMiAwOTozNzoyMiBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4z
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        RnJpLCAwOSBOb3YgMjAxMiAwOTozNzoyMyBHTVQ=
+      !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
+      - !binary |-
+        ZmFsc2U=
+      !binary "RXRhZw==":
+      - !binary |-
+        Mzc4MWJjYWM3Y2NlNTE3MTlkZmY1ZmQzMTM0YTMzZjA=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        OTgz
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Funknown.com%2F1111&_page=1","itemsPerPage":10,"startIndex":0,"isPartOf":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages?uri=http%3A%2F%2Funknown.com%2F1111","hasPart":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Funknown.com%2F1111&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Friday,
+        09-Nov-12 09:37:23 UTC","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Funknown.com%2F1111&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Funknown.com%2F1111&_page=1","label":"Compound
+        Pharmacology Paginated"}}'
+    http_version: 
+  recorded_at: Fri, 09 Nov 2012 09:37:23 GMT
+recorded_with: VCR 2.2.3

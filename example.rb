@@ -45,4 +45,6 @@ linked_data_cache_client = OPS::LinkedDataCacheClient.new(OPS_LINKED_DATA_CACHE_
 
 linked_data_cache_client.compound_info("http://rdf.chemspider.com/187440")
 # Note: Takes some time
-linked_data_cache_client.compound_pharmacology_info("http://rdf.chemspider.com/187440")
+linked_data_cache_client.compound_pharmacology("http://rdf.chemspider.com/187440")
+# Note: Takes some time
+linked_data_cache_client.compound_targets("http://rdf.chemspider.com/187440")

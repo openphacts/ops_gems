@@ -11,18 +11,19 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.2.6)
+    activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
+    awesome_print (1.1.0)
     crack (0.3.1)
     diff-lcs (1.1.3)
-    httpclient (2.2.5)
     flexmock (1.0.3)
-    i18n (0.6.0)
+    httpclient (2.2.7)
+    i18n (0.6.1)
     multi_json (1.3.6)
     nokogiri (1.5.5)
-    oj (1.3.0)
+    oj (1.3.7)
     rake (0.9.2.2)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
@@ -41,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   flexmock (~> 1.0.3)
   ops!
   rake (~> 0.9.2.2)

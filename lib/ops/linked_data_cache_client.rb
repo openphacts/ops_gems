@@ -30,19 +30,7 @@ module OPS
       result
     end
 
-    def compound_pharmacology_info_count(compound_uri)
-      response = execute_request("#{@url}/compound/pharmacology/count.json", :uri => compound_uri)
-      check_response(response)
-      json = decode_response(response)
-
-      result = json['result']['primaryTopic']['compoundPharmacologyTotalResults']
-
-      OPS.log(self, :debug, "Result: #{result.inspect}")
-
-      result
-    end
-
-    def compound_pharmacology_info(compound_uri)
+    def compound_pharmacology(compound_uri)
       response = execute_request("#{@url}/compound/pharmacology.json", :uri => compound_uri)
       check_response(response)
       json = decode_response(response)
@@ -54,22 +42,23 @@ module OPS
       result
     end
 
-    def compound_pharmacology_info_pages(compound_uri)
-      response = execute_request("#{@url}/compound/pharmacology/pages.json", :uri => compound_uri)
-      check_response(response)
-      json = decode_response(response)
-
-      activity_items = json['result']['items']
-
-      result = {}
-
-      activity_items.each do |activity_item|
-        ap activity_item
+    def compound_targets(compound_uri)
+      primary_results = compound_pharmacology(compound_uri)
+      return nil unless primary_results
+      targets = Array.new
+      primary_results.each do |uri, primary_hash|
+        next unless primary_hash.has_key?(:activity)
+        primary_hash[:activity].each do |activity_entry|
+          next unless activity_entry.has_key?(:on_assay) and activity_entry[:on_assay].has_key?(:targets) and activity_entry[:on_assay][:targets].any?
+          targets +=  activity_entry[:on_assay][:targets]
+        end
       end
 
-      OPS.log(self, :debug, "Result: #{result.inspect}")
+      targets.uniq!
 
-      result
+      OPS.log(self, :debug, "Result: #{targets.inspect}")
+
+      targets
     end
 
   private
