@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/object/blank'
 require 'httpclient'
 require 'multi_json'
 require 'awesome_print'
@@ -19,6 +20,7 @@ module OPS
     end
 
     def compound_info(compound_uri)
+      return nil if not compound_uri or compound_uri.blank?
       response = execute_request("#{@url}/compound.json", :uri => compound_uri)
       check_response(response)
       json = decode_response(response)
@@ -31,6 +33,7 @@ module OPS
     end
 
     def compound_pharmacology(compound_uri)
+      return nil if not compound_uri or compound_uri.blank?
       response = execute_request("#{@url}/compound/pharmacology.json", :uri => compound_uri)
       check_response(response)
       json = decode_response(response)

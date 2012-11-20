@@ -116,7 +116,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
   end
 
-  describe "#compound_pharmacology" do 
+  describe "#compound_pharmacology" do
     before :each do
       @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
     end
@@ -145,9 +145,51 @@ describe OPS::LinkedDataCacheClient, :vcr do
       @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
       @client.compound_pharmacology("http://rdf.chemspider.com/6026").should_not be_nil
     end
-   
 
-    describe "#compound_targets" do      
+    it "returns results for using the chemspider URI" do
+      uri = 'http://rdf.chemspider.com/2157'
+      @client.compound_pharmacology(uri).should_not be_nil
+    end
+
+    it "returns results for using the conceptwiki URI" do
+      uri = 'http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413'
+      @client.compound_pharmacology(uri).should_not be_nil
+    end
+
+    # it "returns results for using the kasabi/chembl URI" do
+    #   uri = 'http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25'
+    #   @client.compound_pharmacology(uri).should_not be_nil
+    # end
+
+    # it "returns results for using the drugbank URI" do
+    #   uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
+    #   @client.compound_pharmacology(uri).should_not be_nil
+    # end
+
+    it "returns results for different URIs (chemspider, conceptwiki) of the same known compound" do
+      chembl_uri = 'http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25'
+      conceptwiki_uri = 'http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413'
+      chemspider_uri = 'http://rdf.chemspider.com/2157'
+      drugbank_uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
+      synonymous_uris = [conceptwiki_uri, chemspider_uri]
+
+      results = synonymous_uris.collect{|uri| @client.compound_pharmacology(uri)}
+      results.should_not include nil
+    end
+
+    it "returns the same result for different URIs (chemspider, conceptwiki) of the same known compound" do
+      chembl_uri = 'http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25'
+      conceptwiki_uri = 'http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413'
+      chemspider_uri = 'http://rdf.chemspider.com/2157'
+      drugbank_uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
+      synonymous_uris = [conceptwiki_uri, chemspider_uri]
+
+      results = synonymous_uris.collect{|uri| @client.compound_pharmacology(uri)}
+      results.uniq.size.should be 1
+    end
+
+
+    describe "#compound_targets" do
 
       it "returns results for different URIs (chemspider, conceptwiki) of the same known compound" do
         chembl_uri = 'http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25'
@@ -155,7 +197,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
         chemspider_uri = 'http://rdf.chemspider.com/2157'
         drugbank_uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
         synonymous_uris = [conceptwiki_uri, chemspider_uri]
-        
+
         results = synonymous_uris.collect{|uri| @client.compound_targets(uri)}
         results.should_not include nil
       end
@@ -166,7 +208,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
         chemspider_uri = 'http://rdf.chemspider.com/2157'
         drugbank_uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
         synonymous_uris = [conceptwiki_uri, chemspider_uri]
-        
+
         results = synonymous_uris.collect{|uri| @client.compound_targets(uri)}
         results.uniq.size.should be 1
       end
@@ -182,7 +224,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
         expect {
           @client.compound_targets("http://unknown.com/1111")
         }.to raise_exception(OPS::LinkedDataCacheClient::InvalidResponse, "Could not parse response")
-      end      
+      end
 
       it "works with a server URL with trailing backslash" do
         @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
