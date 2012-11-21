@@ -1,8 +1,38 @@
+########################################################################################
+#
+# The MIT License (MIT)
+# Copyright (c) 2012 BioSolveIT GmbH
+#
+# This file is part of the OPS gem, made available under the MIT license.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of 
+# this software and associated documentation files (the "Software"), to deal in 
+# the Software without restriction, including without limitation the rights to use, 
+# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+# Software, and to permit persons to whom the Software is furnished to do so, 
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all 
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+# For further information please contact:
+# BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
+# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
+#
+########################################################################################
+
 ---
 http_interactions:
 - request:
     method: get
-    uri: http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc
+    uri: http://api.openphacts.org/compound/pharmacology/pages.json?uri=http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc
     body:
       encoding: US-ASCII
       string: ''
@@ -45,8 +75,8 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","itemsPerPage":10,"startIndex":0,"isPartOf":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc","hasPart":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Friday,
-        09-Nov-12 09:37:20 UTC","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a399833","pmid":"10741547","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL412415","full_mwt":1171.17,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc","inDataset":"http://www.conceptwiki.org/","prefLabel":"Glaspimod"},{"_about":"http://rdf.chemspider.com/8074052","inchi":"InChI=1S/C48H74N12O22/c49-19-5-3-9-29(47(79)80)57-39(71)23(53-45(77)31(21-37(67)68)59-43(75)27(13-17-35(63)64)55-41(73)25-11-15-33(61)51-25)7-1-2-8-24(40(72)58-30(48(81)82)10-4-6-20-50)54-46(78)32(22-38(69)70)60-44(76)28(14-18-36(65)66)56-42(74)26-12-16-34(62)52-26/h23-32H,1-22,49-50H2,(H,51,61)(H,52,62)(H,53,77)(H,54,78)(H,55,73)(H,56,74)(H,57,71)(H,58,72)(H,59,75)(H,60,76)(H,63,64)(H,65,66)(H,67,68)(H,69,70)(H,79,80)(H,81,82)/t23-,24-,25-,26-,27-,28-,29-,30-,31-,32-/m0/s1","inchikey":"CNYIEQNFOBBXCP-CJMGQXRASA-N","smiles":"O=C2N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)O)CCCCN)CCCC[C@@H](C(=O)N[C@H](C(=O)O)CCCCN)NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@H]1NC(=O)CC1)CCC(=O)O)CC(=O)O)CC(=O)O)CCC(=O)O)CC2","inDataset":"http://rdf.chemspider.com/","ro5_violations":3}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL846196","description":"In
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","itemsPerPage":10,"startIndex":0,"isPartOf":{"_about":"http://api.openphacts.org/compound/pharmacology/pages?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc","hasPart":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Friday,
+        09-Nov-12 09:37:20 UTC","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a399833","pmid":"10741547","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL412415","full_mwt":1171.17,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc","inDataset":"http://www.conceptwiki.org/","prefLabel":"Glaspimod"},{"_about":"http://rdf.chemspider.com/8074052","inchi":"InChI=1S/C48H74N12O22/c49-19-5-3-9-29(47(79)80)57-39(71)23(53-45(77)31(21-37(67)68)59-43(75)27(13-17-35(63)64)55-41(73)25-11-15-33(61)51-25)7-1-2-8-24(40(72)58-30(48(81)82)10-4-6-20-50)54-46(78)32(22-38(69)70)60-44(76)28(14-18-36(65)66)56-42(74)26-12-16-34(62)52-26/h23-32H,1-22,49-50H2,(H,51,61)(H,52,62)(H,53,77)(H,54,78)(H,55,73)(H,56,74)(H,57,71)(H,58,72)(H,59,75)(H,60,76)(H,63,64)(H,65,66)(H,67,68)(H,69,70)(H,79,80)(H,81,82)/t23-,24-,25-,26-,27-,28-,29-,30-,31-,32-/m0/s1","inchikey":"CNYIEQNFOBBXCP-CJMGQXRASA-N","smiles":"O=C2N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)O)CCCCN)CCCC[C@@H](C(=O)N[C@H](C(=O)O)CCCCN)NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@H]1NC(=O)CC1)CCC(=O)O)CC(=O)O)CC(=O)O)CCC(=O)O)CC2","inDataset":"http://rdf.chemspider.com/","ro5_violations":3}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL846196","description":"In
         vitro ability to induce a hematopoietic synergistic factor from a murine stromal
         cell line at 0.10 ug/mL","target":{"title":"murine stromal cell line","concatenatedURIs":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL614765","target_organisms":""},"assay_organism":"Mus
         musculus","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},"relation":"=","standardUnits":"ug
@@ -74,13 +104,13 @@ http_interactions:
         potency for induction of Colony-Stimulating activity(CSA) of C6 stromal line.","target":{"title":"C6
         (Glioma cells)","concatenatedURIs":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL614657","target_organisms":"Rattus
         norvegicus"},"assay_organism":"Mus musculus","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},"relation":"=","standardValue":1,"activity_type":"Relative
-        potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","label":"Compound
+        potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fbc115328-928f-426b-b760-5969f198a9fc&_page=1","label":"Compound
         Pharmacology Paginated"}}'
     http_version: 
   recorded_at: Fri, 09 Nov 2012 09:37:20 GMT
 - request:
     method: get
-    uri: http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http://rdf.chemspider.com/8074052
+    uri: http://api.openphacts.org/compound/pharmacology/pages.json?uri=http://rdf.chemspider.com/8074052
     body:
       encoding: US-ASCII
       string: ''
@@ -123,8 +153,8 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","itemsPerPage":10,"startIndex":0,"isPartOf":{"_about":"http://ops.few.vu.nl/compound/pharmacology/pages?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052","hasPart":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Friday,
-        09-Nov-12 09:37:21 UTC","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a399833","pmid":"10741547","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL412415","full_mwt":1171.17,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc","inDataset":"http://www.conceptwiki.org/","prefLabel":"Glaspimod"},{"_about":"http://rdf.chemspider.com/8074052","inchi":"InChI=1S/C48H74N12O22/c49-19-5-3-9-29(47(79)80)57-39(71)23(53-45(77)31(21-37(67)68)59-43(75)27(13-17-35(63)64)55-41(73)25-11-15-33(61)51-25)7-1-2-8-24(40(72)58-30(48(81)82)10-4-6-20-50)54-46(78)32(22-38(69)70)60-44(76)28(14-18-36(65)66)56-42(74)26-12-16-34(62)52-26/h23-32H,1-22,49-50H2,(H,51,61)(H,52,62)(H,53,77)(H,54,78)(H,55,73)(H,56,74)(H,57,71)(H,58,72)(H,59,75)(H,60,76)(H,63,64)(H,65,66)(H,67,68)(H,69,70)(H,79,80)(H,81,82)/t23-,24-,25-,26-,27-,28-,29-,30-,31-,32-/m0/s1","inchikey":"CNYIEQNFOBBXCP-CJMGQXRASA-N","smiles":"O=C2N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)O)CCCCN)CCCC[C@@H](C(=O)N[C@H](C(=O)O)CCCCN)NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@H]1NC(=O)CC1)CCC(=O)O)CC(=O)O)CC(=O)O)CCC(=O)O)CC2","inDataset":"http://rdf.chemspider.com/","ro5_violations":3}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL846196","description":"In
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","itemsPerPage":10,"startIndex":0,"isPartOf":{"_about":"http://api.openphacts.org/compound/pharmacology/pages?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052","hasPart":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Friday,
+        09-Nov-12 09:37:21 UTC","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a399833","pmid":"10741547","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL412415","full_mwt":1171.17,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/bc115328-928f-426b-b760-5969f198a9fc","inDataset":"http://www.conceptwiki.org/","prefLabel":"Glaspimod"},{"_about":"http://rdf.chemspider.com/8074052","inchi":"InChI=1S/C48H74N12O22/c49-19-5-3-9-29(47(79)80)57-39(71)23(53-45(77)31(21-37(67)68)59-43(75)27(13-17-35(63)64)55-41(73)25-11-15-33(61)51-25)7-1-2-8-24(40(72)58-30(48(81)82)10-4-6-20-50)54-46(78)32(22-38(69)70)60-44(76)28(14-18-36(65)66)56-42(74)26-12-16-34(62)52-26/h23-32H,1-22,49-50H2,(H,51,61)(H,52,62)(H,53,77)(H,54,78)(H,55,73)(H,56,74)(H,57,71)(H,58,72)(H,59,75)(H,60,76)(H,63,64)(H,65,66)(H,67,68)(H,69,70)(H,79,80)(H,81,82)/t23-,24-,25-,26-,27-,28-,29-,30-,31-,32-/m0/s1","inchikey":"CNYIEQNFOBBXCP-CJMGQXRASA-N","smiles":"O=C2N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)N[C@H](C(=O)O)CCCCN)CCCC[C@@H](C(=O)N[C@H](C(=O)O)CCCCN)NC(=O)[C@@H](NC(=O)[C@@H](NC(=O)[C@H]1NC(=O)CC1)CCC(=O)O)CC(=O)O)CC(=O)O)CCC(=O)O)CC2","inDataset":"http://rdf.chemspider.com/","ro5_violations":3}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL846196","description":"In
         vitro ability to induce a hematopoietic synergistic factor from a murine stromal
         cell line at 0.10 ug/mL","target":{"title":"murine stromal cell line","concatenatedURIs":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL614765","target_organisms":""},"assay_organism":"Mus
         musculus","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},"relation":"=","standardUnits":"ug
@@ -152,7 +182,7 @@ http_interactions:
         potency for induction of Colony-Stimulating activity(CSA) of C6 stromal line.","target":{"title":"C6
         (Glioma cells)","concatenatedURIs":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL614657","target_organisms":"Rattus
         norvegicus"},"assay_organism":"Mus musculus","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},"relation":"=","standardValue":1,"activity_type":"Relative
-        potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://ops.few.vu.nl/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","label":"Compound
+        potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://api.openphacts.org/compound/pharmacology/pages.json?uri=http%3A%2F%2Frdf.chemspider.com%2F8074052&_page=1","label":"Compound
         Pharmacology Paginated"}}'
     http_version: 
   recorded_at: Fri, 09 Nov 2012 09:37:21 GMT

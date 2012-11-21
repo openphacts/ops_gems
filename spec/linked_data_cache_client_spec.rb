@@ -1,9 +1,39 @@
+########################################################################################
+#
+# The MIT License (MIT)
+# Copyright (c) 2012 BioSolveIT GmbH
+#
+# This file is part of the OPS gem, made available under the MIT license.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of 
+# this software and associated documentation files (the "Software"), to deal in 
+# the Software without restriction, including without limitation the rights to use, 
+# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+# Software, and to permit persons to whom the Software is furnished to do so, 
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all 
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+# For further information please contact:
+# BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
+# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
+#
+########################################################################################
+
 require 'spec_helper'
 
 describe OPS::LinkedDataCacheClient, :vcr do
   describe "initialization" do
     it "takes the server URL" do
-      OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
+      OPS::LinkedDataCacheClient.new("http://api.openphacts.org")
     end
 
     it "raises an ArgumentError if no server URL is given" do
@@ -15,19 +45,19 @@ describe OPS::LinkedDataCacheClient, :vcr do
     it "sets the receiving timeout to 60 by default" do
       flexmock(HTTPClient).new_instances.should_receive(:receive_timeout=).with(60).once
 
-      OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
+      OPS::LinkedDataCacheClient.new("http://api.openphacts.org")
     end
 
     it "uses a defined receiving timeout" do
       flexmock(HTTPClient).new_instances.should_receive(:receive_timeout=).with(23).once
 
-      OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl", :receive_timeout => 23)
+      OPS::LinkedDataCacheClient.new("http://api.openphacts.org", :receive_timeout => 23)
     end
   end
 
   describe "#compound_info" do
     before :each do
-      @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
+      @client = OPS::LinkedDataCacheClient.new("http://api.openphacts.org")
     end
 
     it "raises an ArgumentError if no compound URI is given" do
@@ -91,7 +121,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "raises an exception if response can't be parsed" do
-      stub_request(:get, "http://ops.few.vu.nl/compound.json?uri=http://unknown.com/1111").
+      stub_request(:get, "http://api.openphacts.org/compound.json?uri=http://unknown.com/1111").
         to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
       expect {
@@ -100,7 +130,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "raises an exception if the HTTP return code is not 200" do
-      stub_request(:get, "http://ops.few.vu.nl/compound.json?uri=http://unknown.com/1111").
+      stub_request(:get, "http://api.openphacts.org/compound.json?uri=http://unknown.com/1111").
         to_return(:status => 500,
                   :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
@@ -110,7 +140,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "works with a server URL with trailing backslash" do
-      @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
+      @client = OPS::LinkedDataCacheClient.new("http://api.openphacts.org/")
 
       @client.compound_info("http://rdf.chemspider.com/187440").should_not be_nil
     end
@@ -118,7 +148,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
 
   describe "#compound_pharmacology" do
     before :each do
-      @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl")
+      @client = OPS::LinkedDataCacheClient.new("http://api.openphacts.org")
     end
 
     it "raises an ArgumentError if no compound URI is given" do
@@ -132,7 +162,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "raises an exception if the HTTP return code is not 200" do
-      stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.json?uri=http://unknown.com/1111").
+      stub_request(:get, "http://api.openphacts.org/compound/pharmacology.json?uri=http://unknown.com/1111").
         to_return(:status => 500,
                   :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
@@ -142,7 +172,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
     end
 
     it "works with a server URL with trailing backslash" do
-      @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
+      @client = OPS::LinkedDataCacheClient.new("http://api.openphacts.org/")
       @client.compound_pharmacology("http://rdf.chemspider.com/6026").should_not be_nil
     end
 
@@ -183,8 +213,9 @@ describe OPS::LinkedDataCacheClient, :vcr do
       chemspider_uri = 'http://rdf.chemspider.com/2157'
       drugbank_uri = 'http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945'
       synonymous_uris = [conceptwiki_uri, chemspider_uri]
-
+      
       results = synonymous_uris.collect{|uri| @client.compound_pharmacology(uri)}
+      
       results.uniq.size.should be 1
     end
 
@@ -218,7 +249,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
       end
 
       it "raises an exception if response can't be parsed" do
-        stub_request(:get, "http://ops.few.vu.nl/compound/pharmacology.json?uri=http://unknown.com/1111").
+        stub_request(:get, "http://api.openphacts.org/compound/pharmacology.json?uri=http://unknown.com/1111").
           to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
 
         expect {
@@ -227,7 +258,7 @@ describe OPS::LinkedDataCacheClient, :vcr do
       end
 
       it "works with a server URL with trailing backslash" do
-        @client = OPS::LinkedDataCacheClient.new("http://ops.few.vu.nl/")
+        @client = OPS::LinkedDataCacheClient.new("http://api.openphacts.org/")
         @client.compound_targets("http://rdf.chemspider.com/6026").should_not be_nil
       end
 

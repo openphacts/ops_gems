@@ -1,8 +1,38 @@
+########################################################################################
+#
+# The MIT License (MIT)
+# Copyright (c) 2012 BioSolveIT GmbH
+#
+# This file is part of the OPS gem, made available under the MIT license.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of 
+# this software and associated documentation files (the "Software"), to deal in 
+# the Software without restriction, including without limitation the rights to use, 
+# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+# Software, and to permit persons to whom the Software is furnished to do so, 
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all 
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+# For further information please contact:
+# BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
+# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
+#
+########################################################################################
+
 ---
 http_interactions:
 - request:
     method: get
-    uri: http://ops.few.vu.nl/compound/pharmacology.json?uri=http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413
+    uri: http://api.openphacts.org/compound/pharmacology.json?uri=http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413
     body:
       encoding: US-ASCII
       string: ''
@@ -45,7 +75,7 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413","definition":"http://ops.few.vu.nl/api-config","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","exactMatch":[{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a4772903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1614038","description":"PubChem
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","exactMatch":[{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a4772903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1614038","description":"PubChem
         BioAssay. qHTS Assay for Inhibitors of HPGD (15-Hydroxyprostaglandin Dehydrogenase).   (Class
         of assay: confirmatory) [Related pubchem assays: 2429 (Confirmation qHTS Assay
         for Inhibitors of HPGD (15-Hydroxyprostaglandin Dehydrogenase)), 2407 (Probe
@@ -2684,12 +2714,12 @@ http_interactions:
         activity in orally dosed rat assessed as inihibition of carrageenan-induced
         paw edema after 3 hrs","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL376","title":"Rattus
         norvegicus","target_organism":"Rattus norvegicus"},"assay_organism":"Rattus
-        norvegicus"},"relation":"=","standardUnits":"mg kg-1","standardValue":128.9,"activity_type":"ED50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413",{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"}],"prefLabel":"Aspirin","isPrimaryTopicOf":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413"}}}'
+        norvegicus"},"relation":"=","standardUnits":"mg kg-1","standardValue":128.9,"activity_type":"ED50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413",{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"}],"prefLabel":"Aspirin","isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413"}}}'
     http_version: 
   recorded_at: Fri, 09 Nov 2012 12:48:37 GMT
 - request:
     method: get
-    uri: http://ops.few.vu.nl/compound/pharmacology.json?uri=http://rdf.chemspider.com/2157
+    uri: http://api.openphacts.org/compound/pharmacology.json?uri=http://rdf.chemspider.com/2157
     body:
       encoding: US-ASCII
       string: ''
@@ -2732,7 +2762,7 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157","definition":"http://ops.few.vu.nl/api-config","extendedMetadataVersion":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0,"exactMatch":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a4772903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1614038","description":"PubChem
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0,"exactMatch":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a4772903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1614038","description":"PubChem
         BioAssay. qHTS Assay for Inhibitors of HPGD (15-Hydroxyprostaglandin Dehydrogenase).   (Class
         of assay: confirmatory) [Related pubchem assays: 2429 (Confirmation qHTS Assay
         for Inhibitors of HPGD (15-Hydroxyprostaglandin Dehydrogenase)), 2407 (Probe
@@ -5371,7 +5401,7 @@ http_interactions:
         activity in orally dosed rat assessed as inihibition of carrageenan-induced
         paw edema after 3 hrs","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL376","title":"Rattus
         norvegicus","target_organism":"Rattus norvegicus"},"assay_organism":"Rattus
-        norvegicus"},"relation":"=","standardUnits":"mg kg-1","standardValue":128.9,"activity_type":"ED50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://rdf.chemspider.com/2157",{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","prefLabel":"Aspirin"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"}],"isPrimaryTopicOf":"http://ops.few.vu.nl/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157"}}}'
+        norvegicus"},"relation":"=","standardUnits":"mg kg-1","standardValue":128.9,"activity_type":"ED50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://rdf.chemspider.com/2157",{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","prefLabel":"Aspirin"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"}],"isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157"}}}'
     http_version: 
   recorded_at: Fri, 09 Nov 2012 12:48:41 GMT
 recorded_with: VCR 2.2.3
