@@ -1,33 +1,3 @@
-########################################################################################
-#
-# The MIT License (MIT)
-# Copyright (c) 2012 BioSolveIT GmbH
-#
-# This file is part of the OPS gem, made available under the MIT license.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy of 
-# this software and associated documentation files (the "Software"), to deal in 
-# the Software without restriction, including without limitation the rights to use, 
-# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-# Software, and to permit persons to whom the Software is furnished to do so, 
-# subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all 
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
-# For further information please contact:
-# BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
-# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
-#
-########################################################################################
-
 ---
 http_interactions:
 - request:
@@ -45,31 +15,28 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NCBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
-        QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
-      !binary "QWNjZXB0LVJhbmdlcw==":
-      - !binary |-
-        Ynl0ZXM=
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
       !binary "WC1Qb3dlcmVkLUJ5":
       - !binary |-
-        UEhQLzUuNC41LWRldg==
+        UEhQLzUuMy4z
       !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
       - !binary |-
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        ODkyYjQyMmMwZDE0MmQ1NzYzMmI2YzJjNDljNmQ2NzA=
-      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+        MjY3YzhlNTRiY2UyNTQ0YmI5ZmQ2NWIyNWViYjUwNTA=
+      !binary "Q29udGVudC1MZW5ndGg=":
       - !binary |-
-        Y2h1bmtlZA==
+        NTA5
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbg==
@@ -77,5 +44,5 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://unknown.com/1111","isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111"}}}'
     http_version: 
-  recorded_at: Fri, 27 Jul 2012 16:35:49 GMT
+  recorded_at: Wed, 21 Nov 2012 15:32:55 GMT
 recorded_with: VCR 2.2.3

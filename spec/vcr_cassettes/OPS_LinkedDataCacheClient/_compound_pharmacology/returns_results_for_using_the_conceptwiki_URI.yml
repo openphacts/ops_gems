@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.openphacts.org/compound/pharmacology.json?uri=http://rdf.chemspider.com/2157
+    uri: http://api.openphacts.org/compound/pharmacology.json?uri=http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NyBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzowOCBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
@@ -27,13 +27,13 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NyBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzowOCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        OGY4ZjJiYWM2MDE0NjU5ZjM2MmU5NjcyYmJjYzkyNTk=
+        NzNkMzcyNDE2MzE4MTQxNWU5ZTMxZTFlNzNiOTJkNjI=
       !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
       - !binary |-
         Y2h1bmtlZA==
@@ -42,7 +42,7 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0,"exactMatch":[{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","prefLabel":"Aspirin"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2446668","pmid":"18547115","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL937809","description":"Inhibition
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413","inDataset":"http://www.conceptwiki.org","exactMatch":[{"_about":"http://rdf.chemspider.com/2157","inchi":"InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)","inchikey":"BSYNRYMUTXBXSQ-UHFFFAOYSA-N","smiles":"CC(=O)Oc1ccccc1C(=O)O","inDataset":"http://www.chemspider.com","ro5_violations":0},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","full_mwt":180.157,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2446668","pmid":"18547115","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL937809","description":"Inhibition
         of thrombin-induced human platelet aggregation by light transmission aggregometer","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Homo
         sapiens"},"relation":">","standardUnits":"nM","standardValue":100000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2446645","pmid":"18547115","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL937808","description":"Inhibition
         of collagen-induced human platelet aggregation by light transmission aggregometer","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Homo
@@ -1288,14 +1288,14 @@ http_interactions:
         relative to dihydralazine for in vitro hypotensive activity in anesthetized
         rats","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL376","title":"Rattus
         norvegicus","target_organism":"Rattus norvegicus"},"assay_organism":"Rattus
-        norvegicus"},"relation":"=","standardValue":1,"activity_type":"Relative activity","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2369907","pmid":"18722128","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL983687","description":"Antinociceptive
+        norvegicus"},"relation":"=","standardValue":1,"activity_type":"Relative activity","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2019003","pmid":"17197180","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL903181","description":"Anticoagulant
+        activity assessed as inhibition of arachidonic acid induced rabbit platelet
+        aggregation","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Oryctolagus
+        cuniculus"},"relation":"=","standardUnits":"nM","standardValue":151600,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2369907","pmid":"18722128","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL983687","description":"Antinociceptive
         activity against acetic acid-induced abdominal constrictions in Swiss mouse
         assessed as maximal inhibition at 10 mg/kg, ip pretreated 30 mins before acetic
         acid challenge","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
-        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":35,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2019003","pmid":"17197180","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL903181","description":"Anticoagulant
-        activity assessed as inhibition of arachidonic acid induced rabbit platelet
-        aggregation","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Oryctolagus
-        cuniculus"},"relation":"=","standardUnits":"nM","standardValue":151600,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2019004","pmid":"17197180","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL903182","description":"Anticoagulant
+        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":35,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2019004","pmid":"17197180","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL903182","description":"Anticoagulant
         activity assessed as inhibition of thrombin induced rabbit platelet aggregation","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Oryctolagus
         cuniculus"},"relation":">","standardUnits":"nM","standardValue":100000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2445634","pmid":"18541424","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1018367","description":"Antiinflammatory
         activity against carrageenan-induced paw edema in po dosed rat after 3 hrs","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL376","title":"Rattus
@@ -1601,11 +1601,11 @@ http_interactions:
         of COX2","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL230","title":"Cyclooxygenase-2","target_organism":"Homo
         sapiens"}},"relation":"=","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460695","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246807","description":"Antiinflammatory
         activity in human neutrophils assessed as inhibition of respiratory burst","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Homo
-        sapiens"},"relation":"=","standardUnits":"nM","standardValue":518500,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a6851936","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1794483","description":"PubChem
+        sapiens"},"relation":"=","standardUnits":"nM","standardValue":518500,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460635","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246809","description":"Antioxidant
+        activity assessed as xanthin/xanthin oxidase superoxide scavengeing activity","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545"},"relation":">","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a6851936","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1794483","description":"PubChem
         BioAssay. qHTS for Inhibitors of Polymerase Iota.   (Class of assay: confirmatory)
         [Related pubchem assays (depositor defined):AID588623]","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL5391","title":"DNA
-        polymerase iota","target_organism":"Homo sapiens"}},"standardUnits":"uM","standardValue":89.1251,"activity_type":"Potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460635","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246809","description":"Antioxidant
-        activity assessed as xanthin/xanthin oxidase superoxide scavengeing activity","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545"},"relation":">","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3268004","pmid":"20116903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1105582","description":"Analgesic
+        polymerase iota","target_organism":"Homo sapiens"}},"standardUnits":"uM","standardValue":89.1251,"activity_type":"Potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3268004","pmid":"20116903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1105582","description":"Analgesic
         activity in Swiss albino mouse assessed as p-benzoquinone-induced writhing
         at 100 mg/kg, po administered 60 mins before benzoquinone challenge","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
         musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":51.9,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2427363","citesAsDataSource":"http://dx.doi.org/10.1021/np50123a013","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1035134","description":"Inhibition
@@ -2054,15 +2054,15 @@ http_interactions:
         activity in Swiss mouse assessed as inhibition of formalin-induced paw licking
         activity at 10 mg/kg, ip administered 30 mins before formalin challenge measured
         after 5 mins","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
-        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":16,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3532181","pmid":"20708825","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1282758","description":"Antinociceptive
-        activity in Swiss mouse assessed as inhibition of acetic acid-induced abdominal
-        contraction at 0.1 to 100 mg/kg, ip administered 30 mins before acetic acid
-        challenge measured after 20 mins relative to control","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
-        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":83,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2309134","citesAsDataSource":"http://dx.doi.org/10.1021/np50126a023","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1003067","description":"Antiplatelet
+        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":16,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2309134","citesAsDataSource":"http://dx.doi.org/10.1021/np50126a023","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1003067","description":"Antiplatelet
         activity against washed rabbit platelet assessed as arachidonic acid-induced
         platelet aggregation at 50 uM administered 3 mins before arachidonic acid
         challenge","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Oryctolagus
-        cuniculus"},"relation":"=","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2517138","pmid":"18701196","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL977967","description":"Antiinflammatory
+        cuniculus"},"relation":"=","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3532181","pmid":"20708825","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1282758","description":"Antinociceptive
+        activity in Swiss mouse assessed as inhibition of acetic acid-induced abdominal
+        contraction at 0.1 to 100 mg/kg, ip administered 30 mins before acetic acid
+        challenge measured after 20 mins relative to control","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
+        musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":83,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2517138","pmid":"18701196","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL977967","description":"Antiinflammatory
         activity against carrageenan-induced paw edema in Charles Foster albino rat
         at 50 mg/kg, po administered 30 mins before carrageenan challenge measured
         after 1 to 3 hrs","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL376","title":"Rattus
@@ -2681,7 +2681,7 @@ http_interactions:
         porcellus","target_organism":"Cavia porcellus"},"assay_organism":"Cavia porcellus"},"relation":"=","standardUnits":"nM","standardValue":48000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a597864","pmid":"11378363","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL760545","description":"Evaluated
         for in vitro antiplatelet activity against guinea pig platelet rich plasma
         aggregated by arachidonic acid (AA)","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL369","title":"Cavia
-        porcellus","target_organism":"Cavia porcellus"},"assay_organism":"Cavia porcellus"},"relation":"=","standardUnits":"nM","standardValue":61000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://rdf.chemspider.com/2157"],"isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157"}}}'
+        porcellus","target_organism":"Cavia porcellus"},"assay_organism":"Cavia porcellus"},"relation":"=","standardUnits":"nM","standardValue":61000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://www.conceptwiki.org/concept/dd758846-1dac-4f0d-a329-06af9a7fa413",{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00945","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["approved","smallMolecule"],"genericName":"Aspirin"}],"prefLabel":"Aspirin","isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fdd758846-1dac-4f0d-a329-06af9a7fa413"}}}'
     http_version: 
-  recorded_at: Wed, 21 Nov 2012 15:33:01 GMT
+  recorded_at: Wed, 21 Nov 2012 15:33:12 GMT
 recorded_with: VCR 2.2.3

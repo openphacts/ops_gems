@@ -35,7 +35,7 @@ $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'ops'
 
 
-OPS_LINKED_DATA_CACHE_URL = "http://ops2.few.vu.nl"
+OPS_LINKED_DATA_CACHE_URL = "http://api.openphacts.org"
 CHEMSPIDER_TOKEN = ""
 
 raise "No OPS Linked Data Cache Url defined" if OPS_LINKED_DATA_CACHE_URL.empty?

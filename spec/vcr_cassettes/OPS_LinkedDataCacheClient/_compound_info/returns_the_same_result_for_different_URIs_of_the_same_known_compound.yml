@@ -1,33 +1,3 @@
-########################################################################################
-#
-# The MIT License (MIT)
-# Copyright (c) 2012 BioSolveIT GmbH
-#
-# This file is part of the OPS gem, made available under the MIT license.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy of 
-# this software and associated documentation files (the "Software"), to deal in 
-# the Software without restriction, including without limitation the rights to use, 
-# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-# Software, and to permit persons to whom the Software is furnished to do so, 
-# subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all 
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
-# For further information please contact:
-# BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
-# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
-#
-########################################################################################
-
 ---
 http_interactions:
 - request:
@@ -45,37 +15,34 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0NyBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1MSBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
-        QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
-      !binary "QWNjZXB0LVJhbmdlcw==":
-      - !binary |-
-        Ynl0ZXM=
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
       !binary "WC1Qb3dlcmVkLUJ5":
       - !binary |-
-        UEhQLzUuNC41LWRldg==
+        UEhQLzUuMy4z
       !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
       - !binary |-
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0NyBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1MSBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        NzUwZjA4MTAxYWI1ZmEwMmJhMDdjMGJiN2RmNTg4NmM=
-      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+        ZjI1NzgxZDg2ZTVlZjViNDkyOTEwNjk4NzdiNjczZTE=
+      !binary "Q29udGVudC1MZW5ndGg=":
       - !binary |-
-        Y2h1bmtlZA==
+        MzI1MQ==
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5","inDataset":"http://www.conceptwiki.org","exactMatch":["http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5",{"_about":"http://rdf.chemspider.com/187440","inchi":"InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)","inchikey":"MLDQJTXFUGDVEO-UHFFFAOYSA-N","smiles":"CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl","inDataset":"http://www.chemspider.com"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734","alogp":4.175,"full_mwt":464.825,"hba":4,"hbd":3,"molform":"C21H16ClF3N4O3","mw_freebase":464.825,"psa":92.35,"rtb":6,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398","inDataset":"http://linkedlifedata.com/resource/drugbank","biotransformation":"Sorafenib
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5","inDataset":"http://www.conceptwiki.org","exactMatch":[{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398","inDataset":"http://linkedlifedata.com/resource/drugbank","biotransformation":"Sorafenib
         is metabolized primarily in the liver, undergoing oxidative metabolism, mediated
         by CYP3A4, as well as glucuronidation mediated by UGT1A9. Sorafenib accounts
         for approximately 70-85% of the circulating analytes in plasma at steady-
@@ -96,9 +63,9 @@ http_interactions:
         reactions observed at this dose were primarily diarrhea and dermatologic events.
         No information is available on symptoms of acute overdose in animals because
         of the saturation of absorption in oral acute toxicity studies conducted in
-        animals."}],"prefLabel":"Sorafenib","isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5"}}}'
+        animals."},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1336","full_mwt":464.825,"molform":"C21H16ClF3N4O3","mw_freebase":464.825,"rtb":6,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://rdf.chemspider.com/187440","inchi":"InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)","inchikey":"MLDQJTXFUGDVEO-UHFFFAOYSA-N","smiles":"CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl","inDataset":"http://www.chemspider.com","hba":7,"hbd":3,"logp":4.818,"psa":9.235e-18,"ro5_violations":0},"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"],"prefLabel":"Sorafenib","isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F38932552-111f-4a4e-a46a-4ed1d7bdf9d5"}}}'
     http_version: 
-  recorded_at: Fri, 27 Jul 2012 16:35:48 GMT
+  recorded_at: Wed, 21 Nov 2012 15:32:52 GMT
 - request:
     method: get
     uri: http://api.openphacts.org/compound.json?uri=http://rdf.chemspider.com/187440
@@ -114,37 +81,34 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1MiBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
-        QXBhY2hlLzIuMi4xNiAoRGViaWFuKQ==
-      !binary "QWNjZXB0LVJhbmdlcw==":
-      - !binary |-
-        Ynl0ZXM=
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
       !binary "WC1Qb3dlcmVkLUJ5":
       - !binary |-
-        UEhQLzUuNC41LWRldg==
+        UEhQLzUuMy4z
       !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
       - !binary |-
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyNyBKdWwgMjAxMiAxNjozNTo0OCBHTVQ=
+        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1MyBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        YjcxMmRjMzEyYWVlNWEyZDJmNjRjN2EzYmE1OWQ3ZmQ=
-      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+        OTZiM2UxOTE3MDM0NGQ3NmRlM2M0ODYwNDBmMTFjOTM=
+      !binary "Q29udGVudC1MZW5ndGg=":
       - !binary |-
-        Y2h1bmtlZA==
+        MzA4OQ==
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/187440","inchi":"InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)","inchikey":"MLDQJTXFUGDVEO-UHFFFAOYSA-N","smiles":"CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl","inDataset":"http://www.chemspider.com","exactMatch":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/molecule/m276734","alogp":4.175,"full_mwt":464.825,"hba":4,"hbd":3,"molform":"C21H16ClF3N4O3","mw_freebase":464.825,"psa":92.35,"rtb":6,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398","inDataset":"http://linkedlifedata.com/resource/drugbank","biotransformation":"Sorafenib
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/187440","inchi":"InChI=1S/C21H16ClF3N4O3/c1-26-19(30)18-11-15(8-9-27-18)32-14-5-2-12(3-6-14)28-20(31)29-13-4-7-17(22)16(10-13)21(23,24)25/h2-11H,1H3,(H,26,30)(H2,28,29,31)","inchikey":"MLDQJTXFUGDVEO-UHFFFAOYSA-N","smiles":"CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl","inDataset":"http://www.chemspider.com","hba":7,"hbd":3,"logp":4.818,"psa":9.235e-18,"ro5_violations":0,"exactMatch":["http://rdf.chemspider.com/187440",{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1336","full_mwt":464.825,"molform":"C21H16ClF3N4O3","mw_freebase":464.825,"rtb":6,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5","inDataset":"http://www.conceptwiki.org","prefLabel":"Sorafenib"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00398","inDataset":"http://linkedlifedata.com/resource/drugbank","biotransformation":"Sorafenib
         is metabolized primarily in the liver, undergoing oxidative metabolism, mediated
         by CYP3A4, as well as glucuronidation mediated by UGT1A9. Sorafenib accounts
         for approximately 70-85% of the circulating analytes in plasma at steady-
@@ -165,7 +129,7 @@ http_interactions:
         reactions observed at this dose were primarily diarrhea and dermatologic events.
         No information is available on symptoms of acute overdose in animals because
         of the saturation of absorption in oral acute toxicity studies conducted in
-        animals."},"http://rdf.chemspider.com/187440",{"_about":"http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5","inDataset":"http://www.conceptwiki.org","prefLabel":"Sorafenib"}],"isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440"}}}'
+        animals."}],"isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440"}}}'
     http_version: 
-  recorded_at: Fri, 27 Jul 2012 16:35:48 GMT
+  recorded_at: Wed, 21 Nov 2012 15:32:54 GMT
 recorded_with: VCR 2.2.3
