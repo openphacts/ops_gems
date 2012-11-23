@@ -189,6 +189,11 @@ describe OPS::LinkedDataCacheClient, :vcr do
       @client.compound_pharmacology(uri).should_not be_nil
     end
 
+    it "returns results even if some assays do not have targets" do
+      uri = 'http://rdf.chemspider.com/1004'
+      @client.compound_pharmacology(uri).should_not be_nil
+    end
+
     # it "returns results for using the kasabi/chembl URI" do
     #   uri = 'http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25'
     #   @client.compound_pharmacology(uri).should_not be_nil
