@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NSBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjozOCBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
@@ -27,7 +27,7 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMjo1NiBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjozOCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
@@ -65,5 +65,5 @@ http_interactions:
         of the saturation of absorption in oral acute toxicity studies conducted in
         animals."}],"isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Frdf.chemspider.com%2F187440"}}}'
     http_version: 
-  recorded_at: Wed, 21 Nov 2012 15:32:57 GMT
+  recorded_at: Wed, 28 Nov 2012 11:16:40 GMT
 recorded_with: VCR 2.2.3

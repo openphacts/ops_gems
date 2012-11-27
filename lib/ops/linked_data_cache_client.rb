@@ -40,7 +40,7 @@ module OPS
     class BadStatusCode < LinkedDataCacheClient::Error; end
     class InvalidResponse < LinkedDataCacheClient::Error; end
 
-    NON_PROPERTY_KEYS = %w(_about exactMatch inDataset isPrimaryTopicOf activity).freeze
+    NON_PROPERTY_KEYS = %w(_about inDataset isPrimaryTopicOf).freeze
 
     def initialize(url, options={})
       @url = url
@@ -51,53 +51,47 @@ module OPS
 
     def compound_info(compound_uri)
       return nil if not compound_uri or compound_uri.blank?
-      response = execute_request("#{@url}/compound.json", :uri => compound_uri)
-      check_response(response)
-      json = decode_response(response)
-
-      result = parse_items_json(json)
-
-      OPS.log(self, :debug, "Result: #{result.inspect}")
-
-      result
+      query_api(:compound_info, compound_uri)
     end
 
     def compound_pharmacology(compound_uri)
       return nil if not compound_uri or compound_uri.blank?
-      response = execute_request("#{@url}/compound/pharmacology.json", :uri => compound_uri)
-      check_response(response)
-      json = decode_response(response)
-
-      result = parse_items_json(json)
-
-      OPS.log(self, :debug, "Result: #{result.inspect}")
-
-      result
+      query_api(:compound_pharmacology, compound_uri)
     end
 
-    def compound_targets(compound_uri)
-      primary_results = compound_pharmacology(compound_uri)
-      return nil unless primary_results
-      targets = Array.new
-      primary_results.each do |uri, primary_hash|
-        next unless primary_hash.has_key?(:activity)
-        primary_hash[:activity].each do |activity_entry|
-          next unless activity_entry.has_key?(:on_assay) and activity_entry[:on_assay].has_key?(:targets) and activity_entry[:on_assay][:targets].any?
-          targets +=  activity_entry[:on_assay][:targets]
-        end
-      end
+    def target_pharmacology(target_uri)
+      return nil if not target_uri or target_uri.blank?
+      query_api(:target_pharmacology, target_uri)
+    end
 
-      targets.uniq!
-
-      OPS.log(self, :debug, "Result: #{targets.inspect}")
-
-      targets
+    def target_info(target_uri)
+      return nil if not target_uri or target_uri.blank?
+      query_api(:target_info, target_uri)
     end
 
   private
+
+    def query_api(method, uri)
+      return nil if not uri or uri.blank?
+
+      request_path = case method
+        when :compound_info then 'compound.json'
+        when :compound_pharmacology then 'compound/pharmacology.json'
+        when :target_info then 'target.json'
+        when :target_pharmacology then 'target/pharmacology.json'
+      end
+
+      response = execute_request("#{@url}/#{request_path}", :uri => uri)
+      check_response(response)
+      json = decode_response(response)
+      result = parse_items_json(json)
+
+      OPS.log(self, :debug, "Result (#{method}): #{result.inspect}")
+      result
+    end
+
     def execute_request(url, options)
       OPS.log(self, :info, "Issues call to Linked Data Cache API URL '#{url}' with options: #{options.inspect}")
-
       start_time = Time.now
       response = nil
 
@@ -111,7 +105,6 @@ module OPS
 
       query_time = Time.now - start_time
       OPS.log(self, :debug, "Call took #{query_time} seconds")
-
       response
     end
 
@@ -127,84 +120,31 @@ module OPS
 
     def parse_items_json(json)
       primary_topic = json['result']['primaryTopic']
-
       return nil unless primary_topic.has_key?('inDataset')
-
       result = {
         primary_topic['inDataset'].to_sym => parse_item(primary_topic)
       }
-
       primary_topic['exactMatch'].each do |item|
         result[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
       end
-
       result
     end
+
 
     def parse_item(item)
-      result = {
-        :uri => item['_about'],
-        :properties => parse_item_properties(item)
-      }
-
-      if item.has_key?('activity')
-        result[:activity] = []
-        if item['activity'].is_a?(Array)
-          item['activity'].each{|a| result[:activity] << parse_activity(a) if a.has_key?('inDataset')}
+      properties = {:uri => item['_about']}
+      item.each do |key, value|
+        next if NON_PROPERTY_KEYS.include?(key)
+        if value.is_a?(Hash) and value.has_key?('_about')
+          properties[key.underscore.to_sym] = parse_item(value)
+        elsif value.is_a?(Array)
+          properties[key.underscore.to_sym] = value.collect{|e| e.is_a?(Hash) ? parse_item(e) : e}
         else
-          result[:activity] << parse_activity(item['activity']) if item['activity'].has_key?('inDataset')
+          properties[key.underscore.to_sym] = value
         end
       end
-
-      result
-    end
-
-    def parse_item_properties(item)
-      properties = {}
-
-      item.each do |key, value|
-        properties[key.underscore.to_sym] = value unless NON_PROPERTY_KEYS.include?(key)
-      end
-
       properties
     end
 
-    def parse_activity(activity)
-      on_assay = activity['onAssay']
-      targets = if on_assay['target'].nil?
-        []
-      elsif on_assay['target'].is_a?(Hash)
-        [parse_assey_target(on_assay['target'])]
-      elsif on_assay['target'].is_a?(String)
-        [{
-          :uri => on_assay['target'],
-          :title => ""
-        }]
-      else
-        on_assay['target'].collect do |target|
-          parse_assey_target(target)
-        end
-      end
-
-      {
-        :uri => activity['_about'],
-        :on_assay => {
-          :uri => on_assay['_about'],
-          :assay_organism => on_assay['assay_organism'],
-          :targets => targets
-        },
-        :relation => activity['relation'],
-        :standard_units => activity['standardUnits'],
-        :standard_value => activity['standardValue'],
-        :activity_type => activity['activity_type'],
-      }
-    end
-
-    def parse_assey_target(target)
-      {
-        :uri => target['_about'],
-        :title => target['title']
-      }
-    end
   end
 end

@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzowMyBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjo0NiBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
@@ -27,13 +27,13 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzowNCBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjo0NyBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        OGY4ZjJiYWM2MDE0NjU5ZjM2MmU5NjcyYmJjYzkyNTk=
+        OWQ0OTU4YWQzMGUwYjA0OGU2NzU4ZjljMjUwZjcyMzU=
       !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
       - !binary |-
         Y2h1bmtlZA==
@@ -1601,11 +1601,11 @@ http_interactions:
         of COX2","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL230","title":"Cyclooxygenase-2","target_organism":"Homo
         sapiens"}},"relation":"=","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460695","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246807","description":"Antiinflammatory
         activity in human neutrophils assessed as inhibition of respiratory burst","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545","assay_organism":"Homo
-        sapiens"},"relation":"=","standardUnits":"nM","standardValue":518500,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a6851936","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1794483","description":"PubChem
+        sapiens"},"relation":"=","standardUnits":"nM","standardValue":518500,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460635","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246809","description":"Antioxidant
+        activity assessed as xanthin/xanthin oxidase superoxide scavengeing activity","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545"},"relation":">","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a6851936","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1794483","description":"PubChem
         BioAssay. qHTS for Inhibitors of Polymerase Iota.   (Class of assay: confirmatory)
         [Related pubchem assays (depositor defined):AID588623]","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL5391","title":"DNA
-        polymerase iota","target_organism":"Homo sapiens"}},"standardUnits":"uM","standardValue":89.1251,"activity_type":"Potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3460635","pmid":"20576329","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1246809","description":"Antioxidant
-        activity assessed as xanthin/xanthin oxidase superoxide scavengeing activity","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545"},"relation":">","standardUnits":"nM","standardValue":1000000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3268004","pmid":"20116903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1105582","description":"Analgesic
+        polymerase iota","target_organism":"Homo sapiens"}},"standardUnits":"uM","standardValue":89.1251,"activity_type":"Potency","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a3268004","pmid":"20116903","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1105582","description":"Analgesic
         activity in Swiss albino mouse assessed as p-benzoquinone-induced writhing
         at 100 mg/kg, po administered 60 mins before benzoquinone challenge","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL375","title":"Mus
         musculus","target_organism":"Mus musculus"},"assay_organism":"Mus musculus"},"relation":"=","standardUnits":"%","standardValue":51.9,"activity_type":"Inhibition","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2427363","citesAsDataSource":"http://dx.doi.org/10.1021/np50123a013","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL25","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1035134","description":"Inhibition
@@ -2683,5 +2683,5 @@ http_interactions:
         aggregated by arachidonic acid (AA)","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL369","title":"Cavia
         porcellus","target_organism":"Cavia porcellus"},"assay_organism":"Cavia porcellus"},"relation":"=","standardUnits":"nM","standardValue":61000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},"http://rdf.chemspider.com/2157"],"isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F2157"}}}'
     http_version: 
-  recorded_at: Wed, 21 Nov 2012 15:33:08 GMT
+  recorded_at: Wed, 28 Nov 2012 11:16:53 GMT
 recorded_with: VCR 2.2.3

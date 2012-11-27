@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.openphacts.org/target.json?uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNzozNyBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4z
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNzozOCBHTVQ=
+      !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
+      - !binary |-
+        ZmFsc2U=
+      !binary "RXRhZw==":
+      - !binary |-
+        NTU5M2YzNDYwZWYyZGVmNmEzY2M0OTkxMmZlZmQ5NTY=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NTM5MA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/target.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/target.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","exactMatch":[{"_about":"http://purl.uniprot.org/uniprot/Q9Y5Y9","Function_Annotation":"This
+        protein mediates the voltage-dependent sodium ion permeability of excitable
+        membranes. Assuming opened or closed conformations in response to the voltage
+        difference across the membrane, the protein forms a sodium-selective channel
+        through which sodium ions may pass in accordance with their electrochemical
+        gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological
+        properties vary depending on the type of the associated beta subunits (in
+        vitro). Plays a role in neuropathic pain mechanisms (By similarity).","alternativeName":"Peripheral
+        nerve sodium channel 3 , Sodium channel protein type X subunit alpha , Voltage-gated
+        sodium channel subunit alpha Nav1.8","classifiedWith":["http://purl.uniprot.org/keywords/325","http://purl.uniprot.org/keywords/832","http://purl.uniprot.org/go/0001518","http://purl.uniprot.org/keywords/894","http://purl.uniprot.org/keywords/677","http://purl.uniprot.org/go/0035725","http://purl.uniprot.org/go/0007600","http://purl.uniprot.org/keywords/851","http://purl.uniprot.org/keywords/621","http://purl.uniprot.org/go/0044299","http://purl.uniprot.org/go/0005248","http://purl.uniprot.org/keywords/1133","http://purl.uniprot.org/keywords/1185"],"existence":"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence","organism":"http://purl.uniprot.org/taxonomy/9606","sequence":"MEFPIGSLETNNFRRFTPESLVEIEKQIAAKQGTKKAREKHREQKDQEEKPRPQLDLKACNQLPKFYGELPAELIGEPLEDLDPFYSTHRTFMVLNKGRTISRFSATRALWLFSPFNLIRRTAIKVSVHSWFSLFITVTILVNCVCMTRTDLPEKIEYVFTVIYTFEALIKILARGFCLNEFTYLRDPWNWLDFSVITLAYVGTAIDLRGISGLRTFRVLRALKTVSVIPGLKVIVGALIHSVKKLADVTILTIFCLSVFALVGLQLFKGNLKNKCVKNDMAVNETTNYSSHRKPDIYINKRGTSDPLLCGNGSDSGHCPDGYICLKTSDNPDFNYTSFDSFAWAFLSLFRLMTQDSWERLYQQTLRTSGKIYMIFFVLVIFLGSFYLVNLILAVVTMAYEEQNQATTDEIEAKEKKFQEALEMLRKEQEVLAALGIDTTSLHSHNGSPLTSKNASERRHRIKPRVSEGSTEDNKSPRSDPYNQRRMSFLGLASGKRRASHGSVFHFRSPGRDISLPEGVTDDGVFPGDHESHRGSLLLGGGAGQQGPLPRSPLPQPSNPDSRHGEDEHQPPPTSELAPGAVDVSAFDAGQKKTFLSAEYLDEPFRAQRAMSVVSIITSVLEELEESEQKCPPCLTSLSQKYLIWDCCPMWVKLKTILFGLVTDPFAELTITLCIVVNTIFMAMEHHGMSPTFEAMLQIGNIVFTIFFTAEMVFKIIAFDPYYYFQKKWNIFDCIIVTVSLLELGVAKKGSLSVLRSFRLLRVFKLAKSWPTLNTLIKIIGNSVGALGNLTIILAIIVFVFALVGKQLLGENYRNNRKNISAPHEDWPRWHMHDFFHSFLIVFRILCGEWIENMWACMEVGQKSICLILFLTVMVLGNLVVLNLFIALLLNSFSADNLTAPEDDGEVNNLQVALARIQVFGHRTKQALCSFFSRSCPFPQPKAEPELVVKLPLSSSKAENHIAANTARGSSGGLQAPRGPRDEHSDFIANPTVWVSVPIAEGESDLDDLEDDGGEDAQSFQQEVIPKGQQEQLQQVERCGDHLTPRSPGTGTSSEDLAPSLGETWKDESVPQVPAEGVDDTSSSEGSTVDCLDPEEILRKIPELADDLEEPDDCFTEGCIRHCPCCKLDTTKSPWDVGWQVRKTCYRIVEHSWFESFIIFMILLSSGSLAFEDYYLDQKPTVKALLEYTDRVFTFIFVFEMLLKWVAYGFKKYFTNAWCWLDFLIVNISLISLTAKILEYSEVAPIKALRTLRALRPLRALSRFEGMRVVVDALVGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKFWRCINYTDGEFSLVPLSIVNNKSDCKIQNSTGSFFWVNVKVNFDNVAMGYLALLQVATFKGWMDIMYAAVDSREVNMQPKWEDNVYMYLYFVIFIIFGGFFTLNLFVGVIIDNFNQQKKKLGGQDIFMTEEQKKYYNAMKKLGSKKPQKPIPRPLNKFQGFVFDIVTRQAFDITIMVLICLNMITMMVETDDQSEEKTKILGKINQFFVAVFTGECVMKMFALRQYYFTNGWNVFDFIVVVLSIASLIFSAILKSLQSYFSPTLFRVIRLARIGRILRLIRAAKGIRTLLFALMMSLPALFNIGLLLFLVMFIYSIFGMSSFPHVRWEAGIDDMFNFQTFANSMLCLFQITTSAGWDGLLSPILNTGPPYCDPNLPNSNGTRGDCGSPAVGIIFFTTYIIISFLIMVNMYIAVILENFNVATEESTEPLSEDDFDMFYETWEKFDPEATQFITFSALSDFADTLSGPLRIPKPNRNILIQMDLPLVPGDKIHCLDILFAFTKNVLGESGELDSLKANMEEKFMATNLSKSSYEPIATTLRWKQEDISATVIQKAYRSYVLHRSMALSNTPCVPRAEEEAASLPDEGFVAFTANENCVLPDKSETASATSFPPSYESVTRGLSDRVNMRTSSSIQNEDEATSMELIAPGP","inDataset":"http://purl.uniprot.org"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198","inDataset":"http://linkedlifedata.com/resource/drugbank","cellularLocation":"multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough
+        , membrane","molecularWeight":"220568","numberOfResidues":"1988","theoreticalPi":"5.77"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL5451","description":"Sodium
+        channel protein type 10 subunit alpha","keyword":"Sodium , Complete proteome
+        , Glycoprotein , Ion transport , Ionic channel , Membrane , Polymorphism ,
+        Reference proteome , Repeat , Sodium channel , Sodium transport , Transmembrane
+        , Transmembrane helix , Transport , Ubl conjugation , Voltage-gated channel","inDataset":"http://data.kasabi.com/dataset/chembl-rdf","label":"CHEMBL5451
+        , Sodium channel protein type 10 subunit alpha , Sodium channel protein type
+        X subunit alpha , PN3 , Peripheral nerve sodium channel 3 , hPN3 , Voltage-gated
+        sodium channel subunit alpha Nav1.8","subClassOf":"http://purl.obolibrary.org/obo#PR_000000001"},"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],"prefLabel":"Sodium
+        channel protein type 10 subunit alpha (Homo sapiens)","isPrimaryTopicOf":"http://api.openphacts.org/target.json?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291"}}}'
+    http_version: 
+  recorded_at: Wed, 28 Nov 2012 11:17:41 GMT
+recorded_with: VCR 2.2.3

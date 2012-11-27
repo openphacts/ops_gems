@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.openphacts.org/compound/pharmacology.json?uri=http://unknown.com/1111
+    uri: http://api.openphacts.org/compound.json?uri=http://unknown.com/1111
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzoyOSBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjoyOSBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
@@ -27,22 +27,22 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        V2VkLCAyMSBOb3YgMjAxMiAxNTozMzoyOSBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNjozMCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        ZDBmZjY2NmIzY2YzNjA0MmU5ZGY1OTEzMjE0YTAyZWI=
+        MjY3YzhlNTRiY2UyNTQ0YmI5ZmQ2NWIyNWViYjUwNTA=
       !binary "Q29udGVudC1MZW5ndGg=":
       - !binary |-
-        NTQ4
+        NTA5
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbg==
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Funknown.com%2F1111","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Funknown.com%2F1111&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://unknown.com/1111","isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Funknown.com%2F1111"}}}'
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111","definition":"http://api.openphacts.org/api-config","extendedMetadataVersion":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://unknown.com/1111","isPrimaryTopicOf":"http://api.openphacts.org/compound.json?uri=http%3A%2F%2Funknown.com%2F1111"}}}'
     http_version: 
-  recorded_at: Wed, 21 Nov 2012 15:33:30 GMT
+  recorded_at: Wed, 28 Nov 2012 11:16:32 GMT
 recorded_with: VCR 2.2.3

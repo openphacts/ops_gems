@@ -15,7 +15,7 @@ http_interactions:
     headers:
       !binary "RGF0ZQ==":
       - !binary |-
-        RnJpLCAyMyBOb3YgMjAxMiAxMjoyNTozMyBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNzoyMyBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         QXBhY2hlLzIuMi4xNSAoQ2VudE9TKQ==
@@ -27,13 +27,13 @@ http_interactions:
         Kg==
       !binary "TGFzdC1Nb2RpZmllZA==":
       - !binary |-
-        RnJpLCAyMyBOb3YgMjAxMiAxMjoyNTozMyBHTVQ=
+        V2VkLCAyOCBOb3YgMjAxMiAxMToxNzoyNCBHTVQ=
       !binary "WC1TZXJ2ZWQtRnJvbS1DYWNoZQ==":
       - !binary |-
         ZmFsc2U=
       !binary "RXRhZw==":
       - !binary |-
-        YjkyZWU4MWVlYTkzNjdjNDAyNjYyNmZlNzk5ZTUxMjA=
+        MGMxNTU2OTNhYjFmNjQyYjk2NjE4NDY3YjUxM2NhNjM=
       !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
       - !binary |-
         Y2h1bmtlZA==
@@ -48,7 +48,7 @@ http_interactions:
         coefficient (logP)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558"},"relation":"=","standardValue":0.25,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a768844","pmid":"3599019","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL632431","description":"Partition
         coefficient (logP) (ether)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558"},"relation":"=","standardValue":-0.02,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a768845","pmid":"3599019","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL632430","description":"Partition
         coefficient (logP) (chloroform)"},"relation":"=","standardValue":-0.4,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a768846","pmid":"3599019","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL631695","description":"Partition
-        coefficient (logP) (benzene)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558"},"relation":"=","standardValue":-0.7,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a768847","pmid":"3599019","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL875968","description":"Partition
+        coefficient (logP) (benzene)"},"relation":"=","standardValue":-0.7,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a768847","pmid":"3599019","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL875968","description":"Partition
         coefficient (logP) (carbon tetrachloride)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558"},"relation":"=","standardValue":-0.82,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a2385258","pmid":"19056282","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL938588","description":"Binding
         affinity to beta cyclodextrin","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558"},"relation":"=","standardValue":0.57,"activity_type":"log
         Ks","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a292162","pmid":"10866370","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL631962","description":"Aqueous
@@ -67,7 +67,7 @@ http_interactions:
         of Rana pipiens muscle activity.","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612906","title":"Rana
         pipiens","target_organism":"Rana pipiens"},"assay_organism":"frog"},"relation":"=","standardValue":2.4,"activity_type":"Log
         MBC","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a6260338","pmid":"17544548","forMolecule":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL14687","onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL1798345","description":"In-vitro
-        blood to lung partition coefficients of the compound, logP(lung) (human/rat)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612545"},"relation":"=","standardValue":-0.15,"activity_type":"logP(lung)","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB03175","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["experimental","smallMolecule"],"genericName":"1-Proponol"},"http://rdf.chemspider.com/1004",{"_about":"http://www.conceptwiki.org/concept/27bffe2b-7600-468f-9edf-bf573568296f","inDataset":"http://www.conceptwiki.org","prefLabel":"Propan-1-Ol"}],"isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F1004"}}}'
+        blood to lung partition coefficients of the compound, logP(lung) (human/rat)"},"relation":"=","standardValue":-0.15,"activity_type":"logP(lung)","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}]},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB03175","inDataset":"http://linkedlifedata.com/resource/drugbank","drugType":["experimental","smallMolecule"],"genericName":"1-Proponol"},"http://rdf.chemspider.com/1004",{"_about":"http://www.conceptwiki.org/concept/27bffe2b-7600-468f-9edf-bf573568296f","inDataset":"http://www.conceptwiki.org","prefLabel":"Propan-1-Ol"}],"isPrimaryTopicOf":"http://api.openphacts.org/compound/pharmacology.json?uri=http%3A%2F%2Frdf.chemspider.com%2F1004"}}}'
     http_version: 
-  recorded_at: Fri, 23 Nov 2012 12:25:36 GMT
+  recorded_at: Wed, 28 Nov 2012 11:17:26 GMT
 recorded_with: VCR 2.2.3
