@@ -149,9 +149,10 @@ module OPS
 
       if item.has_key?('activity')
         result[:activity] = []
-
-        item['activity'].each do |a|
-          result[:activity] << parse_activity(a) if a.has_key?('inDataset')
+        if item['activity'].is_a?(Array)
+          item['activity'].each{|a| result[:activity] << parse_activity(a) if a.has_key?('inDataset')}
+        else
+          result[:activity] << parse_activity(item['activity']) if item['activity'].has_key?('inDataset')
         end
       end
 
