@@ -59,9 +59,19 @@ module OPS
       query_api(:compound_pharmacology, compound_uri)
     end
 
+    def compound_pharmacology_count(compound_uri)
+      return nil if not compound_uri or compound_uri.blank?
+      query_api(:compound_pharmacology_count, compound_uri)
+    end
+
     def target_pharmacology(target_uri)
       return nil if not target_uri or target_uri.blank?
       query_api(:target_pharmacology, target_uri)
+    end
+
+    def target_pharmacology_count(target_uri)
+      return nil if not target_uri or target_uri.blank?
+      query_api(:target_pharmacology_count, target_uri)
     end
 
     def target_info(target_uri)
@@ -77,8 +87,10 @@ module OPS
       request_path = case method
         when :compound_info then 'compound.json'
         when :compound_pharmacology then 'compound/pharmacology.json'
+        when :compound_pharmacology_count then 'compound/pharmacology/count.json'
         when :target_info then 'target.json'
         when :target_pharmacology then 'target/pharmacology.json'
+        when :target_pharmacology_count then 'target/pharmacology/count.json'
       end
 
       response = execute_request("#{@url}/#{request_path}", :uri => uri)
@@ -120,6 +132,13 @@ module OPS
 
     def parse_items_json(json)
       primary_topic = json['result']['primaryTopic']
+      # process count request results
+      if primary_topic.has_key?('targetPharmacologyTotalResults')
+        return {:uri => primary_topic['_about'], :count => primary_topic['targetPharmacologyTotalResults']}
+      elsif primary_topic.has_key?('compoundPharmacologyTotalResults')
+        return {:uri => primary_topic['_about'], :count => primary_topic['compoundPharmacologyTotalResults']}
+      end
+      # process all other results
       return nil unless primary_topic.has_key?('inDataset')
       result = {
         primary_topic['inDataset'].to_sym => parse_item(primary_topic)

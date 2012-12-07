@@ -5,21 +5,21 @@
 #
 # This file is part of the OPS gem, made available under the MIT license.
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy of 
-# this software and associated documentation files (the "Software"), to deal in 
-# the Software without restriction, including without limitation the rights to use, 
-# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-# Software, and to permit persons to whom the Software is furnished to do so, 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+# Software, and to permit persons to whom the Software is furnished to do so,
 # subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all 
+# The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 # For further information please contact:
@@ -73,8 +73,14 @@ soap_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3
 
 linked_data_cache_client = OPS::LinkedDataCacheClient.new(OPS_LINKED_DATA_CACHE_URL)
 
+# Note: Takes some time
 linked_data_cache_client.compound_info("http://rdf.chemspider.com/187440")
+linked_data_cache_client.compound_pharmacology_count("http://rdf.chemspider.com/187440")
 # Note: Takes some time
 linked_data_cache_client.compound_pharmacology("http://rdf.chemspider.com/187440")
+
 # Note: Takes some time
-linked_data_cache_client.compound_targets("http://rdf.chemspider.com/187440")
+linked_data_cache_client.target_info("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+linked_data_cache_client.target_pharmacology_count("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+# Note: Takes some time
+linked_data_cache_client.target_pharmacology("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
