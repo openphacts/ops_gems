@@ -5,21 +5,21 @@
 #
 # This file is part of the OPS gem, made available under the MIT license.
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy of 
-# this software and associated documentation files (the "Software"), to deal in 
-# the Software without restriction, including without limitation the rights to use, 
-# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-# Software, and to permit persons to whom the Software is furnished to do so, 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+# Software, and to permit persons to whom the Software is furnished to do so,
 # subject to the following conditions:
 #
-# The above copyright notice and this permission notice shall be included in all 
+# The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 # For further information please contact:
@@ -31,10 +31,211 @@
 require 'spec_helper'
 
 describe OPS::JsonChemspiderClient do
+  before :each do
+    @limit = 1000
+    @query = {
+      'op' => 'SubstructureSearch',
+      'limit' => @limit,
+      'searchOptions.MatchTautomers' => 'false',
+      'searchOptions.Molecule' => "CC=CC=COC=CC=CC",
+      'scopeOptions.DataSources[0]' => 'DrugBank',
+      'scopeOptions.DataSources[1]' => 'ChEMBL',
+      'scopeOptions.DataSources[2]' => 'ChEBI',
+      'scopeOptions.DataSources[3]' => 'PDB',
+      'scopeOptions.DataSources[4]' => 'MeSH'
+    }
+  end
+
+  describe "#substructure_search" do
+    it "returns the result from ChemSpider" do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052, 4946325, 4953135, 10176672, 21376080]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC')
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      result.should == [3453052, 4946325, 4953135, 10176672, 21376080]
+    end
+
+    it "waits until a result from ChemSpider is available" do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-AAAA-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_requests = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-AAAA-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return({ :status => 200, :body => %({"Count":1,"Elapsed":"PT0.103S","Message":"Unknown","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT1.103S","Message":"Created","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Scheduled","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT3.103S","Message":"Processing","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT4.103S","Message":"Suspended","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT5.103S","Message":"PartialResultReady","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }},
+                      { :status => 200, :body => %({"Count":1,"Elapsed":"PT5.103S","Message":"Finished","Progress":1,"Status":6}),
+                        :headers => { 'Content-Type' => 'text/plain' }})
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-AAAA-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052, 4946325, 4953135, 10176672, 21376080]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new(@limit, 0)
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC')
+
+      expected_search_request.should have_been_made.once
+      expected_status_requests.should have_been_made.times(7)
+      expected_result_request.should have_been_made.once
+
+      result.should == [3453052, 4946325, 4953135, 10176672, 21376080]
+    end
+
+    it "raises an exception if the HTTP return code is not 200" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 504)
+
+      expect {
+        chemspider_client = OPS::JsonChemspiderClient.new
+        chemspider_client.substructure_search('CC=CC=COC=CC=CC')
+      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, 'Response with status code 504')
+    end
+
+    it "can return the result as compound data hashes" do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResultAsCompounds', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([{"CSID": 3333}]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :result_type => :compounds)
+
+      result.should == [{"CSID" => 3333}]
+    end
+
+    it 'accepts and applies the limit parameter' do
+      query = @query.merge({'limit' => 1})
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :limit => 1)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      result.should == [3453052]
+    end
+
+    it 'accepts and applies the MatchTautomers parameter' do
+      query = @query.merge({'searchOptions.MatchTautomers' => 'true'})
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :match_tautomers => true)
+
+      expected_search_request.should have_been_made.once
+      expected_status_request.should have_been_made.once
+      expected_result_request.should have_been_made.once
+
+      result.should == [3453052]
+    end
+  end
+
   describe "#exact_exact_structure_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
+              'limit' => @limit,
               'op' => 'ExactStructureSearch',
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'scopeOptions.DataSources[0]' => 'DrugBank',
@@ -76,6 +277,7 @@ describe OPS::JsonChemspiderClient do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'ExactStructureSearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CCCCCC",
               'scopeOptions.DataSources[0]' => 'DrugBank',
               'scopeOptions.DataSources[1]' => 'ChEMBL',
@@ -114,7 +316,7 @@ describe OPS::JsonChemspiderClient do
                   to_return(:status => 200, :body => %([3344]),
                             :headers => { 'Content-Type' => 'text/plain' })
 
-      chemspider_client = OPS::JsonChemspiderClient.new(0)
+      chemspider_client = OPS::JsonChemspiderClient.new(@limit, 0)
       result = chemspider_client.exact_structure_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -128,6 +330,7 @@ describe OPS::JsonChemspiderClient do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'ExactStructureSearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'scopeOptions.DataSources[0]' => 'DrugBank',
               'scopeOptions.DataSources[1]' => 'ChEMBL',
@@ -149,6 +352,7 @@ describe OPS::JsonChemspiderClient do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'ExactStructureSearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'scopeOptions.DataSources[0]' => 'DrugBank',
               'scopeOptions.DataSources[1]' => 'ChEMBL',
@@ -187,6 +391,7 @@ describe OPS::JsonChemspiderClient do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'SimilaritySearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)OCCC",
               'searchOptions.SimilarityType' => 'Tanimoto',
               'searchOptions.Threshold' => 0.99,
@@ -228,6 +433,7 @@ describe OPS::JsonChemspiderClient do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'SimilaritySearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CCCCCC",
               'searchOptions.SimilarityType' => 'Tanimoto',
               'searchOptions.Threshold' => 0.99,
@@ -268,7 +474,7 @@ describe OPS::JsonChemspiderClient do
                   to_return(:status => 200, :body => %([112]),
                             :headers => { 'Content-Type' => 'text/plain' })
 
-      chemspider_client = OPS::JsonChemspiderClient.new(0)
+      chemspider_client = OPS::JsonChemspiderClient.new(@limit, 0)
       result = chemspider_client.similarity_search("CCCCCC")
 
       expected_search_request.should have_been_made.once
@@ -282,6 +488,7 @@ describe OPS::JsonChemspiderClient do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'SimilaritySearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'searchOptions.SimilarityType' => 'Tanimoto',
               'searchOptions.Threshold' => 0.99,
@@ -305,6 +512,7 @@ describe OPS::JsonChemspiderClient do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'SimilaritySearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'searchOptions.SimilarityType' => 'Tanimoto',
               'searchOptions.Threshold' => 0.73,
@@ -343,6 +551,7 @@ describe OPS::JsonChemspiderClient do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
               'op' => 'SimilaritySearch',
+              'limit' => @limit,
               'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
               'searchOptions.SimilarityType' => 'Tanimoto',
               'searchOptions.Threshold' => 0.99,
