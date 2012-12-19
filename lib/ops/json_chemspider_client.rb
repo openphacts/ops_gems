@@ -76,9 +76,14 @@ module OPS
         'op' => 'SimilaritySearch',
         'limit' => options.fetch(:limit, @search_default_limit).to_i,
         'searchOptions.Molecule' => smiles,
-        'searchOptions.SimilarityType' => 'Tanimoto',
-        'searchOptions.Threshold' => options.fetch(:threshold, DEFAULT_SIMILARITY_SEARCH_THRESHOLD),
+        'searchOptions.Threshold' => options.fetch(:threshold, DEFAULT_SIMILARITY_SEARCH_THRESHOLD).to_f,
       })
+
+      if options.has_key?(:similarity_type) and %w(Tanimoto Tversky Euclidian).include?(options[:similarity_type].to_s.camelize)
+        params['searchOptions.SimilarityType'] = options[:similarity_type].to_s.camelize
+      else
+        params['searchOptions.SimilarityType'] = 'Tanimoto'
+      end
 
       make_smiles_based_search(params, "SimilaritySearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
@@ -87,9 +92,30 @@ module OPS
       params = DEFAULT_SEARCH_PARAMS.merge({
         'op' => 'SubstructureSearch',
         'limit' => options.fetch(:limit, @search_default_limit).to_i,
-        'searchOptions.Molecule' => smiles,
-        'searchOptions.MatchTautomers' => options.fetch(:match_tautomers, false).to_s,
+        'searchOptions.Molecule' => smiles
       })
+
+      if options.has_key?(:match_tautomers) and %w(true false).include?(options[:match_tautomers].to_s)
+        params['searchOptions.MatchTautomers'] = options[:match_tautomers].to_s
+      else
+        params['searchOptions.MatchTautomers'] = 'false'
+      end
+
+      if options.has_key?(:complexity) and %w(Any Single Multi).include?(options[:complexity].to_s.camelize)
+        params['searchOptions.Complexity'] = options[:complexity].to_s.camelize
+      end
+
+      if options.has_key?(:isotopic) and %w(Any Labeled NotLabeled).include?(options[:isotopic].to_s.camelize)
+        params['searchOptions.Isotopic']   = options[:isotopic].to_s.camelize
+      end
+
+      if options.has_key?(:has_spectra) and %w(true false).include?(options[:has_spectra].to_s)
+        params['searchOptions.HasSpectra'] = options[:has_spectra].to_s
+      end
+
+      if options.has_key?(:has_patents) and %w(true false).include?(options[:has_patents].to_s)
+        params['searchOptions.HasPatents'] = options[:has_patents].to_s
+      end
 
       make_smiles_based_search(params, "SubstructureSearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end

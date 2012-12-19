@@ -33,20 +33,23 @@ require 'spec_helper'
 describe OPS::JsonChemspiderClient do
   before :each do
     @limit = 1000
-    @query = {
-      'op' => 'SubstructureSearch',
-      'limit' => @limit,
-      'searchOptions.MatchTautomers' => 'false',
-      'searchOptions.Molecule' => "CC=CC=COC=CC=CC",
-      'scopeOptions.DataSources[0]' => 'DrugBank',
-      'scopeOptions.DataSources[1]' => 'ChEMBL',
-      'scopeOptions.DataSources[2]' => 'ChEBI',
-      'scopeOptions.DataSources[3]' => 'PDB',
-      'scopeOptions.DataSources[4]' => 'MeSH'
-    }
   end
 
   describe "#substructure_search" do
+    before :each do
+      @query = {
+        'op' => 'SubstructureSearch',
+        'limit' => @limit,
+        'searchOptions.MatchTautomers' => 'false',
+        'searchOptions.Molecule' => "CC=CC=COC=CC=CC",
+        'scopeOptions.DataSources[0]' => 'DrugBank',
+        'scopeOptions.DataSources[1]' => 'ChEMBL',
+        'scopeOptions.DataSources[2]' => 'ChEBI',
+        'scopeOptions.DataSources[3]' => 'PDB',
+        'scopeOptions.DataSources[4]' => 'MeSH'
+      }
+    end
+
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => @query,
@@ -164,7 +167,7 @@ describe OPS::JsonChemspiderClient do
       result.should == [{"CSID" => 3333}]
     end
 
-    it 'accepts and applies the limit parameter' do
+    it 'accepts and applies the :limit parameter' do
       query = @query.merge({'limit' => 1})
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => query,
@@ -189,15 +192,66 @@ describe OPS::JsonChemspiderClient do
 
       chemspider_client = OPS::JsonChemspiderClient.new
       result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :limit => 1)
-
       expected_search_request.should have_been_made.once
-      expected_status_request.should have_been_made.once
-      expected_result_request.should have_been_made.once
-
-      result.should == [3453052]
     end
 
-    it 'accepts and applies the MatchTautomers parameter' do
+    it 'uses :match_tautomers = false as default' do
+      query = @query.merge({'searchOptions.MatchTautomers' => 'false'})
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'overwrites invalid :match_tautomers parameter value with false' do
+      query = @query.merge({'searchOptions.MatchTautomers' => 'false'})
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :match_tautomers => 'invalid')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :match_tautomers = true' do
       query = @query.merge({'searchOptions.MatchTautomers' => 'true'})
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => query,
@@ -222,16 +276,392 @@ describe OPS::JsonChemspiderClient do
 
       chemspider_client = OPS::JsonChemspiderClient.new
       result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :match_tautomers => true)
-
       expected_search_request.should have_been_made.once
-      expected_status_request.should have_been_made.once
-      expected_result_request.should have_been_made.once
-
-      result.should == [3453052]
     end
+
+    it 'ignores invalid :complexity parameter values' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :complexity => 'invalid')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :complexity = "any"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Complexity' => 'Any'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :complexity => 'any')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :complexity = "single"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Complexity' => 'Single'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :complexity => 'single')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :complexity = "multi"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Complexity' => 'Multi'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :complexity => 'multi')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'ignores invalid :isotopic parameter values' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :isotopic => 'invalid')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :isotopic = "any"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Isotopic' => 'Any'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :isotopic => 'any')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :isotopic = "labeled"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Isotopic' => 'Labeled'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :isotopic => 'labeled')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :isotopic = "not_labeled"' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Isotopic' => 'NotLabeled'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :isotopic => 'not_labeled')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'ignores invalid :has_spectra parameter values' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_spectra => 'invalid')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :has_spectra = true' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.HasSpectra' => 'true'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_spectra => true)
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :has_spectra = false' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.HasSpectra' => 'false'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_spectra => false)
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'ignores invalid :has_patents parameter values' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query,
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_patents => 'invalid')
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :has_patents = true' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.HasPatents' => 'true'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_patents => true)
+      expected_search_request.should have_been_made.once
+    end
+
+    it 'accepts :has_patents = false' do
+      expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.HasPatents' => 'false'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_status_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":5,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      expected_result_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([3453052]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.substructure_search('CC=CC=COC=CC=CC', :has_patents => false)
+      expected_search_request.should have_been_made.once
+    end
+
+
+
   end
 
-  describe "#exact_exact_structure_search" do
+  describe "#exact_estructure_search" do
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
         with(:query => {
@@ -387,20 +817,24 @@ describe OPS::JsonChemspiderClient do
   end
 
   describe "#similarity_search" do
+    before :each do
+      @query = {
+        'op' => 'SimilaritySearch',
+        'limit' => @limit,
+        'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)OCCC",
+        'searchOptions.SimilarityType' => 'Tanimoto',
+        'searchOptions.Threshold' => 0.99,
+        'scopeOptions.DataSources[0]' => 'DrugBank',
+        'scopeOptions.DataSources[1]' => 'ChEMBL',
+        'scopeOptions.DataSources[2]' => 'ChEBI',
+        'scopeOptions.DataSources[3]' => 'PDB',
+        'scopeOptions.DataSources[4]' => 'MeSH'
+      }
+    end
+
     it "returns the result from ChemSpider" do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
-        with(:query => {
-              'op' => 'SimilaritySearch',
-              'limit' => @limit,
-              'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)OCCC",
-              'searchOptions.SimilarityType' => 'Tanimoto',
-              'searchOptions.Threshold' => 0.99,
-              'scopeOptions.DataSources[0]' => 'DrugBank',
-              'scopeOptions.DataSources[1]' => 'ChEMBL',
-              'scopeOptions.DataSources[2]' => 'ChEBI',
-              'scopeOptions.DataSources[3]' => 'PDB',
-              'scopeOptions.DataSources[4]' => 'MeSH'
-            },
+        with(:query => @query,
             :body => '',
             :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
           to_return(:status => 200, :body => '9629dbb8-0ca2-1111-aa8b-f4e7f521e25f',
@@ -431,18 +865,7 @@ describe OPS::JsonChemspiderClient do
 
     it "waits until a result from ChemSpider is available" do
       expected_search_request = stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
-        with(:query => {
-              'op' => 'SimilaritySearch',
-              'limit' => @limit,
-              'searchOptions.Molecule' => "CCCCCC",
-              'searchOptions.SimilarityType' => 'Tanimoto',
-              'searchOptions.Threshold' => 0.99,
-              'scopeOptions.DataSources[0]' => 'DrugBank',
-              'scopeOptions.DataSources[1]' => 'ChEMBL',
-              'scopeOptions.DataSources[2]' => 'ChEBI',
-              'scopeOptions.DataSources[3]' => 'PDB',
-              'scopeOptions.DataSources[4]' => 'MeSH'
-            },
+        with(:query => @query,
             :body => '',
             :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
           to_return(:status => 200, :body => '9629dbb8-AAAA-4884-aa8b-f4e7f521e25f',
@@ -475,7 +898,7 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new(@limit, 0)
-      result = chemspider_client.similarity_search("CCCCCC")
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC")
 
       expected_search_request.should have_been_made.once
       expected_status_requests.should have_been_made.times(7)
@@ -486,42 +909,20 @@ describe OPS::JsonChemspiderClient do
 
     it "raises an exception if the HTTP return code is not 200" do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
-        with(:query => {
-              'op' => 'SimilaritySearch',
-              'limit' => @limit,
-              'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
-              'searchOptions.SimilarityType' => 'Tanimoto',
-              'searchOptions.Threshold' => 0.99,
-              'scopeOptions.DataSources[0]' => 'DrugBank',
-              'scopeOptions.DataSources[1]' => 'ChEMBL',
-              'scopeOptions.DataSources[2]' => 'ChEBI',
-              'scopeOptions.DataSources[3]' => 'PDB',
-              'scopeOptions.DataSources[4]' => 'MeSH'
-            },
+        with(:query => @query,
             :body => '',
             :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
           to_return(:status => 504)
 
       expect {
         chemspider_client = OPS::JsonChemspiderClient.new
-        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O")
+        chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC")
       }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Response with status code 504")
     end
 
-    it "uses a given threshold" do
+    it "accepts and applies the :threshold parameter" do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
-        with(:query => {
-              'op' => 'SimilaritySearch',
-              'limit' => @limit,
-              'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
-              'searchOptions.SimilarityType' => 'Tanimoto',
-              'searchOptions.Threshold' => 0.73,
-              'scopeOptions.DataSources[0]' => 'DrugBank',
-              'scopeOptions.DataSources[1]' => 'ChEMBL',
-              'scopeOptions.DataSources[2]' => 'ChEBI',
-              'scopeOptions.DataSources[3]' => 'PDB',
-              'scopeOptions.DataSources[4]' => 'MeSH'
-            },
+        with(:query => @query.merge({'searchOptions.Threshold' => 0.73}),
             :body => '',
             :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
           to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
@@ -542,25 +943,116 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new
-      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O", :threshold => 0.73)
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :threshold => 0.73)
+    end
 
-      result.should == [2157]
+    it "uses 'Tanimoto' as default :similarity_type" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Threshold' => 0.73}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([2157]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :threshold => 0.73, :similarity_type => 'invalid')
+    end
+
+    it "accepts :similarity_type = 'Tversky'" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Threshold' => 0.73, 'searchOptions.SimilarityType' => 'Tversky'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([2157]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :threshold => 0.73, :similarity_type => 'Tversky')
+    end
+
+    it "accepts :similarity_type = 'Euclidian'" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Threshold' => 0.73, 'searchOptions.SimilarityType' => 'Euclidian'}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([2157]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :threshold => 0.73, :similarity_type => 'Euclidian')
+    end
+
+    it "overwrites an invalid :similarity_type with 'Tanimoto'" do
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+        with(:query => @query.merge({'searchOptions.Threshold' => 0.73}),
+            :body => '',
+            :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+          to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
+                    :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+          with(:query => { 'op' => 'GetSearchStatus', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                :body => '',
+                :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+            to_return(:status => 200, :body => %({"Count":1,"Elapsed":"PT2.103S","Message":"Finished","Progress":1,"Status":6}),
+                      :headers => { 'Content-Type' => 'text/plain' })
+
+      stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
+                with(:query => { 'op' => 'GetSearchResult', 'rid' => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f' },
+                      :body => '',
+                      :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
+                  to_return(:status => 200, :body => %([2157]),
+                            :headers => { 'Content-Type' => 'text/plain' })
+
+      chemspider_client = OPS::JsonChemspiderClient.new
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :threshold => 0.73, :similarity_type => 'invalid')
     end
 
     it "can return the result as compound data hashes" do
       stub_request(:get, 'http://www.chemspider.com/JSON.ashx').
-        with(:query => {
-              'op' => 'SimilaritySearch',
-              'limit' => @limit,
-              'searchOptions.Molecule' => "CC(=O)Oc1ccccc1C(=O)O",
-              'searchOptions.SimilarityType' => 'Tanimoto',
-              'searchOptions.Threshold' => 0.99,
-              'scopeOptions.DataSources[0]' => 'DrugBank',
-              'scopeOptions.DataSources[1]' => 'ChEMBL',
-              'scopeOptions.DataSources[2]' => 'ChEBI',
-              'scopeOptions.DataSources[3]' => 'PDB',
-              'scopeOptions.DataSources[4]' => 'MeSH'
-            },
+        with(:query => @query,
             :body => '',
             :headers => { 'Content-Type' => 'application/json; charset=utf-8' }).
           to_return(:status => 200, :body => '9629dbb8-0ca2-4884-aa8b-f4e7f521e25f',
@@ -581,7 +1073,7 @@ describe OPS::JsonChemspiderClient do
                             :headers => { 'Content-Type' => 'text/plain' })
 
       chemspider_client = OPS::JsonChemspiderClient.new
-      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)O", :result_type => :compounds)
+      result = chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC", :result_type => :compounds)
 
       result.should == [{"CSID" => 2157}]
     end
