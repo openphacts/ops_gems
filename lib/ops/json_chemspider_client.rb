@@ -39,7 +39,8 @@ module OPS
     class InvalidResponse < JsonChemspiderClient::Error; end
     class FrameworkError < JsonChemspiderClient::Error; end
 
-    URL = 'http://www.chemspider.com/JSON.ashx'
+    URL = 'http://parts.chemspider.com/JSON.ashx'
+    DEFAULT_RESULT_LIMIT = 100
     DEFAULT_RESULT_TYPE = :ids
     DEFAULT_SIMILARITY_SEARCH_THRESHOLD = 0.99
     RESULTS_OPERATIONS = {
@@ -55,29 +56,29 @@ module OPS
       'scopeOptions.DataSources[4]' => 'MeSH',
     }
 
-    def initialize(search_default_limit=1000, search_status_wait_duration=0.5)
+    def initialize(search_default_limit=DEFAULT_RESULT_LIMIT, search_status_wait_duration=0.5)
+      DEFAULT_SEARCH_PARAMS['resultOptions.Limit'] = search_default_limit
       @search_status_wait_duration = search_status_wait_duration
-      @search_default_limit = search_default_limit
       @http_client = HTTPClient.new
     end
 
     def exact_structure_search(smiles, options={})
       params = DEFAULT_SEARCH_PARAMS.merge({
         'op' => 'ExactStructureSearch',
-        'limit' => options.fetch(:limit, @search_default_limit).to_i,
         'searchOptions.Molecule' => smiles
       })
 
-      make_smiles_based_search(params, "ExactStructureSearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
+      make_smiles_based_search(params, 'ExactStructureSearch', smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
 
     def similarity_search(smiles, options={})
       params = DEFAULT_SEARCH_PARAMS.merge({
         'op' => 'SimilaritySearch',
-        'limit' => options.fetch(:limit, @search_default_limit).to_i,
         'searchOptions.Molecule' => smiles,
         'searchOptions.Threshold' => options.fetch(:threshold, DEFAULT_SIMILARITY_SEARCH_THRESHOLD).to_f,
       })
+
+      params.apply_common_search_options!(options)
 
       if options.has_key?(:similarity_type) and %w(Tanimoto Tversky Euclidian).include?(options[:similarity_type].to_s.camelize)
         params['searchOptions.SimilarityType'] = options[:similarity_type].to_s.camelize
@@ -85,15 +86,16 @@ module OPS
         params['searchOptions.SimilarityType'] = 'Tanimoto'
       end
 
-      make_smiles_based_search(params, "SimilaritySearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
+      make_smiles_based_search(params, 'SimilaritySearch', smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
 
     def substructure_search(smiles, options={})
       params = DEFAULT_SEARCH_PARAMS.merge({
         'op' => 'SubstructureSearch',
-        'limit' => options.fetch(:limit, @search_default_limit).to_i,
         'searchOptions.Molecule' => smiles
       })
+
+      params.apply_common_search_options!(options)
 
       if options.has_key?(:match_tautomers) and %w(true false).include?(options[:match_tautomers].to_s)
         params['searchOptions.MatchTautomers'] = options[:match_tautomers].to_s
@@ -101,31 +103,17 @@ module OPS
         params['searchOptions.MatchTautomers'] = 'false'
       end
 
-      if options.has_key?(:complexity) and %w(Any Single Multi).include?(options[:complexity].to_s.camelize)
-        params['searchOptions.Complexity'] = options[:complexity].to_s.camelize
-      end
-
-      if options.has_key?(:isotopic) and %w(Any Labeled NotLabeled).include?(options[:isotopic].to_s.camelize)
-        params['searchOptions.Isotopic']   = options[:isotopic].to_s.camelize
-      end
-
-      if options.has_key?(:has_spectra) and %w(true false).include?(options[:has_spectra].to_s)
-        params['searchOptions.HasSpectra'] = options[:has_spectra].to_s
-      end
-
-      if options.has_key?(:has_patents) and %w(true false).include?(options[:has_patents].to_s)
-        params['searchOptions.HasPatents'] = options[:has_patents].to_s
-      end
-
-      make_smiles_based_search(params, "SubstructureSearch", smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
+      make_smiles_based_search(params, 'SubstructureSearch', smiles, options.fetch(:result_type, DEFAULT_RESULT_TYPE))
     end
 
   private
     def make_smiles_based_search(params, type, smiles, result_type)
       OPS.log(self, :info, "Issues call to ChemSpider for '#{type}' with smiles '#{smiles}'")
+      OPS.log(self, :debug, "\nparams: #{params.inspect}\n")
       start_time = Time.now
 
       response = @http_client.get(URL, params, { 'Content-Type' => 'application/json; charset=utf-8' })
+      OPS.log(self, :debug, "\n#{response.inspect}\n")
 
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
 
@@ -188,6 +176,34 @@ module OPS
       OPS.log(self, :info, "(#{transaction_id}) Search result: #{result}")
 
       result
+    end
+  end
+end
+
+class Hash
+  def apply_common_search_options!(options_hash)
+    self.apply_generic_search_options!(options_hash)
+
+    if options_hash.has_key?(:complexity) and %w(Any Single Multi).include?(options_hash[:complexity].to_s.camelize)
+      self['commonOptions.Complexity'] = options_hash[:complexity].to_s.camelize
+    end
+
+    if options_hash.has_key?(:isotopic) and %w(Any Labeled NotLabeled).include?(options_hash[:isotopic].to_s.camelize)
+      self['commonOptions.Isotopic']   = options_hash[:isotopic].to_s.camelize
+    end
+
+    if options_hash.has_key?(:has_spectra) and %w(true false).include?(options_hash[:has_spectra].to_s)
+      self['commonOptions.HasSpectra'] = options_hash[:has_spectra].to_s
+    end
+
+    if options_hash.has_key?(:has_patents) and %w(true false).include?(options_hash[:has_patents].to_s)
+      self['commonOptions.HasPatents'] = options_hash[:has_patents].to_s
+    end
+  end
+
+  def apply_generic_search_options!(options_hash)
+    if options_hash.has_key?(:limit)
+      self['resultOptions.Limit'] = options_hash[:limit].to_i
     end
   end
 end
