@@ -166,7 +166,7 @@ module OPS
           raise Failed.new("ChemSpider returned request status 'Failed'")
         elsif search_status == "TooManyRecords"
           raise TooManyRecords.new("ChemSpider returned request status 'TooManyRecords'")
-        elsif search_status.start_with?("A .NET Framework error occurred")
+        elsif search_status and search_status.start_with?("A .NET Framework error occurred")
           raise FrameworkError.new("ChemSpider returned request status 'FrameworkError'")
         end
       end
