@@ -35,52 +35,49 @@ $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'ops'
 
 
-OPS_LINKED_DATA_CACHE_URL = "http://api.openphacts.org"
-CHEMSPIDER_TOKEN = ""
+OPS_API_URL = ENV['OPS_url']
+OPS_APP_ID = ENV['OPS_app_id']
+OPS_APP_KEY = ENV['OPS_app_key']
+SSL_CERT_FILE = ENV['SSL_CERT_FILE']
+CS_API_URL = ENV['CS_url']
 
-raise "No OPS Linked Data Cache Url defined" if OPS_LINKED_DATA_CACHE_URL.empty?
-raise "No ChemSpider Token defined" if CHEMSPIDER_TOKEN.empty?
-
-
+raise "No OPS API URL defined" if OPS_API_URL.nil? or OPS_API_URL.empty?
+raise "No OPS APP ID defined" if OPS_APP_ID.nil? or OPS_APP_ID.empty?
+raise "No OPS APP KEY defined" if OPS_APP_KEY.nil? or OPS_APP_KEY.empty?
+raise "No SSL CERT FILE defined" if SSL_CERT_FILE.nil? or SSL_CERT_FILE.empty?
 
 #OPS.log = false
 
 
 
-json_chemspider_client = OPS::JsonChemspiderClient.new
+ops_client = OPS::OpenPhactsClient.new({
+  :url => OPS_API_URL,
+  :app_id => OPS_APP_ID,
+  :app_key => OPS_APP_KEY,
+  :ssl_cert_file => SSL_CERT_FILE,
+  :verify_certificate => false
+})
+
+ops_client.smiles_to_url(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
+
+ops_client.compound_info("http://rdf.chemspider.com/187440")
+ops_client.compound_pharmacology_count("http://rdf.chemspider.com/187440")
+ops_client.compound_pharmacology("http://rdf.chemspider.com/187440")
+
+ops_client.target_info("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+ops_client.target_pharmacology_count("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+ops_client.target_pharmacology("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+
+
+
+json_chemspider_client = OPS::JsonChemspiderClient.new(CS_API_URL)
 
 json_chemspider_client.exact_structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
 json_chemspider_client.exact_structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :result_type => :compounds)
+
 json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3))
 json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3), :result_type => :compounds)
 json_chemspider_client.similarity_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3), :threshold => 0.95)
 
-
-
-soap_chemspider_client = OPS::SoapChemspiderClient.new(CHEMSPIDER_TOKEN)
-
-soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
-soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_tautomers)
-soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_including_h)
-soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :same_skeleton_excluding_h)
-soap_chemspider_client.structure_search(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1), :match_type => :all_isomers)
-# Note: Takes some time
-soap_chemspider_client.substructure_search(%(O=C(O)c2c(OCCN1C(=O)\\C=C/C1=O)cccc2))
-# Note: Takes some time
-soap_chemspider_client.similarity_search(%(CNC(=O)c1cc(ccn1)Oc2ccc(cc2)NC(=O)Nc3ccc(c(c3)C(F)(F)F)Cl))
-
-
-
-linked_data_cache_client = OPS::LinkedDataCacheClient.new(OPS_LINKED_DATA_CACHE_URL)
-
-# Note: Takes some time
-linked_data_cache_client.compound_info("http://rdf.chemspider.com/187440")
-linked_data_cache_client.compound_pharmacology_count("http://rdf.chemspider.com/187440")
-# Note: Takes some time
-linked_data_cache_client.compound_pharmacology("http://rdf.chemspider.com/187440")
-
-# Note: Takes some time
-linked_data_cache_client.target_info("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
-linked_data_cache_client.target_pharmacology_count("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
-# Note: Takes some time
-linked_data_cache_client.target_pharmacology("http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291")
+json_chemspider_client.substructure_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3))
+json_chemspider_client.substructure_search(%(O=C1N(C(=O)c2c(cccc2)1)C3C(=O)NCCC3), :match_tautomers => true)

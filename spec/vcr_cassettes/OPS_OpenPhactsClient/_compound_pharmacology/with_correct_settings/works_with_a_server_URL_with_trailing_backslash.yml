@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=http://rdf.chemspider.com/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3897'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Mon, 15 Apr 2013 10:04:37 GMT
+      Etag:
+      - 36b300a389a50519f160a487e9e3aebd
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","itemsPerPage":"all","startIndex":0,"isPartOf":{"_about":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key","hasPart":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Monday,
+        15-Apr-13 10:04:37 UTC","extendedMetadataVersion":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a1082946","pmid":"9357523","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL326602","full_mwt":75.1096,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/c99deece-3cd6-49c7-991f-b0efb51ddc80","inDataset":"http://www.conceptwiki.org/","prefLabel_en":"1-Aminopropan-2-ol","prefLabel":"1-Aminopropan-2-ol"},{"_about":"http://rdf.chemspider.com/3","inchi":"InChI=1S/C3H9NO/c1-3(5)2-4/h3,5H,2,4H2,1H3","inchikey":"HXKKHQJGJAFBHI-UHFFFAOYSA-N","smiles":"OC(C)CN","inDataset":"http://rdf.chemspider.com/","ro5_violations":0}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL759677","description":"Inhibitory
+        activity against Plasmodium falciparum","target":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL364","title":"Plasmodium
+        falciparum","organism":"Plasmodium falciparum"},"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","organism":"Plasmodium
+        falciparum"},"relation":"=","standardUnits":"nM","standardValue":800000,"activity_type":"IC50","inDataset":"http://data.kasabi.com/dataset/chembl-rdf","activity_value":800000},{"_about":"http://data.kasabi.com/dataset/chembl-rdf/activity/a670543","pmid":"3882967","forMolecule":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL326602","full_mwt":75.1096,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf","exactMatch":[{"_about":"http://www.conceptwiki.org/concept/c99deece-3cd6-49c7-991f-b0efb51ddc80","inDataset":"http://www.conceptwiki.org/","prefLabel_en":"1-Aminopropan-2-ol","prefLabel":"1-Aminopropan-2-ol"},{"_about":"http://rdf.chemspider.com/3","inchi":"InChI=1S/C3H9NO/c1-3(5)2-4/h3,5H,2,4H2,1H3","inchikey":"HXKKHQJGJAFBHI-UHFFFAOYSA-N","smiles":"OC(C)CN","inDataset":"http://rdf.chemspider.com/","ro5_violations":0}]},"onAssay":{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL633738","description":"Partition
+        coefficient (logP)","target":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL612558","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},"relation":"=","standardValue":-0.96,"activity_type":"LogP","inDataset":"http://data.kasabi.com/dataset/chembl-rdf"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","next":"http://xxxxxx.openphacts.org/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_page=2","label":"Compound
+        Pharmacology Paginated"}}'
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:03 GMT
+recorded_with: VCR 2.2.5

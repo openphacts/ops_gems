@@ -39,7 +39,7 @@ module OPS
     class InvalidResponse < JsonChemspiderClient::Error; end
     class FrameworkError < JsonChemspiderClient::Error; end
 
-    URL = 'http://parts.chemspider.com/JSON.ashx'
+
     DEFAULT_RESULT_LIMIT = 100
     DEFAULT_RESULT_TYPE = :ids
     DEFAULT_SIMILARITY_SEARCH_THRESHOLD = 0.99
@@ -56,7 +56,8 @@ module OPS
       'scopeOptions.DataSources[4]' => 'MeSH',
     }
 
-    def initialize(search_default_limit=DEFAULT_RESULT_LIMIT, search_status_wait_duration=0.5)
+    def initialize(url, search_default_limit=DEFAULT_RESULT_LIMIT, search_status_wait_duration=0.5)
+      @url = url
       DEFAULT_SEARCH_PARAMS['resultOptions.Limit'] = search_default_limit
       @search_status_wait_duration = search_status_wait_duration
       @http_client = HTTPClient.new
@@ -112,7 +113,7 @@ module OPS
       OPS.log(self, :debug, "\nparams: #{params.inspect}\n")
       start_time = Time.now
 
-      response = @http_client.get(URL, params, { 'Content-Type' => 'application/json; charset=utf-8' })
+      response = @http_client.get(@url, params, { 'Content-Type' => 'application/json; charset=utf-8' })
       OPS.log(self, :debug, "\n#{response.inspect}\n")
 
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
@@ -128,7 +129,7 @@ module OPS
     end
 
     def get_async_search_status(transaction_id)
-      response = @http_client.get(URL, { 'op' => 'GetSearchStatus', 'rid' => transaction_id },
+      response = @http_client.get(@url, { 'op' => 'GetSearchStatus', 'rid' => transaction_id },
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
@@ -141,7 +142,7 @@ module OPS
     end
 
     def get_async_search_result(transaction_id, result_type)
-      response = @http_client.get(URL, { 'op' => RESULTS_OPERATIONS[result_type], 'rid' => transaction_id },
+      response = @http_client.get(@url, { 'op' => RESULTS_OPERATIONS[result_type], 'rid' => transaction_id },
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
       raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200

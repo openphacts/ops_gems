@@ -28,6 +28,18 @@
 #
 ########################################################################################
 
+require 'multi_json'
+
 module OPS
-  VERSION = "2.0.0"
+  class CS
+
+    def parse_json(json)
+      begin
+        MultiJson.load(response.body)
+      rescue MultiJson::DecodeError
+        raise InvalidResponse.new("Could not parse response")
+      end
+    end
+
+  end
 end

@@ -1,0 +1,192 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/compound?_format=json&app_id=foo&app_key=bar&uri=http://rdf.chemspider.com/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:26:59 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:26:59 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://rdf.chemspider.com/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:26:59 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:26:59 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/compound/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://rdf.chemspider.com/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:00 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:00 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/target?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:00 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:00 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/target/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:01 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:01 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/target/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:01 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:01 GMT
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/structure?_format=json&app_id=foo&app_key=bar&smiles=CCCC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:01 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:01 GMT
+recorded_with: VCR 2.2.5

@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/target/pharmacology/count?_format=json&app_id=secret_id&app_key=secret_key&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '974'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Mon, 15 Apr 2013 10:04:46 GMT
+      Etag:
+      - ef2f4f76ea61b8879d63fc711ae9c163
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://xxxxxx.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key","definition":"http://xxxxxx.openphacts.org/api-config","extendedMetadataVersion":"http://xxxxxx.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","targetPharmacologyTotalResults":186,"isPrimaryTopicOf":"http://xxxxxx.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:08 GMT
+recorded_with: VCR 2.2.5

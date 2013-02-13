@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://xxxxxx.openphacts.org/structure?_format=json&app_id=secret_id&app_key=secret_key&smiles=CCCC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - ngx_openresty/1.2.3.8
+      Date:
+      - Mon, 15 Apr 2013 12:27:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '642'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Mon, 15 Apr 2013 10:04:48 GMT
+      Etag:
+      - adb15dd9796dd88fbc06de8151bc351f
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"http://xxxxxx.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key","definition":"http://xxxxxx.openphacts.org/api-config","extendedMetadataVersion":"http://xxxxxx.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/7555","smiles":"CCCC","isPrimaryTopicOf":"http://xxxxxx.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+    http_version: 
+  recorded_at: Mon, 15 Apr 2013 12:27:09 GMT
+recorded_with: VCR 2.2.5

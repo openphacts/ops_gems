@@ -36,5 +36,5 @@ Development
 Authors
 -------
 
-Thomas Marek ([http://github.com/tmak](http://github.com/tmak))
 Lothar Wissler ([http://github.com/lotharwissler](http://github.com/lotharwissler))
+Thomas Marek ([http://github.com/tmak](http://github.com/tmak))
