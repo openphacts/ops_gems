@@ -50,14 +50,14 @@ UNKNOWN_SMILES      = 'C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=
 describe OPS::OpenPhactsClient, :vcr do
   describe "initialization" do
     before :each do
-      @config = {:url => 'https://www.url.com', :app_id => 'app_id', :app_key => 'app_key', :ssl_cert_file => ENV['SSL_CERT_FILE']}
+      @config = {:url => 'https://www.url.com', :app_id => 'app_id', :app_key => 'app_key', :ssl_cert_file => OPS_SETTINGS[:ssl_cert_file]}
     end
 
     it "accepts a config hash" do
       OPS::OpenPhactsClient.new(@config)
     end
 
-    it "raises an ArgumentError no server settings are given" do
+    it "raises an ArgumentError if no server settings are given" do
       expect {
         OPS::OpenPhactsClient.new
       }.to raise_error(ArgumentError)
