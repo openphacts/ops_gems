@@ -67,70 +67,70 @@ describe OPS::OpenPhactsClient, :vcr do
       @config.delete(:url)
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'url')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if an empty server url is given" do
       @config[:url] = ''
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'url')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::InvalidArgument if an invalid server url is given" do
       @config[:url] = 'ptth:\\as.de'
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::InvalidArgument, 'url')
+      }.to raise_error(OPS::InvalidArgument)
     end
 
     it "raises an OPS::MissingArgument if app_id is missing" do
       @config.delete(:app_id)
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'app_id')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if an empty app_id is given" do
       @config[:app_id] = ''
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'app_id')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if app_key is missing" do
       @config.delete(:app_key)
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'app_key')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if an empty app_key is given" do
       @config[:app_key] = ''
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'app_key')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if ssl_cert_file is missing" do
       @config.delete(:ssl_cert_file)
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'ssl_cert_file')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::MissingArgument if an empty ssl_cert_file is given" do
       @config[:ssl_cert_file] = ''
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument, 'ssl_cert_file')
+      }.to raise_error(OPS::MissingArgument)
     end
 
     it "raises an OPS::InvalidArgument if ssl_cert_file does not exist" do
       @config[:ssl_cert_file] = '/this/should/not/exist'
       expect {
         OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::InvalidArgument, 'ssl_cert_file')
+      }.to raise_error(OPS::InvalidArgument)
     end
 
     it "sets the receiving timeout to 60 by default" do
