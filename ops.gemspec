@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "httpclient", "~> 2.2.5"
   s.add_runtime_dependency "multi_json", "~> 1.3", ">= 1.3.6"
   s.add_runtime_dependency "oj", "~> 1.3.0"
+  s.add_runtime_dependency "awesome_print", ">= 1.0.0"
 
   s.add_development_dependency "rake", "~> 0.9.2.2"
   s.add_development_dependency "rspec", "~> 2.11.0"
