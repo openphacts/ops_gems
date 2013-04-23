@@ -3,6 +3,7 @@ PATH
   specs:
     ops (2.0.0)
       activesupport (~> 3.2.0, >= 3.2.13)
+      awesome_print (>= 1.1.0)
       httpclient (~> 2.2.5)
       multi_json (~> 1.3, >= 1.3.6)
       nokogiri (~> 1.5.5)
