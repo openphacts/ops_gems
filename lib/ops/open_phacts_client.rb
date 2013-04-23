@@ -39,7 +39,7 @@ module OPS
   class OpenPhactsClient
 
     def initialize(config, options={})
-      [:url, :app_id, :app_key, :ssl_cert_file].each do |key|
+      [:url, :app_id, :app_key].each do |key|
         raise MissingArgument, key if config[key].nil? or config[key].empty?
       end
       raise InvalidArgument, :url if (config[:url] =~ /^http[s]{0,1}:\/\//) == nil
@@ -48,10 +48,9 @@ module OPS
       @default_params = {:_format => 'json', :app_id => config[:app_id], :app_key => config[:app_key]}.freeze
       @http_client = HTTPClient.new
       @http_client.receive_timeout = options.fetch(:receive_timeout, 60)
-      raise InvalidArgument, :ssl_cert_file unless File.exists?(config[:ssl_cert_file])
-      @http_client.ssl_config.add_trust_ca(config[:ssl_cert_file])
-      if config.has_key?(:verify_certificate) and config[:verify_certificate] == false
-        @http_client.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      unless config.has_key?(:verify_certificate) and config[:verify_certificate] == false
+        raise InvalidArgument, :ssl_cert_file unless File.exists?(config[:ssl_cert_file])
+        @http_client.ssl_config.add_trust_ca(config[:ssl_cert_file])
       end
     end
 
