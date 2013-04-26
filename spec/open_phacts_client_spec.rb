@@ -31,11 +31,9 @@
 require 'spec_helper'
 
 OPS_SETTINGS = {
-  :url => 'https://xxxxxx.openphacts.org',
+  :url => 'https://beta.openphacts.org',
   :app_id => 'secret_id',
-  :app_key => 'secret_key',
-  :ssl_cert_file => 'cacert.pem',
-  :verify_certificate => false
+  :app_key => 'secret_key'
 }.freeze
 
 VALID_COMPOUND_URI  = 'http://rdf.chemspider.com/3'
@@ -50,7 +48,7 @@ UNKNOWN_SMILES      = 'C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=
 describe OPS::OpenPhactsClient, :vcr do
   describe "initialization" do
     before :each do
-      @config = {:url => 'https://www.url.com', :app_id => 'app_id', :app_key => 'app_key', :ssl_cert_file => OPS_SETTINGS[:ssl_cert_file]}
+      @config = {:url => 'https://www.url.com', :app_id => 'app_id', :app_key => 'app_key'}
     end
 
     it "accepts a config hash" do
@@ -110,27 +108,6 @@ describe OPS::OpenPhactsClient, :vcr do
       expect {
         OPS::OpenPhactsClient.new(@config)
       }.to raise_error(OPS::MissingArgument)
-    end
-
-    it "raises an OPS::MissingArgument if ssl_cert_file is missing" do
-      @config.delete(:ssl_cert_file)
-      expect {
-        OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument)
-    end
-
-    it "raises an OPS::MissingArgument if an empty ssl_cert_file is given" do
-      @config[:ssl_cert_file] = ''
-      expect {
-        OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::MissingArgument)
-    end
-
-    it "raises an OPS::InvalidArgument if ssl_cert_file does not exist" do
-      @config[:ssl_cert_file] = '/this/should/not/exist'
-      expect {
-        OPS::OpenPhactsClient.new(@config)
-      }.to raise_error(OPS::InvalidArgument)
     end
 
     it "sets the receiving timeout to 60 by default" do
@@ -388,8 +365,17 @@ describe OPS::OpenPhactsClient, :vcr do
         @client.target_info(VALID_TARGET_URI).should == {
           :"http://www.conceptwiki.org"=>{
             :uri=>"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291",
-            :pref_label=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)",
-            :pref_label_en=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)"
+            :pref_label_en=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)",
+            :pref_label=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)"
+          },
+          :"http://purl.uniprot.org"=>{
+            :uri=>"http://purl.uniprot.org/uniprot/Q9Y5Y9",
+            :function_annotation=>"This protein mediates the voltage-dependent sodium ion permeability of excitable membranes. Assuming opened or closed conformations in response to the voltage difference across the membrane, the protein forms a sodium-selective channel through which sodium ions may pass in accordance with their electrochemical gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological properties vary depending on the type of the associated beta subunits (in vitro). Plays a role in neuropathic pain mechanisms (By similarity).",
+            :alternative_name=>["Sodium channel protein type X subunit alpha", "Peripheral nerve sodium channel 3", "Voltage-gated sodium channel subunit alpha Nav1.8"],
+            :classified_with=>["http://purl.uniprot.org/go/0007600", "http://purl.uniprot.org/keywords/832", "http://purl.uniprot.org/go/0044299", "http://purl.uniprot.org/keywords/894", "http://purl.uniprot.org/keywords/851", "http://purl.uniprot.org/keywords/677", "http://purl.uniprot.org/keywords/621", "http://purl.uniprot.org/go/0001518", "http://purl.uniprot.org/keywords/1133", "http://purl.uniprot.org/keywords/325", "http://purl.uniprot.org/keywords/1185", "http://purl.uniprot.org/go/0005248", "http://purl.uniprot.org/go/0035725"],
+            :existence=>"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence",
+            :organism=>"http://purl.uniprot.org/taxonomy/9606",
+            :sequence=>"MEFPIGSLETNNFRRFTPESLVEIEKQIAAKQGTKKAREKHREQKDQEEKPRPQLDLKACNQLPKFYGELPAELIGEPLEDLDPFYSTHRTFMVLNKGRTISRFSATRALWLFSPFNLIRRTAIKVSVHSWFSLFITVTILVNCVCMTRTDLPEKIEYVFTVIYTFEALIKILARGFCLNEFTYLRDPWNWLDFSVITLAYVGTAIDLRGISGLRTFRVLRALKTVSVIPGLKVIVGALIHSVKKLADVTILTIFCLSVFALVGLQLFKGNLKNKCVKNDMAVNETTNYSSHRKPDIYINKRGTSDPLLCGNGSDSGHCPDGYICLKTSDNPDFNYTSFDSFAWAFLSLFRLMTQDSWERLYQQTLRTSGKIYMIFFVLVIFLGSFYLVNLILAVVTMAYEEQNQATTDEIEAKEKKFQEALEMLRKEQEVLAALGIDTTSLHSHNGSPLTSKNASERRHRIKPRVSEGSTEDNKSPRSDPYNQRRMSFLGLASGKRRASHGSVFHFRSPGRDISLPEGVTDDGVFPGDHESHRGSLLLGGGAGQQGPLPRSPLPQPSNPDSRHGEDEHQPPPTSELAPGAVDVSAFDAGQKKTFLSAEYLDEPFRAQRAMSVVSIITSVLEELEESEQKCPPCLTSLSQKYLIWDCCPMWVKLKTILFGLVTDPFAELTITLCIVVNTIFMAMEHHGMSPTFEAMLQIGNIVFTIFFTAEMVFKIIAFDPYYYFQKKWNIFDCIIVTVSLLELGVAKKGSLSVLRSFRLLRVFKLAKSWPTLNTLIKIIGNSVGALGNLTIILAIIVFVFALVGKQLLGENYRNNRKNISAPHEDWPRWHMHDFFHSFLIVFRILCGEWIENMWACMEVGQKSICLILFLTVMVLGNLVVLNLFIALLLNSFSADNLTAPEDDGEVNNLQVALARIQVFGHRTKQALCSFFSRSCPFPQPKAEPELVVKLPLSSSKAENHIAANTARGSSGGLQAPRGPRDEHSDFIANPTVWVSVPIAEGESDLDDLEDDGGEDAQSFQQEVIPKGQQEQLQQVERCGDHLTPRSPGTGTSSEDLAPSLGETWKDESVPQVPAEGVDDTSSSEGSTVDCLDPEEILRKIPELADDLEEPDDCFTEGCIRHCPCCKLDTTKSPWDVGWQVRKTCYRIVEHSWFESFIIFMILLSSGSLAFEDYYLDQKPTVKALLEYTDRVFTFIFVFEMLLKWVAYGFKKYFTNAWCWLDFLIVNISLISLTAKILEYSEVAPIKALRTLRALRPLRALSRFEGMRVVVDALVGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKFWRCINYTDGEFSLVPLSIVNNKSDCKIQNSTGSFFWVNVKVNFDNVAMGYLALLQVATFKGWMDIMYAAVDSREVNMQPKWEDNVYMYLYFVIFIIFGGFFTLNLFVGVIIDNFNQQKKKLGGQDIFMTEEQKKYYNAMKKLGSKKPQKPIPRPLNKFQGFVFDIVTRQAFDITIMVLICLNMITMMVETDDQSEEKTKILGKINQFFVAVFTGECVMKMFALRQYYFTNGWNVFDFIVVVLSIASLIFSAILKSLQSYFSPTLFRVIRLARIGRILRLIRAAKGIRTLLFALMMSLPALFNIGLLLFLVMFIYSIFGMSSFPHVRWEAGIDDMFNFQTFANSMLCLFQITTSAGWDGLLSPILNTGPPYCDPNLPNSNGTRGDCGSPAVGIIFFTTYIIISFLIMVNMYIAVILENFNVATEESTEPLSEDDFDMFYETWEKFDPEATQFITFSALSDFADTLSGPLRIPKPNRNILIQMDLPLVPGDKIHCLDILFAFTKNVLGESGELDSLKANMEEKFMATNLSKSSYEPIATTLRWKQEDISATVIQKAYRSYVLHRSMALSNTPCVPRAEEEAASLPDEGFVAFTANENCVLPDKSETASATSFPPSYESVTRGLSDRVNMRTSSSIQNEDEATSMELIAPGP"
           },
           :"http://linkedlifedata.com/resource/drugbank"=>{
             :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198",
@@ -399,17 +385,8 @@ describe OPS::OpenPhactsClient, :vcr do
           :"http://data.kasabi.com/dataset/chembl-rdf"=>{
             :uri=>"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL5451",
             :description=>"Sodium channel protein type 10 subunit alpha",
-            :keyword=>["Sodium channel", "Ionic channel", "Reference proteome", "Polymorphism", "Transport", "Sodium transport", "Voltage-gated channel", "Glycoprotein", "Repeat", "Ion transport", "Sodium", "Ubl conjugation", "Transmembrane helix", "Transmembrane", "Complete proteome", "Membrane"],
+            :keyword=>["Polymorphism", "Repeat", "Reference proteome", "Sodium", "Ubl conjugation", "Complete proteome", "Sodium channel", "Ion transport", "Transmembrane", "Ionic channel", "Transport", "Sodium transport", "Voltage-gated channel", "Membrane", "Glycoprotein", "Transmembrane helix"],
             :sub_class_of=>"http://purl.obolibrary.org/obo#PR_000000001"
-          },
-          :"http://purl.uniprot.org"=>{
-            :uri=>"http://purl.uniprot.org/uniprot/Q9Y5Y9",
-            :function_annotation=>"This protein mediates the voltage-dependent sodium ion permeability of excitable membranes. Assuming opened or closed conformations in response to the voltage difference across the membrane, the protein forms a sodium-selective channel through which sodium ions may pass in accordance with their electrochemical gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological properties vary depending on the type of the associated beta subunits (in vitro). Plays a role in neuropathic pain mechanisms (By similarity).",
-            :alternative_name=>["Voltage-gated sodium channel subunit alpha Nav1.8", "Sodium channel protein type X subunit alpha", "Peripheral nerve sodium channel 3"],
-            :classified_with=>["http://purl.uniprot.org/go/0001518", "http://purl.uniprot.org/go/0035725", "http://purl.uniprot.org/go/0005248", "http://purl.uniprot.org/keywords/325", "http://purl.uniprot.org/keywords/851", "http://purl.uniprot.org/keywords/894", "http://purl.uniprot.org/go/0044299", "http://purl.uniprot.org/go/0007600", "http://purl.uniprot.org/keywords/677", "http://purl.uniprot.org/keywords/621", "http://purl.uniprot.org/keywords/1133", "http://purl.uniprot.org/keywords/1185", "http://purl.uniprot.org/keywords/832"],
-            :existence=>"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence",
-            :organism=>"http://purl.uniprot.org/taxonomy/9606",
-            :sequence=>"MEFPIGSLETNNFRRFTPESLVEIEKQIAAKQGTKKAREKHREQKDQEEKPRPQLDLKACNQLPKFYGELPAELIGEPLEDLDPFYSTHRTFMVLNKGRTISRFSATRALWLFSPFNLIRRTAIKVSVHSWFSLFITVTILVNCVCMTRTDLPEKIEYVFTVIYTFEALIKILARGFCLNEFTYLRDPWNWLDFSVITLAYVGTAIDLRGISGLRTFRVLRALKTVSVIPGLKVIVGALIHSVKKLADVTILTIFCLSVFALVGLQLFKGNLKNKCVKNDMAVNETTNYSSHRKPDIYINKRGTSDPLLCGNGSDSGHCPDGYICLKTSDNPDFNYTSFDSFAWAFLSLFRLMTQDSWERLYQQTLRTSGKIYMIFFVLVIFLGSFYLVNLILAVVTMAYEEQNQATTDEIEAKEKKFQEALEMLRKEQEVLAALGIDTTSLHSHNGSPLTSKNASERRHRIKPRVSEGSTEDNKSPRSDPYNQRRMSFLGLASGKRRASHGSVFHFRSPGRDISLPEGVTDDGVFPGDHESHRGSLLLGGGAGQQGPLPRSPLPQPSNPDSRHGEDEHQPPPTSELAPGAVDVSAFDAGQKKTFLSAEYLDEPFRAQRAMSVVSIITSVLEELEESEQKCPPCLTSLSQKYLIWDCCPMWVKLKTILFGLVTDPFAELTITLCIVVNTIFMAMEHHGMSPTFEAMLQIGNIVFTIFFTAEMVFKIIAFDPYYYFQKKWNIFDCIIVTVSLLELGVAKKGSLSVLRSFRLLRVFKLAKSWPTLNTLIKIIGNSVGALGNLTIILAIIVFVFALVGKQLLGENYRNNRKNISAPHEDWPRWHMHDFFHSFLIVFRILCGEWIENMWACMEVGQKSICLILFLTVMVLGNLVVLNLFIALLLNSFSADNLTAPEDDGEVNNLQVALARIQVFGHRTKQALCSFFSRSCPFPQPKAEPELVVKLPLSSSKAENHIAANTARGSSGGLQAPRGPRDEHSDFIANPTVWVSVPIAEGESDLDDLEDDGGEDAQSFQQEVIPKGQQEQLQQVERCGDHLTPRSPGTGTSSEDLAPSLGETWKDESVPQVPAEGVDDTSSSEGSTVDCLDPEEILRKIPELADDLEEPDDCFTEGCIRHCPCCKLDTTKSPWDVGWQVRKTCYRIVEHSWFESFIIFMILLSSGSLAFEDYYLDQKPTVKALLEYTDRVFTFIFVFEMLLKWVAYGFKKYFTNAWCWLDFLIVNISLISLTAKILEYSEVAPIKALRTLRALRPLRALSRFEGMRVVVDALVGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKFWRCINYTDGEFSLVPLSIVNNKSDCKIQNSTGSFFWVNVKVNFDNVAMGYLALLQVATFKGWMDIMYAAVDSREVNMQPKWEDNVYMYLYFVIFIIFGGFFTLNLFVGVIIDNFNQQKKKLGGQDIFMTEEQKKYYNAMKKLGSKKPQKPIPRPLNKFQGFVFDIVTRQAFDITIMVLICLNMITMMVETDDQSEEKTKILGKINQFFVAVFTGECVMKMFALRQYYFTNGWNVFDFIVVVLSIASLIFSAILKSLQSYFSPTLFRVIRLARIGRILRLIRAAKGIRTLLFALMMSLPALFNIGLLLFLVMFIYSIFGMSSFPHVRWEAGIDDMFNFQTFANSMLCLFQITTSAGWDGLLSPILNTGPPYCDPNLPNSNGTRGDCGSPAVGIIFFTTYIIISFLIMVNMYIAVILENFNVATEESTEPLSEDDFDMFYETWEKFDPEATQFITFSALSDFADTLSGPLRIPKPNRNILIQMDLPLVPGDKIHCLDILFAFTKNVLGESGELDSLKANMEEKFMATNLSKSSYEPIATTLRWKQEDISATVIQKAYRSYVLHRSMALSNTPCVPRAEEEAASLPDEGFVAFTANENCVLPDKSETASATSFPPSYESVTRGLSDRVNMRTSSSIQNEDEATSMELIAPGP"
           }
         }
       end

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://xxxxxx.openphacts.org/target/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=%23187440
+    uri: https://beta.openphacts.org/target/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=%23187440
     body:
       encoding: US-ASCII
       string: ''
@@ -12,16 +12,16 @@ http_interactions:
       code: 400
       message: Bad Request
     headers:
-      Server:
-      - ngx_openresty/1.2.3.8
       Date:
-      - Mon, 15 Apr 2013 12:27:05 GMT
+      - Fri, 26 Apr 2013 09:55:49 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1285'
+      - '1291'
       Connection:
       - keep-alive
+      Server:
+      - Apache/2.2.15 (CentOS)
       X-Powered-By:
       - PHP/5.3.3
       Access-Control-Allow-Origin:
@@ -31,7 +31,7 @@ http_interactions:
       string: ! "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n\t\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n\n<html
         xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n<head>\n
         \   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n<link
-        rel=\"stylesheet\" href=\"http://xxxxxx.openphacts.org/css/puelia.css\" type=\"text/css\"
+        rel=\"stylesheet\" href=\"https://beta.openphacts.org/css/puelia.css\" type=\"text/css\"
         media=\"screen\" title=\"puelia main css\" charset=\"utf-8\"/>\n<link rel=\"shortcut
         icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\t<title>Invalid
         Request :: Puelia -Linked Data API</title>\t\n</head>\n\n<body>\n    <div
@@ -45,5 +45,5 @@ http_interactions:
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Mon, 15 Apr 2013 12:27:05 GMT
+  recorded_at: Fri, 26 Apr 2013 09:55:49 GMT
 recorded_with: VCR 2.2.5

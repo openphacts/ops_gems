@@ -38,13 +38,11 @@ require 'ops'
 OPS_API_URL = ENV['OPS_url']
 OPS_APP_ID = ENV['OPS_app_id']
 OPS_APP_KEY = ENV['OPS_app_key']
-SSL_CERT_FILE = ENV['SSL_CERT_FILE']
 CS_API_URL = ENV['CS_url']
 
 raise "No OPS API URL defined" if OPS_API_URL.nil? or OPS_API_URL.empty?
 raise "No OPS APP ID defined" if OPS_APP_ID.nil? or OPS_APP_ID.empty?
 raise "No OPS APP KEY defined" if OPS_APP_KEY.nil? or OPS_APP_KEY.empty?
-raise "No SSL CERT FILE defined" if SSL_CERT_FILE.nil? or SSL_CERT_FILE.empty?
 
 #OPS.log = false
 
@@ -53,9 +51,7 @@ raise "No SSL CERT FILE defined" if SSL_CERT_FILE.nil? or SSL_CERT_FILE.empty?
 ops_client = OPS::OpenPhactsClient.new({
   :url => OPS_API_URL,
   :app_id => OPS_APP_ID,
-  :app_key => OPS_APP_KEY,
-  :ssl_cert_file => SSL_CERT_FILE,
-  :verify_certificate => false
+  :app_key => OPS_APP_KEY
 })
 
 ops_client.smiles_to_url(%([O-]C(=O)[C@@H](NC(=O)C[NH3+])Cc1ccc(O)cc1))
