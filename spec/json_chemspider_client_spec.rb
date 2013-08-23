@@ -134,7 +134,7 @@ describe OPS::JsonChemspiderClient do
       expect {
         chemspider_client = OPS::JsonChemspiderClient.new(CS_API_URL)
         chemspider_client.substructure_search('CC=CC=COC=CC=CC')
-      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, 'Response with status code 504')
+      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, 'Smiles based search responded with status code 504')
     end
 
     it "can return the result as compound data hashes" do
@@ -724,7 +724,7 @@ describe OPS::JsonChemspiderClient do
       expect {
         chemspider_client = OPS::JsonChemspiderClient.new(CS_API_URL)
         chemspider_client.exact_structure_search("CC(=O)Oc1ccccc1C(=O)O")
-      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Response with status code 504")
+      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Smiles based search responded with status code 504")
     end
 
     it "can return the result as compound data hashes" do
@@ -844,7 +844,7 @@ describe OPS::JsonChemspiderClient do
       expect {
         chemspider_client = OPS::JsonChemspiderClient.new(CS_API_URL)
         chemspider_client.similarity_search("CC(=O)Oc1ccccc1C(=O)OCCC")
-      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Response with status code 504")
+      }.to raise_exception(OPS::JsonChemspiderClient::BadStatusCode, "Smiles based search responded with status code 504")
     end
 
     it 'accepts and applies the :limit parameter' do
