@@ -116,7 +116,10 @@ module OPS
       response = @http_client.get(@url, params, { 'Content-Type' => 'application/json; charset=utf-8' })
       OPS.log(self, :debug, "\n#{response.inspect}\n")
 
-      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+      if response.code != 200
+        OPS.log(self, :error, "smiles based search returned response code #{response.code} (#{smiles}): #{response.body}")
+        raise BadStatusCode.new("Smiles based search responded with status code #{response.code}")
+      end
 
       transaction_id = response.body
 
@@ -133,8 +136,8 @@ module OPS
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
       if response.code != 200
-        OPS.log(self, :error, "search status returned response code #{resnpose.code} (#{transaction_id}): #{response.body}")
-        raise BadStatusCode.new("Response with status code #{response.code}")
+        OPS.log(self, :error, "search status returned response code #{response.code} (#{transaction_id}): #{response.body}")
+        raise BadStatusCode.new("Search status responded with status code #{response.code}")
       end
 
       begin
@@ -150,8 +153,8 @@ module OPS
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
       if response.code != 200
-        OPS.log(self, :error, "search result returned response code #{resnpose.code} (#{transaction_id}): #{response.body}")
-        raise BadStatusCode.new("Response with status code #{response.code}")
+        OPS.log(self, :error, "search result returned response code #{response.code} (#{transaction_id}): #{response.body}")
+        raise BadStatusCode.new("Search result responded with status code #{response.code}")
       end
 
       begin
