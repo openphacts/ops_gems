@@ -132,11 +132,15 @@ module OPS
       response = @http_client.get(@url, { 'op' => 'GetSearchStatus', 'rid' => transaction_id },
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
-      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+      if response.code != 200
+        OPS.log(self, :error, "search status returned response code #{resnpose.code} (#{transaction_id}): #{response.body}")
+        raise BadStatusCode.new("Response with status code #{response.code}")
+      end
 
       begin
         MultiJson.load(response.body)
       rescue MultiJson::DecodeError
+        OPS.log(self, :error, "search status decode error (#{transaction_id}): #{response.body}")
         raise InvalidResponse.new("Could not parse response")
       end
     end
@@ -145,11 +149,15 @@ module OPS
       response = @http_client.get(@url, { 'op' => RESULTS_OPERATIONS[result_type], 'rid' => transaction_id },
                                   { 'Content-Type' => 'application/json; charset=utf-8' })
 
-      raise BadStatusCode.new("Response with status code #{response.code}") if response.code != 200
+      if response.code != 200
+        OPS.log(self, :error, "search result returned response code #{resnpose.code} (#{transaction_id}): #{response.body}")
+        raise BadStatusCode.new("Response with status code #{response.code}")
+      end
 
       begin
         MultiJson.load(response.body)
       rescue MultiJson::DecodeError
+        OPS.log(self, :error, "search result decode error (#{transaction_id}): #{response.body}")
         raise InvalidResponse.new("Could not parse response")
       end
     end
@@ -163,6 +171,8 @@ module OPS
         search_status = get_async_search_status(transaction_id)['Message']
         OPS.log(self, :debug, "(#{transaction_id}) Search status: '#{search_status}'")
         next if search_status.nil?
+
+        OPS.log(self, :error, "error during wait for search result (#{transaction_id}): #{search_status}")
 
         if search_status == "Failed"
           raise Failed.new("ChemSpider returned request status 'Failed'")
