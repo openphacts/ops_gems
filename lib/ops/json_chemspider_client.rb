@@ -172,13 +172,14 @@ module OPS
         OPS.log(self, :debug, "(#{transaction_id}) Search status: '#{search_status}'")
         next if search_status.nil?
 
-        OPS.log(self, :error, "error during wait for search result (#{transaction_id}): #{search_status}")
-
         if search_status == "Failed"
+          OPS.log(self, :error, "error during wait for search result (#{transaction_id}): #{search_status}")
           raise Failed.new("ChemSpider returned request status 'Failed'")
         elsif search_status == "TooManyRecords"
+          OPS.log(self, :error, "error during wait for search result (#{transaction_id}): #{search_status}")
           raise TooManyRecords.new("ChemSpider returned request status 'TooManyRecords'")
         elsif search_status.start_with?("A .NET Framework error occurred")
+          OPS.log(self, :error, "error during wait for search result (#{transaction_id}): #{search_status}")
           raise FrameworkError.new("ChemSpider returned request status 'FrameworkError'")
         end
       end
