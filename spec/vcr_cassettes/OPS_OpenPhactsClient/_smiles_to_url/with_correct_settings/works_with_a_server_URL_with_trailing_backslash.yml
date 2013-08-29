@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 26 Apr 2013 09:55:52 GMT
+      - Thu, 29 Aug 2013 12:18:45 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -27,16 +27,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Fri, 26 Apr 2013 09:48:55 GMT
+      - Tue, 27 Aug 2013 06:12:38 GMT
       Etag:
-      - ced24fa03dd28f81a25409af9878a53b
+      - de78e369ec128365f8419f5d10865593
       X-Served-From-Cache:
       - 'true'
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"https://beta.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/7555","smiles":"CCCC","isPrimaryTopicOf":"https://beta.openphacts.org/structure?smiles=CCCC&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"https://beta.openphacts.org/structure?app_id=secret_id&app_key=secret_key&smiles=CCCC&_format=json","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/structure?app_id=secret_id&app_key=secret_key&smiles=CCCC&_format=json&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/7555","smiles":"CCCC","isPrimaryTopicOf":"https://beta.openphacts.org/structure?app_id=secret_id&app_key=secret_key&smiles=CCCC&_format=json"}}}'
     http_version: 
-  recorded_at: Fri, 26 Apr 2013 09:55:52 GMT
+  recorded_at: Thu, 29 Aug 2013 12:18:45 GMT
 recorded_with: VCR 2.2.5

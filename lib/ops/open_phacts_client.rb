@@ -87,17 +87,15 @@ module OPS
       query_api('structure', options.merge(:smiles => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
     end
 
-    # not yet supported
-    # def similarity_search(smiles, options={})
-    #   return nil if not smiles or smiles.blank?
-    #   query_api('structure/similarity', options.merge('searchOptions.Molecule' => smiles))
-    # end
+    def similarity_search(smiles, options={})
+      return nil if not smiles or smiles.blank?
+      query_api('structure/similarity', options.merge('searchOptions.Molecule' => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+    end
 
-    # not yet supported
-    # def substructure_search(smiles, options={})
-    #   return nil if not smiles or smiles.blank?
-    #   query_api('structure/substructure', options.merge('searchOptions.Molecule' => smiles))
-    # end
+    def substructure_search(smiles, options={})
+      return nil if not smiles or smiles.blank?
+      query_api('structure/substructure', options.merge('searchOptions.Molecule' => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+    end
 
   private
 
@@ -109,7 +107,7 @@ module OPS
       result = json_parser.nil? ? json : json_parser.call(json)
 
       OPS.log(self, :debug, "Result (#{request_path}): #{result.inspect}")
-      result = nil if result.size == 1 and result.keys == [:uri]
+      result = nil if result.size == 1 and result.is_a?(Hash) and result.keys == [:uri]
       result
     end
 
@@ -133,7 +131,7 @@ module OPS
 
     def check_resonse(response)
       unless response.code == 200
-        raise case response.code
+        e = case response.code
           when 403 then OPS::ForbiddenError
           when 400 then OPS::BadRequestError
           when 404 then OPS::NotFoundError
@@ -141,6 +139,8 @@ module OPS
           when 504 then OPS::GatewayTimeoutError
           else OPS::ServerResponseError
         end
+        OPS.log(self, :error, "#{e}")
+        raise e
       end
     end
 

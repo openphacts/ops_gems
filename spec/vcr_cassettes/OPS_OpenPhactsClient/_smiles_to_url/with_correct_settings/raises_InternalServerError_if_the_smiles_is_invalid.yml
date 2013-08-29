@@ -13,11 +13,11 @@ http_interactions:
       message: Internal Server Error
     headers:
       Date:
-      - Fri, 26 Apr 2013 09:55:52 GMT
+      - Thu, 29 Aug 2013 12:18:45 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1318'
+      - '1328'
       Connection:
       - keep-alive
       Server:
@@ -39,11 +39,11 @@ http_interactions:
         Linked Data API</div>\n<div class=\"contents\">\n\n<h1>Internal Server Error</h1>\n
         \   <p>\n        Sorry, there was an internal error in serving this request,
         possibly due to an upstream server, or a configuration error.\n    </p>\n
-        \   \n    <!-- Errors -->\n<p>\n    Error. External service returned: Cannot
-        parse SMILES: CCC) ---&gt; Cannot parse SMILES: CCC)\r\n</p>\n    \n</div>\n<div
+        \   \n    <!-- Errors -->\n<p>\n    Results returned from ChemSpider contain
+        warnings or errors: &quot;Cannot do the convertion. Sorry!&quot;</p>\n    \n</div>\n<div
         class=\"footer\">\n    <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Fri, 26 Apr 2013 09:55:52 GMT
+  recorded_at: Thu, 29 Aug 2013 12:18:45 GMT
 recorded_with: VCR 2.2.5

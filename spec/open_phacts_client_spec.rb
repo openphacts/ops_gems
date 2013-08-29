@@ -385,7 +385,7 @@ describe OPS::OpenPhactsClient, :vcr do
           :"http://data.kasabi.com/dataset/chembl-rdf"=>{
             :uri=>"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL5451",
             :description=>"Sodium channel protein type 10 subunit alpha",
-            :keyword=>["Polymorphism", "Repeat", "Reference proteome", "Sodium", "Ubl conjugation", "Complete proteome", "Sodium channel", "Ion transport", "Transmembrane", "Ionic channel", "Transport", "Sodium transport", "Voltage-gated channel", "Membrane", "Glycoprotein", "Transmembrane helix"],
+            :keyword=>["Polymorphism", "Repeat", "Reference proteome", "Sodium", "Ubl conjugation", "Sodium channel", "Complete proteome", "Ion transport", "Transmembrane", "Ionic channel", "Transport", "Sodium transport", "Voltage-gated channel", "Membrane", "Glycoprotein", "Transmembrane helix"],
             :sub_class_of=>"http://purl.obolibrary.org/obo#PR_000000001"
           }
         }
@@ -578,6 +578,114 @@ describe OPS::OpenPhactsClient, :vcr do
         stub_request(:get, "#{OPS_SETTINGS[:url]}/structure?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&smiles=#{VALID_SMILES}").
           to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
         expect {@client.smiles_to_url(VALID_SMILES)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
+      end
+    end
+  end
+
+  describe '#similarity_search' do
+    context 'with correct settings' do
+      before :each do
+        @client = OPS::OpenPhactsClient.new(OPS_SETTINGS)
+      end
+
+      it 'raises InternalServerError if the smiles is unknown to OPS' do
+        expect {@client.similarity_search(UNKNOWN_SMILES)}.to raise_error OPS::GatewayTimeoutError
+      end
+
+      it 'raises InternalServerError if the smiles is invalid' do
+        expect {@client.similarity_search(INVALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it 'raises InternalServerError if an OPS internal server error occurs' do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/similarity?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:status => 500)
+        expect {@client.similarity_search(VALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it "raises an ArgumentError if no smiles URI is given" do
+        expect {@client.similarity_search}.to raise_error(ArgumentError)
+      end
+
+      it "returns results if the smiles is known to OPS" do
+        @client.similarity_search(VALID_SMILES, 'resultOptions.Limit' => 5).should == {
+          :limit => "5",
+          :molecule => VALID_SMILES,
+          :result => [
+            "http://rdf.chemspider.com/349",
+            "http://rdf.chemspider.com/350",
+            "http://rdf.chemspider.com/347",
+            "http://rdf.chemspider.com/348",
+            "http://rdf.chemspider.com/352"
+          ],
+          :type => "SimilaritySearch"
+        }
+      end
+
+      it "works with a server URL with trailing backslash" do
+        config = OPS_SETTINGS.dup
+        config[:url] += '/'
+        @client = OPS::OpenPhactsClient.new(config)
+        @client.similarity_search(VALID_SMILES, 'resultOptions.Limit' => 5).should_not be_nil
+      end
+
+      it "raises an exception if response can't be parsed" do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/similarity?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
+        expect {@client.similarity_search(VALID_SMILES)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
+      end
+    end
+  end
+
+  describe '#substructure_search' do
+    context 'with correct settings' do
+      before :each do
+        @client = OPS::OpenPhactsClient.new(OPS_SETTINGS)
+      end
+
+      it 'raises InternalServerError if the smiles is unknown to OPS' do
+        expect {@client.substructure_search(UNKNOWN_SMILES)}.to raise_error OPS::NotFoundError
+      end
+
+      it 'raises InternalServerError if the smiles is invalid' do
+        expect {@client.substructure_search(INVALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it 'raises InternalServerError if an OPS internal server error occurs' do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/substructure?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:status => 500)
+        expect {@client.substructure_search(VALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it "raises an ArgumentError if no smiles URI is given" do
+        expect {@client.substructure_search}.to raise_error(ArgumentError)
+      end
+
+      it "returns results if the smiles is known to OPS" do
+        @client.substructure_search(VALID_SMILES, 'resultOptions.Limit' => 5).should == {
+          :limit => "5",
+          :molecule => VALID_SMILES,
+          :result => [
+            "http://rdf.chemspider.com/349",
+            "http://rdf.chemspider.com/360",
+            "http://rdf.chemspider.com/347",
+            "http://rdf.chemspider.com/354",
+            "http://rdf.chemspider.com/355"
+          ],
+          :type => "SubstructureSearch"
+        }
+      end
+
+      it "works with a server URL with trailing backslash" do
+        config = OPS_SETTINGS.dup
+        config[:url] += '/'
+        @client = OPS::OpenPhactsClient.new(config)
+        @client.substructure_search(VALID_SMILES, 'resultOptions.Limit' => 5).should_not be_nil
+      end
+
+      it "raises an exception if response can't be parsed" do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/substructure?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
+        expect {@client.substructure_search(VALID_SMILES)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
       end
     end
   end

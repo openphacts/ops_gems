@@ -53,9 +53,15 @@ module OPS
         return {:uri => primary_topic['_about'], :count => primary_topic['targetPharmacologyTotalResults']}
       elsif primary_topic.has_key?('compoundPharmacologyTotalResults')
         return {:uri => primary_topic['_about'], :count => primary_topic['compoundPharmacologyTotalResults']}
-      end
-
       # process all other results
+      else
+        return parse_primary_topic_hash(primary_topic)
+      end
+    end
+
+  private
+
+    def self.parse_primary_topic_hash(primary_topic)
       if primary_topic.has_key?('inDataset')
         result = { primary_topic['inDataset'].to_sym => parse_item(primary_topic) }
         primary_topic['exactMatch'].each do |item|
@@ -68,8 +74,6 @@ module OPS
       result
     end
 
-  private
-
     def self.parse_item(item, include_exact_matches=false)
       if include_exact_matches and item.has_key?('exactMatch') and item.has_key?('inDataset')
         properties = { item['inDataset'].to_sym => parse_item(item) }
@@ -77,7 +81,8 @@ module OPS
           properties[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
         end
       else
-        properties = {:uri => item['_about']}
+        properties = {}
+        properties[:uri] = item['_about'] if item['_about'].present?
         item.each do |key, value|
           next if NON_PROPERTY_KEYS.include?(key)
           if value.is_a?(Hash) and value.has_key?('_about')

@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 26 Apr 2013 09:55:47 GMT
+      - Thu, 29 Aug 2013 12:18:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -29,7 +29,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Fri, 26 Apr 2013 09:48:43 GMT
+      - Thu, 29 Aug 2013 11:15:38 GMT
       Etag:
       - 4e4950b4dbe7f97ac2adf3a9f767509f
       X-Served-From-Cache:
@@ -40,5 +40,5 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"https://beta.openphacts.org/compound?uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/compound?uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://rdf.chemspider.com/3","inchi":"InChI=1S/C3H9NO/c1-3(5)2-4/h3,5H,2,4H2,1H3","inchikey":"HXKKHQJGJAFBHI-UHFFFAOYSA-N","smiles":"OC(C)CN","inDataset":"http://www.chemspider.com","hba":2,"hbd":3,"logp":-1.127,"psa":4.625e-18,"ro5_violations":0,"exactMatch":[{"_about":"http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL326602","full_mwt":75.1096,"molform":"C3H9NO","mw_freebase":75.1096,"rtb":1,"inDataset":"http://data.kasabi.com/dataset/chembl-rdf"},{"_about":"http://www.conceptwiki.org/concept/c99deece-3cd6-49c7-991f-b0efb51ddc80","inDataset":"http://www.conceptwiki.org","prefLabel_en":"1-Aminopropan-2-ol","prefLabel":"1-Aminopropan-2-ol"},"http://rdf.chemspider.com/3"],"isPrimaryTopicOf":"https://beta.openphacts.org/compound?uri=http%3A%2F%2Frdf.chemspider.com%2F3&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Fri, 26 Apr 2013 09:55:47 GMT
+  recorded_at: Thu, 29 Aug 2013 12:18:40 GMT
 recorded_with: VCR 2.2.5

@@ -2,22 +2,22 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=%23187440
+    uri: https://beta.openphacts.org/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.Molecule=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C
     body:
       encoding: US-ASCII
       string: ''
     headers: {}
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 504
+      message: Gateway Timeout
     headers:
       Date:
-      - Thu, 29 Aug 2013 12:18:40 GMT
+      - Thu, 29 Aug 2013 12:18:45 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1291'
+      - '1189'
       Connection:
       - keep-alive
       Server:
@@ -33,17 +33,15 @@ http_interactions:
         \   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n<link
         rel=\"stylesheet\" href=\"https://beta.openphacts.org/css/puelia.css\" type=\"text/css\"
         media=\"screen\" title=\"puelia main css\" charset=\"utf-8\"/>\n<link rel=\"shortcut
-        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\t<title>Invalid
-        Request :: Puelia -Linked Data API</title>\t\n</head>\n\n<body>\n    <div
-        class=\"container\">\n    <div class=\"header\">Puelia: an implementation
-        of the Linked Data API</div>\n    \n    \n    \n<div class=\"contents\">\n
-        \   <h1>Invalid Request</h1>\n    <p>\n        You've possibly requested this
-        page in a format that this API does not currently provide, or tried to use
-        some strange query parameters.\n    </p>\n    \n    <!-- Errors -->\n<p>\n
-        \   URIs in the request not well formed</p>\n    \n    \n</div>\n<div class=\"footer\">\n
-        \   <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
+        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\t<title>Timeout
+        Error :: Puelia - Linked Data API</title>\n</head>\n\n<body>\n\n<div class=\"container\">\n<div
+        class=\"header\">Puelia: an implementation of the Linked Data API</div>\n<div
+        class=\"contents\">\n\n<h1>Timeout Error</h1>\n    <p>\n        Sorry, there
+        was a timeout error due to an upstream server.\n    </p>\n    \n    <!-- Errors
+        -->\n<p>\n    Search timed out after waiting for 5 minutes</p>\n    \n</div>\n<div
+        class=\"footer\">\n    <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 29 Aug 2013 12:18:40 GMT
+  recorded_at: Thu, 29 Aug 2013 12:18:45 GMT
 recorded_with: VCR 2.2.5

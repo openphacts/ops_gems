@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/structure?_format=json&app_id=secret_id&app_key=secret_key&smiles=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C
+    uri: https://beta.openphacts.org/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.Molecule=CCC)
     body:
       encoding: US-ASCII
       string: ''
@@ -13,11 +13,11 @@ http_interactions:
       message: Internal Server Error
     headers:
       Date:
-      - Thu, 29 Aug 2013 12:18:44 GMT
+      - Thu, 29 Aug 2013 12:18:46 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1305'
+      - '1971'
       Connection:
       - keep-alive
       Server:
@@ -39,11 +39,19 @@ http_interactions:
         Linked Data API</div>\n<div class=\"contents\">\n\n<h1>Internal Server Error</h1>\n
         \   <p>\n        Sorry, there was an internal error in serving this request,
         possibly due to an upstream server, or a configuration error.\n    </p>\n
-        \   \n    <!-- Errors -->\n<p>\n    Results returned from ChemSpider contain
-        warnings or errors: &quot;Not found&quot;</p>\n    \n</div>\n<div class=\"footer\">\n
+        \   \n    <!-- Errors -->\n<p>\n    Unexpected response returned from ChemSpider:
+        GetSearchStatus error: A .NET Framework error occurred during execution of
+        user-defined routine or aggregate &quot;z_SearchSim&quot;: \r\nSystem.Exception:
+        SMILES loader: unexpected ')'\r\nSystem.Exception: \r\n   at indigo.Bingo._ExecuteBingoOperation(SqlString
+        bingo_schema, bingoOperationDelegate operationDelegate, bingoGetIndexDataDelegate
+        getBingoDataDelegate, BingoOp op_flags)\r\n   at indigo.Bingo._MakeSearch(SqlString
+        query, SqlString table, SqlString options, SqlString bingo_schema, String
+        search_type, Boolean highlighting, Object[] ext_options)\r\n   at indigo.Bingo.SearchSim(SqlString
+        table, SqlString query, SqlString metric, SqlString bingo_schema, SqlDouble
+        min_bound, SqlDouble max_bound)\r\n.</p>\n    \n</div>\n<div class=\"footer\">\n
         \   <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 29 Aug 2013 12:18:44 GMT
+  recorded_at: Thu, 29 Aug 2013 12:18:46 GMT
 recorded_with: VCR 2.2.5
