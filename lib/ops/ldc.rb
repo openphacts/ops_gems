@@ -65,7 +65,9 @@ module OPS
       if primary_topic.has_key?('inDataset')
         result = { primary_topic['inDataset'].to_sym => parse_item(primary_topic) }
         primary_topic['exactMatch'].each do |item|
-          result[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
+          next unless item.is_a?(Hash)
+          next unless item.has_key?('inDataset')
+          result[item['inDataset'].to_sym] = parse_item(item)
         end
       else
         result = parse_item(primary_topic)
@@ -78,7 +80,9 @@ module OPS
       if include_exact_matches and item.has_key?('exactMatch') and item.has_key?('inDataset')
         properties = { item['inDataset'].to_sym => parse_item(item) }
         item['exactMatch'].each do |item|
-          properties[item['inDataset'].to_sym] = parse_item(item) if item.is_a?(Hash)
+          next unless item.is_a?(Hash)
+          next unless item.has_key?('inDataset')
+          properties[item['inDataset'].to_sym] = parse_item(item)
         end
       else
         properties = {}
