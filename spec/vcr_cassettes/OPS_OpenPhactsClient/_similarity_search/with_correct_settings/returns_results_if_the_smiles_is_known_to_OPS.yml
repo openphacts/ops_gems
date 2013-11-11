@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&resultOptions.Limit=5&searchOptions.Molecule=CCCC
+    uri: https://beta.openphacts.org/1.3/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&resultOptions.Count=5&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O&searchOptions.Threshold=0.9
     body:
       encoding: US-ASCII
       string: ''
@@ -13,13 +13,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Aug 2013 12:18:46 GMT
+      - Mon, 11 Nov 2013 07:31:09 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '982'
+      - '1442'
       Connection:
       - keep-alive
+      Vary:
+      - Accept-Encoding
       Server:
       - Apache/2.2.15 (CentOS)
       X-Powered-By:
@@ -27,16 +29,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Thu, 29 Aug 2013 11:17:50 GMT
-      Etag:
-      - 13c36f2dd626515ccc1d4f9a632db66d
+      - Mon, 11 Nov 2013 07:31:06 GMT
       X-Served-From-Cache:
-      - 'true'
+      - 'false'
+      Etag:
+      - e8aab93a771752d2bd58f1496eb71f0c
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"https://beta.openphacts.org/structure/similarity?resultOptions.Limit=5&searchOptions.Molecule=CCCC&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/structure/similarity?resultOptions.Limit=5&searchOptions.Molecule=CCCC&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"result":["http://rdf.chemspider.com/349","http://rdf.chemspider.com/350","http://rdf.chemspider.com/347","http://rdf.chemspider.com/348","http://rdf.chemspider.com/352"],"Limit":"5","Molecule":"CCCC","type":"SimilaritySearch","isPrimaryTopicOf":"https://beta.openphacts.org/structure/similarity?resultOptions.Limit=5&searchOptions.Molecule=CCCC&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.openphacts.org/api/ChemicalStructureSearch","result":[{"_about":"http://ops.rsc.org/OPS2954","relevance":1},{"_about":"http://ops.rsc.org/OPS28298","relevance":1},{"_about":"http://ops.rsc.org/OPS4291","relevance":0.97727274894714},{"_about":"http://ops.rsc.org/OPS18084","relevance":0.97727274894714},{"_about":"http://ops.rsc.org/OPS324814","relevance":0.97727274894714}],"Count":"5","Molecule":"CC(=O)Oc1ccccc1C(=O)O","Threshold":"0.9","type":"http://www.openphacts.org/api/SimilaritySearch","isPrimaryTopicOf":"https://beta.openphacts.org/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Thu, 29 Aug 2013 12:18:46 GMT
+  recorded_at: Mon, 11 Nov 2013 07:31:09 GMT
 recorded_with: VCR 2.2.5

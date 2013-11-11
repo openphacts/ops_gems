@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/target/pharmacology/count?_format=json&app_id=secret_id&app_key=secret_key&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
+    uri: https://beta.openphacts.org/1.3/target/pharmacology/count?_format=json&app_id=secret_id&app_key=secret_key&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
     body:
       encoding: US-ASCII
       string: ''
@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Aug 2013 12:18:44 GMT
+      - Mon, 11 Nov 2013 07:30:50 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -27,16 +27,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Thu, 29 Aug 2013 11:15:47 GMT
-      Etag:
-      - b195e4a4ad1d9e64a24a43c814d4e8dc
+      - Mon, 11 Nov 2013 07:23:12 GMT
       X-Served-From-Cache:
-      - 'true'
+      - 'false'
+      Etag:
+      - f6e49aba95223bb03fd513c5a6c1dd84
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"0.2","result":{"_about":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","targetPharmacologyTotalResults":186,"isPrimaryTopicOf":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","targetPharmacologyTotalResults":168,"isPrimaryTopicOf":"https://beta.openphacts.org/target/pharmacology/count?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Thu, 29 Aug 2013 12:18:44 GMT
+  recorded_at: Mon, 11 Nov 2013 07:30:50 GMT
 recorded_with: VCR 2.2.5

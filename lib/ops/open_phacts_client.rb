@@ -89,12 +89,14 @@ module OPS
 
     def similarity_search(smiles, options={})
       return nil if not smiles or smiles.blank?
-      query_api('structure/similarity', options.merge('searchOptions.Molecule' => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+      opts = options.merge('searchOptions.Molecule' => smiles)
+      query_api('structure/similarity', opts, Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
     end
 
     def substructure_search(smiles, options={})
       return nil if not smiles or smiles.blank?
-      query_api('structure/substructure', options.merge('searchOptions.Molecule' => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+      opts = options.merge('searchOptions.Molecule' => smiles, 'searchOptions.MolType' => 0)
+      query_api('structure/substructure', opts, Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
     end
 
   private

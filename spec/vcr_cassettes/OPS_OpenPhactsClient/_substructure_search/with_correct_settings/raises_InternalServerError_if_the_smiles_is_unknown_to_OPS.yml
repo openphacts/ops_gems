@@ -2,26 +2,24 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/structure/substructure?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.Molecule=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C
+    uri: https://beta.openphacts.org/1.3/structure/substructure?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.MolType=0&searchOptions.Molecule=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=CC=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C=C
     body:
       encoding: US-ASCII
       string: ''
     headers: {}
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 500
+      message: Internal Server Error
     headers:
       Date:
-      - Thu, 29 Aug 2013 12:18:47 GMT
+      - Mon, 11 Nov 2013 07:31:17 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1152'
+      - '2739'
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
       Server:
       - Apache/2.2.15 (CentOS)
       X-Powered-By:
@@ -35,15 +33,31 @@ http_interactions:
         \   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n<link
         rel=\"stylesheet\" href=\"https://beta.openphacts.org/css/puelia.css\" type=\"text/css\"
         media=\"screen\" title=\"puelia main css\" charset=\"utf-8\"/>\n<link rel=\"shortcut
-        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\n\t<title>Page
-        Not Found :: Puelia - Linked Data API</title>\n    \n</head>\n\n<body>\n    <div
-        class=\"container\">\n    <div class=\"header\">Puelia: an implementation
-        of the Linked Data API</div>\n    \n    \n    <div class=\"contents\">   \n
-        \       <h1>Page Not Found</h1>\n         <p>The resource you requested could
-        not be found at this location.</p>\n    </div>\n    <div class=\"footer\">\n
-        \   <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
+        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\t<title>Internal
+        Server Error :: Puelia - Linked Data API</title>\n</head>\n\n<body>\n\n<div
+        class=\"container\">\n<div class=\"header\">Puelia: an implementation of the
+        Linked Data API</div>\n<div class=\"contents\">\n\n<h1>Internal Server Error</h1>\n
+        \   <p>\n        Sorry, there was an internal error in serving this request,
+        possibly due to an upstream server, or a configuration error.\n    </p>\n
+        \   \n    <!-- Errors -->\n<p>\n    Unexpected response returned from ChemSpider:
+        &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;\r\n&lt;html
+        xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;\r\n&lt;head&gt;\r\n&lt;meta
+        http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;/&gt;\r\n&lt;title&gt;500
+        - Internal server error.&lt;/title&gt;\r\n&lt;style type=&quot;text/css&quot;&gt;\r\n&lt;!--\r\nbody{margin:0;font-size:.7em;font-family:Verdana,
+        Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\nfieldset{padding:0 15px
+        10px 15px;} \r\nh1{font-size:2.4em;margin:0;color:#FFF;}\r\nh2{font-size:1.7em;margin:0;color:#CC0000;}
+        \r\nh3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n#header{width:96%;margin:0
+        0 0 0;padding:6px 2% 6px 2%;font-family:&quot;trebuchet MS&quot;, Verdana,
+        sans-serif;color:#FFF;\r\nbackground-color:#555555;}\r\n#content{margin:0
+        0 0 2%;position:relative;}\r\n.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n--&gt;\r\n&lt;/style&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;div
+        id=&quot;header&quot;&gt;&lt;h1&gt;Server Error&lt;/h1&gt;&lt;/div&gt;\r\n&lt;div
+        id=&quot;content&quot;&gt;\r\n &lt;div class=&quot;content-container&quot;&gt;&lt;fieldset&gt;\r\n
+        \ &lt;h2&gt;500 - Internal server error.&lt;/h2&gt;\r\n  &lt;h3&gt;There is
+        a problem with the resource you are looking for, and it cannot be displayed.&lt;/h3&gt;\r\n
+        &lt;/fieldset&gt;&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n</p>\n
+        \   \n</div>\n<div class=\"footer\">\n    <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
-        Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n    \n    </div>\n</body>\n</html>\n"
+        Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 29 Aug 2013 12:18:47 GMT
+  recorded_at: Mon, 11 Nov 2013 07:31:17 GMT
 recorded_with: VCR 2.2.5
