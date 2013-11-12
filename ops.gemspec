@@ -35,8 +35,8 @@ require 'ops/version'
 Gem::Specification.new do |s|
   s.name        = "ops"
   s.version     = OPS::VERSION
-  s.authors     = "Thomas Marek"
-  s.email       = "thomas.marek@biosolveit.de"
+  s.authors     = "Lothar Wissler"
+  s.email       = "lothar.wissler@biosolveit.de"
   s.homepage    = ""
   s.summary     = %q{Toolkit for the OPS Platform}
   s.description = %q{Toolkit for the OPS Platform}
@@ -46,16 +46,16 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = %w(lib)
 
-  s.add_runtime_dependency "activesupport", "~> 3.2.0", ">= 3.2.13"
-  s.add_runtime_dependency "nokogiri", "~> 1.5.5"
-  s.add_runtime_dependency "httpclient", "~> 2.2.5"
-  s.add_runtime_dependency "multi_json", "~> 1.3", ">= 1.3.6"
-  s.add_runtime_dependency "oj", "~> 1.3.0"
+  s.add_runtime_dependency "activesupport", "~> 3.2.0", ">= 3.2.14"
+  s.add_runtime_dependency "nokogiri", "~> 1.5.10"
+  s.add_runtime_dependency "httpclient", "~> 2.3.4.1"
+  s.add_runtime_dependency "multi_json", "~> 1.8", ">= 1.8.2"
+  s.add_runtime_dependency "oj", "~> 1.3.7"
 
-  s.add_development_dependency "rake", "~> 0.9.2.2"
-  s.add_development_dependency "rspec", "~> 2.11.0"
-  s.add_development_dependency "webmock", "~> 1.8.7"
-  s.add_development_dependency "vcr", "~> 2.2.3"
-  s.add_development_dependency "flexmock", "~> 1.0.3"
+  s.add_development_dependency "rake", "~> 10.1.0"
+  s.add_development_dependency "rspec", "~> 2.14.1"
+  s.add_development_dependency "webmock", "~> 1.13.0"
+  s.add_development_dependency "vcr", "~> 2.7.0"
+  s.add_development_dependency "flexmock", "~> 1.3.2"
   s.add_development_dependency "awesome_print"
 end
