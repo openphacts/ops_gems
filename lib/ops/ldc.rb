@@ -77,25 +77,25 @@ module OPS
     end
 
     def self.parse_item(item, include_exact_matches=false)
-      if include_exact_matches and item.has_key?('exactMatch') and item.has_key?('inDataset')
-        properties = { item['inDataset'].to_sym => parse_item(item) }
-        item['exactMatch'].each do |item|
-          next unless item.is_a?(Hash)
-          next unless item.has_key?('inDataset')
-          properties[item['inDataset'].to_sym] = parse_item(item)
+      properties = {}
+      properties[:uri] = item['_about'] if item['_about'].present?
+
+      if include_exact_matches and item.has_key?('exactMatch')
+        exact_matches = item['exactMatch'].is_a?(Array) ? item['exactMatch'] : [item['exactMatch']]
+        exact_matches.each do |match|
+          next unless match.has_key?('inDataset')
+          properties[match['inDataset'].to_sym] = parse_item(match)
         end
-      else
-        properties = {}
-        properties[:uri] = item['_about'] if item['_about'].present?
-        item.each do |key, value|
-          next if NON_PROPERTY_KEYS.include?(key)
-          if value.is_a?(Hash) and value.has_key?('_about')
-            properties[key.underscore.to_sym] = parse_item(value, include_exact_matches)
-          elsif value.is_a?(Array)
-            properties[key.underscore.to_sym] = value.collect{|e| e.is_a?(Hash) ? parse_item(e, include_exact_matches) : e}
-          else
-            properties[key.underscore.to_sym] = value
-          end
+      end
+
+      item.each do |key, value|
+        next if NON_PROPERTY_KEYS.include?(key)
+        if value.is_a?(Hash) and value.has_key?('_about')
+          properties[key.underscore.to_sym] = parse_item(value, include_exact_matches)
+        elsif value.is_a?(Array)
+          properties[key.underscore.to_sym] = value.collect{|e| e.is_a?(Hash) ? parse_item(e, include_exact_matches) : e}
+        else
+          properties[key.underscore.to_sym] = value
         end
       end
       properties

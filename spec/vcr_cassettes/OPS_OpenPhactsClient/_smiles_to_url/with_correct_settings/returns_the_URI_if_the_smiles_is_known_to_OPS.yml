@@ -6,18 +6,24 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:33 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Mon, 11 Nov 2013 07:30:57 GMT
+      - Wed, 26 Mar 2014 08:11:33 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '766'
+      - '780'
       Connection:
       - keep-alive
       Server:
@@ -27,16 +33,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Mon, 11 Nov 2013 07:30:55 GMT
+      - Wed, 26 Mar 2014 08:11:32 GMT
       X-Served-From-Cache:
       - 'false'
       Etag:
-      - aaca74744eeb44b54995847ea9315c2e
+      - e70f900bad7342927eab80553fa1dc76
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://ops.rsc.org/OPS2954","smiles":"CC(=O)Oc1ccccc1C(=O)O","isPrimaryTopicOf":"https://beta.openphacts.org/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/1.3/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.3/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://ops.rsc.org/OPS403534","smiles":"CC(=O)Oc1ccccc1C(=O)O","isPrimaryTopicOf":"https://beta.openphacts.org/1.3/structure?smiles=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:57 GMT
-recorded_with: VCR 2.2.5
+  recorded_at: Wed, 26 Mar 2014 08:11:33 GMT
+recorded_with: VCR 2.8.0

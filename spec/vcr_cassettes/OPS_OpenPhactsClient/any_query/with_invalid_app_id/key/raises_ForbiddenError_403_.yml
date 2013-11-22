@@ -6,7 +6,13 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:17 GMT
   response:
     status:
       code: 403
@@ -15,7 +21,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:34 GMT
+      - Wed, 26 Mar 2014 08:11:17 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -26,14 +32,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:34 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:17 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://ops.rsc.org/OPS3
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:17 GMT
   response:
     status:
       code: 403
@@ -42,7 +54,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:34 GMT
+      - Wed, 26 Mar 2014 08:11:18 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -53,14 +65,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:34 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:18 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/compound/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://ops.rsc.org/OPS3
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:18 GMT
   response:
     status:
       code: 403
@@ -69,7 +87,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:35 GMT
+      - Wed, 26 Mar 2014 08:11:18 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -80,14 +98,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:35 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:18 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/target?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:18 GMT
   response:
     status:
       code: 403
@@ -96,7 +120,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:35 GMT
+      - Wed, 26 Mar 2014 08:11:18 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -107,14 +131,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:35 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:18 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/target/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:18 GMT
   response:
     status:
       code: 403
@@ -123,7 +153,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:35 GMT
+      - Wed, 26 Mar 2014 08:11:18 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -134,14 +164,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:35 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:18 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/target/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:18 GMT
   response:
     status:
       code: 403
@@ -150,7 +186,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:36 GMT
+      - Wed, 26 Mar 2014 08:11:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -161,14 +197,20 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:36 GMT
+  recorded_at: Wed, 26 Mar 2014 08:11:19 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.3/structure?_format=json&app_id=foo&app_key=bar&smiles=CC(=O)Oc1ccccc1C(=O)O
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Wed, 26 Mar 2014 08:11:19 GMT
   response:
     status:
       code: 403
@@ -177,7 +219,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Mon, 11 Nov 2013 07:30:36 GMT
+      - Wed, 26 Mar 2014 08:11:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -188,5 +230,5 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 07:30:36 GMT
-recorded_with: VCR 2.2.5
+  recorded_at: Wed, 26 Mar 2014 08:11:19 GMT
+recorded_with: VCR 2.8.0

@@ -32,11 +32,15 @@
 module OPS
   class URIMapping
     MAPPINGS = [
-      [/http:\/\/rdf\.chemspider\.com\/(\d+)/, "http://www.chemspider.com/Chemical-Structure.%s.html"],
+      [/http:\/\/ops\.rsc\.org\/OPS(\d+)/, "http://ops.rsc.org/substance.aspx?SubstanceID=%s"],
       [/http:\/\/.*\/drugbank\/.*\/(DB[\d]+)/, "http://www.drugbank.ca/drugs/%s"],
-      [/http:\/\/data\.kasabi\.com\/dataset\/chembl-rdf\/chemblid\/(CHEMBL\d+)/, "https://www.ebi.ac.uk/chembldb/compound/inspect/%s"],
-      [/http:\/\/data\.kasabi\.com\/dataset\/chembl-rdf\/(chemblid|molecule|target|activity|assay)\/([\w\d]+)/, "http://linkedchemistry.info/chembl/%s/%s"],
+      [/http:\/\/.*\/drugbank\/.*\/targets\/(\d+)/, "http://wifo5-03.informatik.uni-mannheim.de/drugbank/page/targets/%s"],
       [/http:\/\/www\.conceptwiki\.org\/concept\/([\w\d\-]+)/, "http://www.conceptwiki.org/wiki/#/concept/%s/view"],
+      [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/molecule\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/compound/inspect/%s"],
+      [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/target\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/target/inspect/%s"],
+      [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/assay\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/assay/inspect/%s"],
+      [/(http:\/\/rdf\.ebi\.ac\.uk\/.*\/activity\/CHEMBL.*)/, "http://www.ebi.ac.uk/rdf/services/chembl/describe?uri=%s"],
+      [/http:\/\/purl\.uniprot\.org\/uniprot\/(.*)/, "http://www.uniprot.org/uniprot/%s"]
     ].freeze
 
     def resolve_uri(uri)
