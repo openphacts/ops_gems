@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rake", "~> 10.2.1"
   s.add_development_dependency "rspec", "~> 2.14.1"
-  s.add_development_dependency "webmock", ">= 1.3.2", "<= 1.17.4"
+  s.add_development_dependency "webmock", "~> 1.17.4"
   s.add_development_dependency "vcr", "~> 2.8.0"
   s.add_development_dependency "flexmock", "~> 1.3.3"
   s.add_development_dependency "awesome_print"
