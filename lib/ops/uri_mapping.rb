@@ -32,10 +32,10 @@
 module OPS
   class URIMapping
     MAPPINGS = [
-      [/http:\/\/ops\.rsc\.org\/OPS(\d+)/, "http://ops.rsc.org/substance.aspx?SubstanceID=%s"],
+      [/(http:\/\/ops\.rsc[-us]*\.org\/OPS\d+)/, "%s"],
       [/http:\/\/.*\/drugbank\/.*\/(DB[\d]+)/, "http://www.drugbank.ca/drugs/%s"],
       [/http:\/\/.*\/drugbank\/.*\/targets\/(\d+)/, "http://wifo5-03.informatik.uni-mannheim.de/drugbank/page/targets/%s"],
-      [/http:\/\/www\.conceptwiki\.org\/concept\/([\w\d\-]+)/, "http://www.conceptwiki.org/wiki/#/concept/%s/view"],
+      [/http:\/\/www\.conceptwiki\.org\/concept\/([\w\d\-]+)/, "http://www.conceptwiki.org/concept/index/%s"],
       [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/molecule\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/compound/inspect/%s"],
       [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/target\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/target/inspect/%s"],
       [/http:\/\/rdf\.ebi\.ac\.uk\/.*\/assay\/(CHEMBL[\d]+)/, "http://www.ebi.ac.uk/chembl/assay/inspect/%s"],

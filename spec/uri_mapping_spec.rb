@@ -31,8 +31,12 @@
 require 'spec_helper'
 
 describe OPS::URIMapping do
-  it "resolves a ChemSpider URI" do
-    OPS::URIMapping.new.resolve_uri("http://ops.rsc.org/OPS100").should == "http://ops.rsc.org/substance.aspx?SubstanceID=100"
+  it "does not change a rsc URI" do
+    OPS::URIMapping.new.resolve_uri("http://ops.rsc.org/OPS100").should == "http://ops.rsc.org/OPS100"
+  end
+
+  it "does not change a rsc-us URI" do
+    OPS::URIMapping.new.resolve_uri("http://ops.rsc-us.org/OPS100").should == "http://ops.rsc-us.org/OPS100"
   end
 
   it "resolves a Chembl RDF molecule URI" do
@@ -64,7 +68,7 @@ describe OPS::URIMapping do
   end
 
   it "resolves a ConceptWiki URI" do
-    OPS::URIMapping.new.resolve_uri("http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5").should == "http://www.conceptwiki.org/wiki/#/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5/view"
+    OPS::URIMapping.new.resolve_uri("http://www.conceptwiki.org/concept/38932552-111f-4a4e-a46a-4ed1d7bdf9d5").should == "http://www.conceptwiki.org/concept/index/38932552-111f-4a4e-a46a-4ed1d7bdf9d5"
   end
 
   it "resolves a uniprot URI" do
