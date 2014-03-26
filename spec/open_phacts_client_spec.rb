@@ -671,13 +671,11 @@ describe OPS::OpenPhactsClient, :vcr do
       end
 
       it 'raises OPS::NotFoundError if the smiles is unknown to OPS' do
-        expect {@client.similarity_search(UNKNOWN_SMILES, 'resultOptions.Count' => 5, 'searchOptions.Threshold' => 0.9)}
-        .to raise_error OPS::NotFoundError
+        expect {@client.similarity_search(UNKNOWN_SMILES, 'resultOptions.Count' => 5, 'searchOptions.Threshold' => 0.9)}.to raise_error OPS::NotFoundError
       end
 
       it 'raises InternalServerError if the smiles is invalid' do
-        expect {@client.similarity_search(INVALID_SMILES, 'resultOptions.Count' => 5, 'searchOptions.Threshold' => 0.9)}
-        .to raise_error OPS::InternalServerError
+        expect {@client.similarity_search(INVALID_SMILES, 'resultOptions.Count' => 5, 'searchOptions.Threshold' => 0.9)}.to raise_error OPS::InternalServerError
       end
 
       it 'raises InternalServerError if an OPS internal server error occurs' do

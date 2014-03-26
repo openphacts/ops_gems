@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    ops (3.1.1)
+    ops (3.1.2)
       activesupport (~> 3.2.0, >= 3.2.17)
       httpclient (~> 2.3.4.1)
       multi_json (>= 1.8, <= 1.9.2)
-      nokogiri (~> 1.6.1)
+      nokogiri (~> 1.5.10)
       oj (>= 1.4.7, <= 2.6.1)
 
 GEM
@@ -22,12 +22,10 @@ GEM
     flexmock (1.3.3)
     httpclient (2.3.4.1)
     i18n (0.6.9)
-    mini_portile (0.5.3)
     multi_json (1.9.2)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.5.11)
     oj (2.6.1)
-    rake (10.2.1)
+    rake (10.0.4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -49,7 +47,7 @@ DEPENDENCIES
   awesome_print
   flexmock (~> 1.3.3)
   ops!
-  rake (~> 10.2.1)
+  rake (~> 10.0.4)
   rspec (~> 2.14.1)
   vcr (~> 2.8.0)
   webmock (~> 1.17.4)

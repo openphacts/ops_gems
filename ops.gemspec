@@ -47,12 +47,12 @@ Gem::Specification.new do |s|
   s.require_paths = %w(lib)
 
   s.add_runtime_dependency "activesupport", "~> 3.2.0", ">= 3.2.17"
-  s.add_runtime_dependency "nokogiri", "~> 1.6.1"
+  s.add_runtime_dependency "nokogiri", "~> 1.5.10"
   s.add_runtime_dependency "httpclient", "~> 2.3.4.1"
   s.add_runtime_dependency "multi_json", ">= 1.8", "<= 1.9.2"
   s.add_runtime_dependency "oj", ">= 1.4.7", "<= 2.6.1"
 
-  s.add_development_dependency "rake", "~> 10.2.1"
+  s.add_development_dependency "rake", "~> 10.0.4"
   s.add_development_dependency "rspec", "~> 2.14.1"
   s.add_development_dependency "webmock", "~> 1.17.4"
   s.add_development_dependency "vcr", "~> 2.8.0"
