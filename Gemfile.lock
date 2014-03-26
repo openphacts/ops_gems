@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ops (3.1.0)
+    ops (3.1.1)
       activesupport (~> 3.2.0, >= 3.2.17)
       httpclient (~> 2.3.4.1)
       multi_json (>= 1.8, <= 1.9.2)
@@ -26,7 +26,7 @@ GEM
     multi_json (1.9.2)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    oj (1.4.7)
+    oj (2.6.1)
     rake (10.2.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
