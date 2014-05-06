@@ -64,10 +64,13 @@ module OPS
     def self.parse_primary_topic_hash(primary_topic)
       if primary_topic.has_key?('inDataset')
         result = { primary_topic['inDataset'].to_sym => parse_item(primary_topic) }
-        primary_topic['exactMatch'].each do |item|
-          next unless item.is_a?(Hash)
-          next unless item.has_key?('inDataset')
-          result[item['inDataset'].to_sym] = parse_item(item)
+
+        if primary_topic.has_key?('exactMatch') and primary_topic['exactMatch'].is_a?(Enumerable)
+          primary_topic['exactMatch'].each do |item|
+            next unless item.is_a?(Hash)
+            next unless item.has_key?('inDataset')
+            result[item['inDataset'].to_sym] = parse_item(item)
+          end
         end
       else
         result = parse_item(primary_topic)
