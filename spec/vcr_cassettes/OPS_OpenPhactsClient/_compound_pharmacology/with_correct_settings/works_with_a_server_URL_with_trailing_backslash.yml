@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/1.3/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=http://ops.rsc.org/OPS3
+    uri: https://beta.openphacts.org/1.4/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=secret_id&app_key=secret_key&uri=http://ops.rsc.org/OPS3
     body:
       encoding: US-ASCII
       string: ''
@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Wed, 26 Mar 2014 08:11:21 GMT
+      - Tue, 08 Jul 2014 13:20:25 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 26 Mar 2014 08:11:21 GMT
+      - Tue, 08 Jul 2014 13:20:26 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Wed, 26 Mar 2014 08:11:19 GMT
-      X-Served-From-Cache:
-      - 'false'
+      - Tue, 08 Jul 2014 12:49:03 GMT
       Etag:
-      - 10fd2e140397b9ad05a8664332014a07
+      - 491b8b081c238fbbeb1948eea9829a02
+      X-Served-From-Cache:
+      - 'true'
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","itemsPerPage":"all","startIndex":0,"isPartOf":{"_about":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key","hasPart":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Wednesday,
-        26-Mar-14 08:11:19 UTC","extendedMetadataVersion":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/activity/CHEMBL_ACT_10006980","activityComment":"inactive","hasAssay":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/assay/CHEMBL1963885","description":"PUBCHEM_BIOASSAY:
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","itemsPerPage":"all","startIndex":0,"isPartOf":{"_about":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key","hasPart":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","definition":"http://www.openphacts.org/api#compoundPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Tuesday,
+        08-Jul-14 12:49:03 UTC","extendedMetadataVersion":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/activity/CHEMBL_ACT_10006980","activityComment":"inactive","hasAssay":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/assay/CHEMBL1963885","description":"PUBCHEM_BIOASSAY:
         NCI human tumor cell line growth inhibition assay. Data for the PC-3 Prostate
         cell line.   (Class of assay: confirmatory) ","hasTarget":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL390","title":"PC-3","targetOrganismName":"Homo
         sapiens","inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#CellLine"},"inDataset":"http://www.ebi.ac.uk/chembl"},"hasMolecule":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","inDataset":"http://www.ebi.ac.uk/chembl","exactMatch":[{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","molweight":420.41,"ro5_violations":1,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
@@ -399,8 +399,8 @@ http_interactions:
         sapiens","inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#CellLine"},"inDataset":"http://www.ebi.ac.uk/chembl"},"hasMolecule":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","inDataset":"http://www.ebi.ac.uk/chembl","exactMatch":[{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","molweight":420.41,"ro5_violations":1,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
         hexopyranoside","prefLabel":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
         hexopyranoside"}]},"activity_unit":{"_about":"http://www.openphacts.org/units/Nanomolar","prefLabel":"nM"},"publishedType":"log
-        GI50 (M)","publishedValue":-4.371,"activity_type":"GI50","activity_value":42559.84,"inDataset":"http://www.ebi.ac.uk/chembl"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","next":"https://beta.openphacts.org/1.3/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=2","label":"Compound
+        GI50 (M)","publishedValue":-4.371,"activity_type":"GI50","activity_value":42559.84,"inDataset":"http://www.ebi.ac.uk/chembl"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=1","next":"https://beta.openphacts.org/1.4/compound/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_page=2","label":"Compound
         Pharmacology: List"}}'
     http_version: 
-  recorded_at: Wed, 26 Mar 2014 08:11:21 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 08 Jul 2014 13:20:27 GMT
+recorded_with: VCR 2.9.0

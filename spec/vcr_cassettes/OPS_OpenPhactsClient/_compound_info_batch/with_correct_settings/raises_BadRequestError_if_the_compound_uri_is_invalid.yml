@@ -1,25 +1,27 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://beta.openphacts.org/1.4/target?_format=json&app_id=secret_id&app_key=secret_key&uri=%23187440
+    method: post
+    uri: https://beta.openphacts.org/1.4/compound/batch
     body:
       encoding: US-ASCII
-      string: ''
+      string: uri_list=%23187440&_format=json&app_id=secret_id&app_key=secret_key
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:33 GMT
+      - Tue, 08 Jul 2014 13:20:14 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
   response:
     status:
       code: 400
       message: Bad Request
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:33 GMT
+      - Tue, 08 Jul 2014 13:20:14 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
@@ -51,5 +53,5 @@ http_interactions:
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:34 GMT
+  recorded_at: Tue, 08 Jul 2014 13:20:15 GMT
 recorded_with: VCR 2.9.0

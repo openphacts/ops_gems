@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/1.3/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&resultOptions.Count=5&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O&searchOptions.Threshold=0.9
+    uri: https://beta.openphacts.org/1.4/structure/similarity?_format=json&app_id=secret_id&app_key=secret_key&resultOptions.Count=5&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O&searchOptions.Threshold=0.9
     body:
       encoding: US-ASCII
       string: ''
@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Wed, 26 Mar 2014 08:11:36 GMT
+      - Tue, 08 Jul 2014 13:21:06 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 26 Mar 2014 08:11:41 GMT
+      - Tue, 08 Jul 2014 13:21:07 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -35,16 +35,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Wed, 26 Mar 2014 08:11:35 GMT
-      X-Served-From-Cache:
-      - 'false'
+      - Tue, 08 Jul 2014 12:49:55 GMT
       Etag:
-      - d7e94897efc135cfd6fb2f1061eb1c7a
+      - 9aca60cea55c3b92a2f5dc7e1578bd8c
+      X-Served-From-Cache:
+      - 'true'
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
-      string: ! '{"format":"linked-data-api","version":"1.3","result":{"_about":"https://beta.openphacts.org/1.3/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.3/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.openphacts.org/api/ChemicalStructureSearch","result":[{"_about":"http://ops.rsc.org/OPS403534","relevance":1},{"_about":"http://ops.rsc.org/OPS666650","relevance":1},{"_about":"http://ops.rsc.org/OPS1056157","relevance":1},{"_about":"http://ops.rsc.org/OPS684682","relevance":0.97727274894714},{"_about":"http://ops.rsc.org/OPS767417","relevance":0.97727274894714}],"Count":"5","Molecule":"CC(=O)Oc1ccccc1C(=O)O","Threshold":"0.9","type":"http://www.openphacts.org/api/SimilaritySearch","isPrimaryTopicOf":"https://beta.openphacts.org/1.3/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key"}}}'
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.openphacts.org/api/ChemicalStructureSearch","result":[{"_about":"http://ops.rsc.org/OPS403534","relevance":1},{"_about":"http://ops.rsc.org/OPS666650","relevance":1},{"_about":"http://ops.rsc.org/OPS1056157","relevance":1},{"_about":"http://ops.rsc.org/OPS684682","relevance":0.97727274894714},{"_about":"http://ops.rsc.org/OPS767417","relevance":0.97727274894714}],"Count":"5","Molecule":"CC(=O)Oc1ccccc1C(=O)O","Threshold":"0.9","type":"http://www.openphacts.org/api/SimilaritySearch","isPrimaryTopicOf":"https://beta.openphacts.org/1.4/structure/similarity?resultOptions.Count=5&searchOptions.Threshold=0.9&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Wed, 26 Mar 2014 08:11:41 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 08 Jul 2014 13:21:07 GMT
+recorded_with: VCR 2.9.0

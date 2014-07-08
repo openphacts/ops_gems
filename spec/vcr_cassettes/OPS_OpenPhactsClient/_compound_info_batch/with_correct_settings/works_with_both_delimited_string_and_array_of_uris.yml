@@ -1,0 +1,111 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://beta.openphacts.org/1.4/compound/batch
+    body:
+      encoding: US-ASCII
+      string: uri_list=http%3A%2F%2Fops.rsc.org%2FOPS3%7Chttp%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 08 Jul 2014 13:20:17 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 08 Jul 2014 13:20:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2617'
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Tue, 08 Jul 2014 12:48:56 GMT
+      Etag:
+      - 63083588c9eafed6d4ef168ac89c4e9d
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/compound/batch","modified":"Tuesday,
+        08-Jul-14 12:48:56 UTC","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/compound/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","hba":9,"hbd":6,"inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","logp":0.684,"molformula":"C21H24O9","molweight":420.41,"psa":149.07,"ro5_violations":1,"rtb":12,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O","sameAs":["http://ops.rsc.org/OPS3/rdf","http://ops.rsc.org/OPS3"],"exactMatch":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","mw_freebase":420.41,"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside","prefLabel":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside"},"http://www.conceptwiki.org/concept/index/a371d2ba-4c32-4fad-99dc-3b1d5357d29d"]},{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","hba":9,"hbd":6,"inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","logp":0.684,"molformula":"C21H24O9","molweight":420.41,"psa":149.07,"ro5_violations":1,"rtb":12,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O","sameAs":["http://ops.rsc.org/OPS3/rdf","http://ops.rsc.org/OPS3"],"exactMatch":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","mw_freebase":420.41,"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside","prefLabel":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside"},"http://www.conceptwiki.org/concept/index/a371d2ba-4c32-4fad-99dc-3b1d5357d29d"]}],"type":"http://purl.org/linked-data/api/vocab#List"}}'
+    http_version: 
+  recorded_at: Tue, 08 Jul 2014 13:20:18 GMT
+- request:
+    method: post
+    uri: https://beta.openphacts.org/1.4/compound/batch
+    body:
+      encoding: US-ASCII
+      string: uri_list=http%3A%2F%2Fops.rsc.org%2FOPS3%7Chttp%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 08 Jul 2014 13:20:18 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 08 Jul 2014 13:20:19 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2617'
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Tue, 08 Jul 2014 12:48:56 GMT
+      Etag:
+      - 63083588c9eafed6d4ef168ac89c4e9d
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/compound/batch","modified":"Tuesday,
+        08-Jul-14 12:48:56 UTC","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/compound/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","hba":9,"hbd":6,"inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","logp":0.684,"molformula":"C21H24O9","molweight":420.41,"psa":149.07,"ro5_violations":1,"rtb":12,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O","sameAs":["http://ops.rsc.org/OPS3/rdf","http://ops.rsc.org/OPS3"],"exactMatch":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","mw_freebase":420.41,"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside","prefLabel":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside"},"http://www.conceptwiki.org/concept/index/a371d2ba-4c32-4fad-99dc-3b1d5357d29d"]},{"_about":"http://ops.rsc.org/OPS3","inDataset":"http://ops.rsc.org","hba":9,"hbd":6,"inchi":"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+","inchikey":"GKAJCVFOJGXVIA-NSCUHMNNSA-N","logp":0.684,"molformula":"C21H24O9","molweight":420.41,"psa":149.07,"ro5_violations":1,"rtb":12,"smiles":"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O","sameAs":["http://ops.rsc.org/OPS3/rdf","http://ops.rsc.org/OPS3"],"exactMatch":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358","mw_freebase":420.41,"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule"},{"_about":"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d","inDataset":"http://www.conceptwiki.org","prefLabel_en":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside","prefLabel":"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl
+        hexopyranoside"},"http://www.conceptwiki.org/concept/index/a371d2ba-4c32-4fad-99dc-3b1d5357d29d"]}],"type":"http://purl.org/linked-data/api/vocab#List"}}'
+    http_version: 
+  recorded_at: Tue, 08 Jul 2014 13:20:19 GMT
+recorded_with: VCR 2.9.0

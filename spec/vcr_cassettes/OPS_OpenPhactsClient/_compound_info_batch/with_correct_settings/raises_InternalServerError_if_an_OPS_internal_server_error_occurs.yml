@@ -1,31 +1,35 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://beta.openphacts.org/1.4/target?_format=json&app_id=secret_id&app_key=secret_key&uri=%23187440
+    method: post
+    uri: https://beta.openphacts.org/1.4/compound/batch
     body:
       encoding: US-ASCII
-      string: ''
+      string: uri_list=http%3A%2F%2Funknown.com%2F1111&_format=json&app_id=secret_id&app_key=secret_key
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:33 GMT
+      - Tue, 08 Jul 2014 13:20:15 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 404
+      message: Not Found
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:33 GMT
+      - Tue, 08 Jul 2014 13:20:15 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1291'
+      - '1152'
       Connection:
       - keep-alive
+      Vary:
+      - Accept-Encoding
       Server:
       - Apache/2.2.15 (CentOS)
       X-Powered-By:
@@ -39,17 +43,15 @@ http_interactions:
         \   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n<link
         rel=\"stylesheet\" href=\"https://beta.openphacts.org/css/puelia.css\" type=\"text/css\"
         media=\"screen\" title=\"puelia main css\" charset=\"utf-8\"/>\n<link rel=\"shortcut
-        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\t<title>Invalid
-        Request :: Puelia -Linked Data API</title>\t\n</head>\n\n<body>\n    <div
+        icon\" href=\"/imgs/favicon.png\" type=\"image/png\"/>\n    \n\n\t<title>Page
+        Not Found :: Puelia - Linked Data API</title>\n    \n</head>\n\n<body>\n    <div
         class=\"container\">\n    <div class=\"header\">Puelia: an implementation
-        of the Linked Data API</div>\n    \n    \n    \n<div class=\"contents\">\n
-        \   <h1>Invalid Request</h1>\n    <p>\n        You've possibly requested this
-        page in a format that this API does not currently provide, or tried to use
-        some strange query parameters.\n    </p>\n    \n    <!-- Errors -->\n<p>\n
-        \   URIs in the request not well formed</p>\n    \n    \n</div>\n<div class=\"footer\">\n
+        of the Linked Data API</div>\n    \n    \n    <div class=\"contents\">   \n
+        \       <h1>Page Not Found</h1>\n         <p>The resource you requested could
+        not be found at this location.</p>\n    </div>\n    <div class=\"footer\">\n
         \   <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
-        Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
+        Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n    \n    </div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:34 GMT
+  recorded_at: Tue, 08 Jul 2014 13:20:16 GMT
 recorded_with: VCR 2.9.0

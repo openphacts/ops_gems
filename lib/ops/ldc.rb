@@ -45,6 +45,16 @@ module OPS
       result
     end
 
+    # process pharmacology paginated results
+    def self.parse_batch_json(json)
+      items = json['result'].delete('items')
+      batch_result = parse_item(json['result'])
+
+      result = batch_result
+      result[:items] = items.collect{|item| parse_primary_topic_hash(item)}
+      result
+    end
+
     def self.parse_primary_topic_json(json)
       primary_topic = json['result']['primaryTopic']
 
@@ -86,6 +96,7 @@ module OPS
       if include_exact_matches and item.has_key?('exactMatch')
         exact_matches = item['exactMatch'].is_a?(Array) ? item['exactMatch'] : [item['exactMatch']]
         exact_matches.each do |match|
+          next if match.is_a?(String)
           next unless match.has_key?('inDataset')
           properties[match['inDataset'].to_sym] = parse_item(match)
         end

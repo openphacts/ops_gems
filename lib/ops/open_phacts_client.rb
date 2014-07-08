@@ -55,6 +55,12 @@ module OPS
       query_api('compound', options.merge(:uri => compound_uri), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
     end
 
+    def compound_info_batch(compound_uris, options={})
+      return nil if not compound_uris or compound_uris.empty?
+      compound_uris = compound_uris.join("|") if compound_uris.is_a?(Array)
+      query_api('compound/batch', options.merge(:uri_list => compound_uris), Proc.new{|data| OPS::LDC.parse_batch_json(data)})
+    end
+
     def compound_pharmacology(compound_uri, options={})
       return nil if not compound_uri or compound_uri.blank?
       options[:_pageSize] = 'all' unless options.has_key?(:_pageSize)
@@ -80,6 +86,12 @@ module OPS
     def target_info(target_uri, options={})
       return nil if not target_uri or target_uri.blank?
       query_api('target', options.merge(:uri => target_uri), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+    end
+
+    def target_info_batch(target_uris, options={})
+      return nil if not target_uris or target_uris.empty?
+      target_uris = target_uris.join("|") if target_uris.is_a?(Array)
+      query_api('target/batch', options.merge(:uri_list => target_uris), Proc.new{|data| OPS::LDC.parse_batch_json(data)})
     end
 
     def smiles_to_url(smiles, options={})
@@ -119,7 +131,11 @@ module OPS
       response = nil
 
       begin
-        response = @http_client.get(url, options)
+        response = if (url.end_with?('/batch'))
+          @http_client.post(url, options)
+        else
+          @http_client.get(url, options)
+        end
       rescue Timeout::Error
         query_time = Time.now - start_time
         OPS.log(self, :error, "Timeout after #{query_time} seconds")
@@ -137,11 +153,12 @@ module OPS
           when 403 then OPS::ForbiddenError
           when 400 then OPS::BadRequestError
           when 404 then OPS::NotFoundError
+          when 414 then OPS::UriTooLarge
           when 500 then OPS::InternalServerError
           when 504 then OPS::GatewayTimeoutError
           else OPS::ServerResponseError
         end
-        OPS.log(self, :error, "#{e}")
+        OPS.log(self, :error, "#{e}: #{response.inspect}")
         raise e
       end
     end

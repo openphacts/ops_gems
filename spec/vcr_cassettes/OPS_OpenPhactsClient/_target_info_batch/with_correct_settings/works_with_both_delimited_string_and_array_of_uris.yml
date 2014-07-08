@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://beta.openphacts.org/1.4/target/batch
+    body:
+      encoding: US-ASCII
+      string: uri_list=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291%7Chttp%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 08 Jul 2014 13:20:40 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 08 Jul 2014 13:20:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Tue, 08 Jul 2014 12:49:24 GMT
+      Etag:
+      - 8de925091a4693741f1fd802923773de
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/target/batch","modified":"Tuesday,
+        08-Jul-14 12:49:24 UTC","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/target/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","sameAs":["http://www.conceptwiki.org/concept/index/00059958-a045-4581-9dc5-e5a08bb0c291","http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],"exactMatch":[{"_about":"http://purl.uniprot.org/uniprot/Q9Y5Y9","Function_Annotation":"This
+        protein mediates the voltage-dependent sodium ion permeability of excitable
+        membranes. Assuming opened or closed conformations in response to the voltage
+        difference across the membrane, the protein forms a sodium-selective channel
+        through which sodium ions may pass in accordance with their electrochemical
+        gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological
+        properties vary depending on the type of the associated beta subunits (in
+        vitro). Plays a role in neuropathic pain mechanisms (By similarity).","alternativeName":["Voltage-gated
+        sodium channel subunit alpha Nav1.8","Peripheral nerve sodium channel 3","Sodium
+        channel protein type X subunit alpha"],"classifiedWith":["http://purl.uniprot.org/keywords/1185","http://purl.uniprot.org/go/0001518","http://purl.uniprot.org/keywords/1133","http://purl.uniprot.org/go/0055117","http://purl.uniprot.org/go/0019233","http://purl.uniprot.org/go/0005248","http://purl.uniprot.org/go/0042475","http://purl.uniprot.org/go/0007600","http://purl.uniprot.org/keywords/325","http://purl.uniprot.org/keywords/851","http://purl.uniprot.org/go/0071439","http://purl.uniprot.org/keywords/677","http://purl.uniprot.org/go/0060371","http://purl.uniprot.org/keywords/621","http://purl.uniprot.org/keywords/894","http://purl.uniprot.org/go/0002027","http://purl.uniprot.org/keywords/832","http://purl.uniprot.org/go/0086067","http://purl.uniprot.org/go/0086069"],"existence":"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence","organism":"http://purl.uniprot.org/taxonomy/9606","inDataset":"http://purl.uniprot.org"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198","inDataset":"http://linkedlifedata.com/resource/drugbank","targetForDrug":[{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Proparacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Bupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Ropivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Chloroprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Lidocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Oxybuprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Dibucaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","illicit"],"genericName":"Cocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Dyclonine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Levobupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Benzocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Mepivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Hexylcaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Procaine"}],"cellularLocation":["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough","membrane"],"numberOfResidues":"1988","theoreticalPi":"5.77"}],"mappingRelation":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451","hasTargetComponent":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744","description":"Sodium
+        channel protein type 10 subunit alpha","inDataset":"http://www.ebi.ac.uk/chembl"},"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein","label":"Sodium
+        channel protein type X alpha subunit"},"prefLabel_en":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)","prefLabel":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)"},{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","sameAs":["http://www.conceptwiki.org/concept/index/00059958-a045-4581-9dc5-e5a08bb0c291","http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],"exactMatch":[{"_about":"http://purl.uniprot.org/uniprot/Q9Y5Y9","Function_Annotation":"This
+        protein mediates the voltage-dependent sodium ion permeability of excitable
+        membranes. Assuming opened or closed conformations in response to the voltage
+        difference across the membrane, the protein forms a sodium-selective channel
+        through which sodium ions may pass in accordance with their electrochemical
+        gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological
+        properties vary depending on the type of the associated beta subunits (in
+        vitro). Plays a role in neuropathic pain mechanisms (By similarity).","alternativeName":["Voltage-gated
+        sodium channel subunit alpha Nav1.8","Peripheral nerve sodium channel 3","Sodium
+        channel protein type X subunit alpha"],"classifiedWith":["http://purl.uniprot.org/keywords/1185","http://purl.uniprot.org/go/0001518","http://purl.uniprot.org/keywords/1133","http://purl.uniprot.org/go/0055117","http://purl.uniprot.org/go/0019233","http://purl.uniprot.org/go/0005248","http://purl.uniprot.org/go/0042475","http://purl.uniprot.org/go/0007600","http://purl.uniprot.org/keywords/325","http://purl.uniprot.org/keywords/851","http://purl.uniprot.org/go/0071439","http://purl.uniprot.org/keywords/677","http://purl.uniprot.org/go/0060371","http://purl.uniprot.org/keywords/621","http://purl.uniprot.org/keywords/894","http://purl.uniprot.org/go/0002027","http://purl.uniprot.org/keywords/832","http://purl.uniprot.org/go/0086067","http://purl.uniprot.org/go/0086069"],"existence":"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence","organism":"http://purl.uniprot.org/taxonomy/9606","inDataset":"http://purl.uniprot.org"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198","inDataset":"http://linkedlifedata.com/resource/drugbank","targetForDrug":[{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Proparacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Bupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Ropivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Chloroprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Lidocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Oxybuprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Dibucaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","illicit"],"genericName":"Cocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Dyclonine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Levobupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Benzocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Mepivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Hexylcaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Procaine"}],"cellularLocation":["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough","membrane"],"numberOfResidues":"1988","theoreticalPi":"5.77"}],"mappingRelation":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451","hasTargetComponent":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744","description":"Sodium
+        channel protein type 10 subunit alpha","inDataset":"http://www.ebi.ac.uk/chembl"},"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein","label":"Sodium
+        channel protein type X alpha subunit"},"prefLabel_en":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)","prefLabel":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)"}],"type":"http://purl.org/linked-data/api/vocab#List"}}'
+    http_version: 
+  recorded_at: Tue, 08 Jul 2014 13:20:43 GMT
+- request:
+    method: post
+    uri: https://beta.openphacts.org/1.4/target/batch
+    body:
+      encoding: US-ASCII
+      string: uri_list=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291%7Chttp%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 08 Jul 2014 13:20:43 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 08 Jul 2014 13:20:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Last-Modified:
+      - Tue, 08 Jul 2014 12:49:24 GMT
+      Etag:
+      - 8de925091a4693741f1fd802923773de
+      X-Served-From-Cache:
+      - 'true'
+      X-3scale-Proxy-Secret-Token:
+      - Shared_secret_sent_from_proxy_to_API_backend
+    body:
+      encoding: US-ASCII
+      string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/target/batch","modified":"Tuesday,
+        08-Jul-14 12:49:24 UTC","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/target/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","sameAs":["http://www.conceptwiki.org/concept/index/00059958-a045-4581-9dc5-e5a08bb0c291","http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],"exactMatch":[{"_about":"http://purl.uniprot.org/uniprot/Q9Y5Y9","Function_Annotation":"This
+        protein mediates the voltage-dependent sodium ion permeability of excitable
+        membranes. Assuming opened or closed conformations in response to the voltage
+        difference across the membrane, the protein forms a sodium-selective channel
+        through which sodium ions may pass in accordance with their electrochemical
+        gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological
+        properties vary depending on the type of the associated beta subunits (in
+        vitro). Plays a role in neuropathic pain mechanisms (By similarity).","alternativeName":["Voltage-gated
+        sodium channel subunit alpha Nav1.8","Peripheral nerve sodium channel 3","Sodium
+        channel protein type X subunit alpha"],"classifiedWith":["http://purl.uniprot.org/keywords/1185","http://purl.uniprot.org/go/0001518","http://purl.uniprot.org/keywords/1133","http://purl.uniprot.org/go/0055117","http://purl.uniprot.org/go/0019233","http://purl.uniprot.org/go/0005248","http://purl.uniprot.org/go/0042475","http://purl.uniprot.org/go/0007600","http://purl.uniprot.org/keywords/325","http://purl.uniprot.org/keywords/851","http://purl.uniprot.org/go/0071439","http://purl.uniprot.org/keywords/677","http://purl.uniprot.org/go/0060371","http://purl.uniprot.org/keywords/621","http://purl.uniprot.org/keywords/894","http://purl.uniprot.org/go/0002027","http://purl.uniprot.org/keywords/832","http://purl.uniprot.org/go/0086067","http://purl.uniprot.org/go/0086069"],"existence":"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence","organism":"http://purl.uniprot.org/taxonomy/9606","inDataset":"http://purl.uniprot.org"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198","inDataset":"http://linkedlifedata.com/resource/drugbank","targetForDrug":[{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Proparacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Bupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Ropivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Chloroprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Lidocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Oxybuprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Dibucaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","illicit"],"genericName":"Cocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Dyclonine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Levobupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Benzocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Mepivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Hexylcaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Procaine"}],"cellularLocation":["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough","membrane"],"numberOfResidues":"1988","theoreticalPi":"5.77"}],"mappingRelation":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451","hasTargetComponent":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744","description":"Sodium
+        channel protein type 10 subunit alpha","inDataset":"http://www.ebi.ac.uk/chembl"},"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein","label":"Sodium
+        channel protein type X alpha subunit"},"prefLabel_en":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)","prefLabel":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)"},{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","sameAs":["http://www.conceptwiki.org/concept/index/00059958-a045-4581-9dc5-e5a08bb0c291","http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],"exactMatch":[{"_about":"http://purl.uniprot.org/uniprot/Q9Y5Y9","Function_Annotation":"This
+        protein mediates the voltage-dependent sodium ion permeability of excitable
+        membranes. Assuming opened or closed conformations in response to the voltage
+        difference across the membrane, the protein forms a sodium-selective channel
+        through which sodium ions may pass in accordance with their electrochemical
+        gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological
+        properties vary depending on the type of the associated beta subunits (in
+        vitro). Plays a role in neuropathic pain mechanisms (By similarity).","alternativeName":["Voltage-gated
+        sodium channel subunit alpha Nav1.8","Peripheral nerve sodium channel 3","Sodium
+        channel protein type X subunit alpha"],"classifiedWith":["http://purl.uniprot.org/keywords/1185","http://purl.uniprot.org/go/0001518","http://purl.uniprot.org/keywords/1133","http://purl.uniprot.org/go/0055117","http://purl.uniprot.org/go/0019233","http://purl.uniprot.org/go/0005248","http://purl.uniprot.org/go/0042475","http://purl.uniprot.org/go/0007600","http://purl.uniprot.org/keywords/325","http://purl.uniprot.org/keywords/851","http://purl.uniprot.org/go/0071439","http://purl.uniprot.org/keywords/677","http://purl.uniprot.org/go/0060371","http://purl.uniprot.org/keywords/621","http://purl.uniprot.org/keywords/894","http://purl.uniprot.org/go/0002027","http://purl.uniprot.org/keywords/832","http://purl.uniprot.org/go/0086067","http://purl.uniprot.org/go/0086069"],"existence":"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence","organism":"http://purl.uniprot.org/taxonomy/9606","inDataset":"http://purl.uniprot.org"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198","inDataset":"http://linkedlifedata.com/resource/drugbank","targetForDrug":[{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Proparacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Bupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Ropivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Chloroprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Lidocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Oxybuprocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Dibucaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","illicit"],"genericName":"Cocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Dyclonine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Levobupivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Benzocaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["smallMolecule","approved"],"genericName":"Mepivacaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule"],"genericName":"Hexylcaine"},{"_about":"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721","inDataset":"http://linkedlifedata.com/resource/drugbank","drug_type":["approved","smallMolecule","investigational"],"genericName":"Procaine"}],"cellularLocation":["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough","membrane"],"numberOfResidues":"1988","theoreticalPi":"5.77"}],"mappingRelation":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451","hasTargetComponent":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744","description":"Sodium
+        channel protein type 10 subunit alpha","inDataset":"http://www.ebi.ac.uk/chembl"},"inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein","label":"Sodium
+        channel protein type X alpha subunit"},"prefLabel_en":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)","prefLabel":"Sodium channel protein
+        type 10 subunit alpha (Homo sapiens)"}],"type":"http://purl.org/linked-data/api/vocab#List"}}'
+    http_version: 
+  recorded_at: Tue, 08 Jul 2014 13:20:44 GMT
+recorded_with: VCR 2.9.0

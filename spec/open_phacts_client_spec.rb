@@ -31,7 +31,7 @@
 require 'spec_helper'
 
 OPS_SETTINGS = {
-  :url => 'https://beta.openphacts.org/1.3',
+  :url => 'https://beta.openphacts.org/1.4',
   :app_id => 'secret_id',
   :app_key => 'secret_key'
 }.freeze
@@ -134,9 +134,11 @@ describe OPS::OpenPhactsClient, :vcr do
 
       it 'raises ForbiddenError (403)' do
         expect {@client.compound_info(VALID_COMPOUND_URI)}.to raise_error OPS::ForbiddenError
+        expect {@client.compound_info_batch(VALID_COMPOUND_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.compound_pharmacology(VALID_COMPOUND_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.compound_pharmacology_count(VALID_COMPOUND_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.target_info(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
+        expect {@client.target_info_batch(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.target_pharmacology(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.target_pharmacology_count(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.smiles_to_url(VALID_SMILES)}.to raise_error OPS::ForbiddenError
@@ -206,6 +208,82 @@ describe OPS::OpenPhactsClient, :vcr do
         stub_request(:get, "#{OPS_SETTINGS[:url]}/compound?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&uri=#{UNKNOWN_URI}").
           to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
         expect {@client.compound_info(UNKNOWN_URI)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
+      end
+    end
+  end
+
+
+
+  describe '#compound_info_batch' do
+    context 'with correct settings' do
+      before :each do
+        @client = OPS::OpenPhactsClient.new(OPS_SETTINGS)
+      end
+
+      it 'raises NotFoundError if the compound is unknown to OPS' do
+        expect {@client.compound_info_batch(UNKNOWN_URI)}.to raise_error OPS::NotFoundError
+      end
+
+      it 'raises BadRequestError if the compound uri is invalid' do
+        expect {@client.compound_info_batch(INVALID_URI)}.to raise_error OPS::BadRequestError
+      end
+
+      it 'raises InternalServerError if an OPS internal server error occurs' do
+        stub_request(:post, "#{OPS_SETTINGS[:url]}/compound/batch").to_return(:status => 500)
+        expect {@client.compound_info_batch(UNKNOWN_URI)}.to raise_error OPS::InternalServerError
+      end
+
+      it "raises an ArgumentError if no compound URI is given" do
+        expect {@client.compound_info_batch}.to raise_error(ArgumentError)
+      end
+
+      it "returns the compound info if the compound is known to OPS" do
+        @client.compound_info_batch(VALID_COMPOUND_URI).should == {
+          :uri=>"https://beta.openphacts.org/1.4/compound/batch",
+          :modified=>"Tuesday, 08-Jul-14 12:48:54 UTC",
+          :definition=>"https://beta.openphacts.org/api-config",
+          :extended_metadata_version=>"https://beta.openphacts.org/1.4/compound/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite",
+          :type=>"http://purl.org/linked-data/api/vocab#List",
+          :items=>[
+            {
+              :"http://ops.rsc.org"=>{
+                :uri=>"http://ops.rsc.org/OPS3", :hba=>9, :hbd=>6,
+                :inchi=>"InChI=1S/C21H24O9/c1-28-16-5-4-11(8-15(16)24)2-3-12-6-13(23)9-14(7-12)29-21-20(27)19(26)18(25)17(10-22)30-21/h2-9,17-27H,10H2,1H3/b3-2+",
+                :inchikey=>"GKAJCVFOJGXVIA-NSCUHMNNSA-N", :logp=>0.684, :molformula=>"C21H24O9",
+                :molweight=>420.41, :psa=>149.07, :ro5_violations=>1, :rtb=>12,
+                :smiles=>"COC1=C(C=C(C=C1)/C=C/C2=CC(=CC(=C2)OC3C(C(C(C(O3)CO)O)O)O)O)O",
+                :same_as=>["http://ops.rsc.org/OPS3", "http://ops.rsc.org/OPS3/rdf"]
+              },
+              :"http://www.ebi.ac.uk/chembl"=>{
+                :uri=>"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1987358",
+                :mw_freebase=>420.41, :type=>"http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule"
+              },
+              :"http://www.conceptwiki.org"=>{
+                :uri=>"http://www.conceptwiki.org/concept/a371d2ba-4c32-4fad-99dc-3b1d5357d29d",
+                :pref_label_en=>"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl hexopyranoside",
+                :pref_label=>"3-Hydroxy-5-[(E)-2-(3-hydroxy-4-methoxyphenyl)vinyl]phenyl hexopyranoside"
+              }
+            }
+          ]
+        }
+      end
+
+      it "works with a server URL with trailing backslash" do
+        config = OPS_SETTINGS.dup
+        config[:url] += '/'
+        @client = OPS::OpenPhactsClient.new(config)
+        @client.compound_info_batch(VALID_COMPOUND_URI).should_not be_nil
+      end
+
+      it "works with both '|' delimited string and array of uris" do
+        uriList = [VALID_COMPOUND_URI, VALID_COMPOUND_URI]
+        expect(@client.compound_info_batch(uriList)).to eq(@client.compound_info_batch(uriList.join("|")))
+      end
+
+      it "raises an exception if response can't be parsed" do
+        stub_request(:post, "#{OPS_SETTINGS[:url]}/compound/batch").
+          to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
+        expect {@client.compound_info_batch(UNKNOWN_URI)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
       end
     end
   end
@@ -376,6 +454,77 @@ describe OPS::OpenPhactsClient, :vcr do
             :pref_label_en=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)",
             :pref_label=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)"
           },
+          :"http://linkedlifedata.com/resource/drugbank"=>{
+            :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198",
+            :target_for_drug=>[
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Proparacaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297",
+                :drug_type=>["approved", "smallMolecule", "investigational"], :generic_name=>"Bupivacaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296",
+                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Ropivacaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161",
+                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Chloroprocaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Lidocaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Oxybuprocaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Dibucaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907",
+                :drug_type=>["approved", "smallMolecule", "illicit"], :generic_name=>"Cocaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645",
+                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Dyclonine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002",
+                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Levobupivacaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Benzocaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961",
+                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Mepivacaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473",
+                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Hexylcaine"
+              },
+              {
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721",
+                :drug_type=>["approved", "smallMolecule", "investigational"], :generic_name=>"Procaine"
+              }
+            ],
+            :cellular_location=>["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough", "membrane"],
+            :number_of_residues=>"1988", :theoretical_pi=>"5.77"
+          },
+          :"http://purl.uniprot.org"=>{
+            :uri=>"http://purl.uniprot.org/uniprot/Q9Y5Y9",
+            :function_annotation=>"This protein mediates the voltage-dependent sodium ion permeability of excitable membranes. Assuming opened or closed conformations in response to the voltage difference across the membrane, the protein forms a sodium-selective channel through which sodium ions may pass in accordance with their electrochemical gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological properties vary depending on the type of the associated beta subunits (in vitro). Plays a role in neuropathic pain mechanisms (By similarity).",
+            :alternative_name=>["Voltage-gated sodium channel subunit alpha Nav1.8", "Peripheral nerve sodium channel 3", "Sodium channel protein type X subunit alpha"],
+            :classified_with=>["http://purl.uniprot.org/keywords/1185", "http://purl.uniprot.org/go/0001518", "http://purl.uniprot.org/keywords/1133", "http://purl.uniprot.org/go/0055117", "http://purl.uniprot.org/go/0019233", "http://purl.uniprot.org/go/0005248", "http://purl.uniprot.org/go/0042475", "http://purl.uniprot.org/go/0007600", "http://purl.uniprot.org/keywords/325", "http://purl.uniprot.org/keywords/851", "http://purl.uniprot.org/go/0071439", "http://purl.uniprot.org/keywords/677", "http://purl.uniprot.org/go/0060371", "http://purl.uniprot.org/keywords/621", "http://purl.uniprot.org/keywords/894", "http://purl.uniprot.org/go/0002027", "http://purl.uniprot.org/keywords/832", "http://purl.uniprot.org/go/0086067", "http://purl.uniprot.org/go/0086069"],
+            :existence=>"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence",
+            :organism=>"http://purl.uniprot.org/taxonomy/9606"
+          },
           :"http://www.ebi.ac.uk/chembl"=>{
             :uri=>"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451",
             :has_target_component=>{
@@ -384,75 +533,6 @@ describe OPS::OpenPhactsClient, :vcr do
             },
             :type=>"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein",
             :label=>"Sodium channel protein type X alpha subunit"
-          },
-          :"http://purl.uniprot.org"=>{
-            :uri=>"http://purl.uniprot.org/uniprot/Q9Y5Y9",
-            :function_annotation=>"This protein mediates the voltage-dependent sodium ion permeability of excitable membranes. Assuming opened or closed conformations in response to the voltage difference across the membrane, the protein forms a sodium-selective channel through which sodium ions may pass in accordance with their electrochemical gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological properties vary depending on the type of the associated beta subunits (in vitro). Plays a role in neuropathic pain mechanisms (By similarity).",
-            :alternative_name=>["Peripheral nerve sodium channel 3", "Voltage-gated sodium channel subunit alpha Nav1.8", "Sodium channel protein type X subunit alpha"],
-            :classified_with=>["http://purl.uniprot.org/keywords/851", "http://purl.uniprot.org/go/0005248", "http://purl.uniprot.org/go/0001518", "http://purl.uniprot.org/keywords/325", "http://purl.uniprot.org/go/0055117", "http://purl.uniprot.org/keywords/1133", "http://purl.uniprot.org/keywords/1185", "http://purl.uniprot.org/go/0019233", "http://purl.uniprot.org/go/0007600", "http://purl.uniprot.org/go/0086067", "http://purl.uniprot.org/go/0086069", "http://purl.uniprot.org/go/0042475", "http://purl.uniprot.org/go/0060371", "http://purl.uniprot.org/keywords/832", "http://purl.uniprot.org/go/0071439", "http://purl.uniprot.org/keywords/621", "http://purl.uniprot.org/go/0002027", "http://purl.uniprot.org/keywords/894", "http://purl.uniprot.org/keywords/677"],
-            :existence=>"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence",
-            :organism=>"http://purl.uniprot.org/taxonomy/9606"
-          },
-          :"http://linkedlifedata.com/resource/drugbank"=>{
-            :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198",
-            :target_for_drug=>[
-              {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Oxybuprocaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281",
-                :drug_type=>["approved", "smallMolecule"],
-                :generic_name=>"Lidocaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645",
-                :drug_type=>["approved", "smallMolecule"],
-                :generic_name=>"Dyclonine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Dibucaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Ropivacaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297",
-                :drug_type=>["investigational", "approved", "smallMolecule"],
-                :generic_name=>"Bupivacaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907",
-                :drug_type=>["illicit", "approved", "smallMolecule"],
-                :generic_name=>"Cocaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Chloroprocaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Proparacaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961",
-                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Mepivacaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086",
-                :drug_type=>["approved", "smallMolecule"], :generic_name=>"Benzocaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473",
-                :drug_type=>["smallMolecule", "approved"],
-                :generic_name=>"Hexylcaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721",
-                :drug_type=>["smallMolecule", "approved", "investigational"],
-                :generic_name=>"Procaine"
-              }, {
-                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002",
-                :drug_type=>["smallMolecule", "approved"], :generic_name=>"Levobupivacaine"
-              }
-            ],
-            :cellular_location=>["membrane", "multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough"],
-            :number_of_residues=>"1988", :theoretical_pi=>"5.77"
           }
         }
       end
@@ -468,6 +548,153 @@ describe OPS::OpenPhactsClient, :vcr do
         stub_request(:get, "#{OPS_SETTINGS[:url]}/target?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&uri=#{UNKNOWN_URI}").
           to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
         expect {@client.target_info(UNKNOWN_URI)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
+      end
+    end
+  end
+
+
+
+  describe '#target_info_batch' do
+    context 'with correct settings' do
+      before :each do
+        @client = OPS::OpenPhactsClient.new(OPS_SETTINGS)
+      end
+
+      it 'raises NotFoundError if the target is unknown to OPS' do
+        expect {@client.target_info_batch(UNKNOWN_URI)}.to raise_error OPS::NotFoundError
+      end
+
+      it 'raises BadRequestError if the target uri is invalid' do
+        expect {@client.target_info_batch(INVALID_URI)}.to raise_error OPS::BadRequestError
+      end
+
+      it 'raises InternalServerError if an OPS internal server error occurs' do
+        stub_request(:post, "#{OPS_SETTINGS[:url]}/target/batch").to_return(:status => 500)
+        expect {@client.target_info_batch(UNKNOWN_URI)}.to raise_error OPS::InternalServerError
+      end
+
+      it "raises an ArgumentError if no target URI is given" do
+        expect {@client.target_info_batch}.to raise_error(ArgumentError)
+      end
+
+      it "returns the target info if the target is known to OPS" do
+        @client.target_info_batch(VALID_TARGET_URI).should == {
+          :uri=>"https://beta.openphacts.org/1.4/target/batch",
+          :modified=>"Tuesday, 08-Jul-14 12:49:21 UTC",
+          :definition=>"https://beta.openphacts.org/api-config",
+          :extended_metadata_version=>"https://beta.openphacts.org/1.4/target/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite",
+          :type=>"http://purl.org/linked-data/api/vocab#List",
+          :items=>[
+            {
+              :"http://www.conceptwiki.org"=>{
+                :uri=>"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291",
+                :same_as=>["http://www.conceptwiki.org/concept/index/00059958-a045-4581-9dc5-e5a08bb0c291", "http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291"],
+                :mapping_relation=>{
+                  :uri=>"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451",
+                  :has_target_component=>{
+                    :uri=>"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744",
+                    :description=>"Sodium channel protein type 10 subunit alpha"
+                  },
+                  :type=>"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein",
+                  :label=>"Sodium channel protein type X alpha subunit"
+                },
+                :pref_label_en=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)",
+                :pref_label=>"Sodium channel protein type 10 subunit alpha (Homo sapiens)"
+              },
+              :"http://purl.uniprot.org"=>{
+                :uri=>"http://purl.uniprot.org/uniprot/Q9Y5Y9",
+                :function_annotation=>"This protein mediates the voltage-dependent sodium ion permeability of excitable membranes. Assuming opened or closed conformations in response to the voltage difference across the membrane, the protein forms a sodium-selective channel through which sodium ions may pass in accordance with their electrochemical gradient. It is a tetrodotoxin-resistant sodium channel isoform. Its electrophysiological properties vary depending on the type of the associated beta subunits (in vitro). Plays a role in neuropathic pain mechanisms (By similarity).",
+                :alternative_name=>["Voltage-gated sodium channel subunit alpha Nav1.8", "Peripheral nerve sodium channel 3", "Sodium channel protein type X subunit alpha"],
+                :classified_with=>["http://purl.uniprot.org/keywords/1185", "http://purl.uniprot.org/go/0001518", "http://purl.uniprot.org/keywords/1133", "http://purl.uniprot.org/go/0055117", "http://purl.uniprot.org/go/0019233", "http://purl.uniprot.org/go/0005248", "http://purl.uniprot.org/go/0042475", "http://purl.uniprot.org/go/0007600", "http://purl.uniprot.org/keywords/325", "http://purl.uniprot.org/keywords/851", "http://purl.uniprot.org/go/0071439", "http://purl.uniprot.org/keywords/677", "http://purl.uniprot.org/go/0060371", "http://purl.uniprot.org/keywords/621", "http://purl.uniprot.org/keywords/894", "http://purl.uniprot.org/go/0002027", "http://purl.uniprot.org/keywords/832", "http://purl.uniprot.org/go/0086067", "http://purl.uniprot.org/go/0086069"],
+                :existence=>"http://purl.uniprot.org/core/Evidence_at_Protein_Level_Existence",
+                :organism=>"http://purl.uniprot.org/taxonomy/9606"
+              },
+              :"http://linkedlifedata.com/resource/drugbank"=>{
+                :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/targets/198",
+                :target_for_drug=>[
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00807",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Proparacaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00297",
+                    :drug_type=>["approved", "smallMolecule", "investigational"],
+                    :generic_name=>"Bupivacaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00296",
+                    :drug_type=>["approved", "smallMolecule"], :generic_name=>"Ropivacaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01161",
+                    :drug_type=>["approved", "smallMolecule"], :generic_name=>"Chloroprocaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00281",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Lidocaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00892",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Oxybuprocaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00527",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Dibucaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00907",
+                    :drug_type=>["approved", "smallMolecule", "illicit"], :generic_name=>"Cocaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00645",
+                    :drug_type=>["approved", "smallMolecule"], :generic_name=>"Dyclonine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01002",
+                    :drug_type=>["approved", "smallMolecule"], :generic_name=>"Levobupivacaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB01086",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Benzocaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00961",
+                    :drug_type=>["smallMolecule", "approved"], :generic_name=>"Mepivacaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00473",
+                    :drug_type=>["approved", "smallMolecule"], :generic_name=>"Hexylcaine"
+                  },
+                  {
+                    :uri=>"http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugs/DB00721",
+                    :drug_type=>["approved", "smallMolecule", "investigational"],
+                    :generic_name=>"Procaine"
+                  }
+                ],
+                :cellular_location=>["multi-passMembraneProtein.ItCanBeTranslocatedToTheExtracellularMembraneThrough", "membrane"],
+                :number_of_residues=>"1988", :theoretical_pi=>"5.77"
+              }
+            }
+          ]
+        }
+      end
+
+      it "works with a server URL with trailing backslash" do
+        config = OPS_SETTINGS.dup
+        config[:url] += '/'
+        @client = OPS::OpenPhactsClient.new(config)
+        @client.target_info_batch(VALID_TARGET_URI).should_not be_nil
+      end
+
+      it "works with both '|' delimited string and array of uris" do
+        uriList = [VALID_TARGET_URI, VALID_TARGET_URI]
+        expect(@client.target_info_batch(uriList)).to eq(@client.target_info_batch(uriList.join("|")))
+      end
+
+      it "raises an exception if response can't be parsed" do
+        stub_request(:post, "#{OPS_SETTINGS[:url]}/target/batch").
+          to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
+        expect {@client.target_info_batch(UNKNOWN_URI)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
       end
     end
   end

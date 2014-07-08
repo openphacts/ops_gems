@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/1.3/structure/substructure?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.MolType=0&searchOptions.Molecule=CCC)
+    uri: https://beta.openphacts.org/1.4/structure/substructure?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.MolType=0&searchOptions.Molecule=CCC)
     body:
       encoding: US-ASCII
       string: ''
@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Wed, 26 Mar 2014 08:11:42 GMT
+      - Tue, 08 Jul 2014 13:21:10 GMT
   response:
     status:
       code: 500
       message: Internal Server Error
     headers:
       Date:
-      - Wed, 26 Mar 2014 08:11:43 GMT
+      - Tue, 08 Jul 2014 13:21:10 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
@@ -65,5 +65,5 @@ http_interactions:
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Wed, 26 Mar 2014 08:11:43 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 08 Jul 2014 13:21:11 GMT
+recorded_with: VCR 2.9.0

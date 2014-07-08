@@ -39,6 +39,7 @@ module OPS
   class ServerResponseError < Error; end
   class NotFoundError < ServerResponseError; end
   class ForbiddenError < ServerResponseError; end
+  class UriTooLarge < ServerResponseError; end
   class BadRequestError < ServerResponseError; end
   class GatewayTimeoutError < ServerResponseError; end
   class InternalServerError < ServerResponseError; end
