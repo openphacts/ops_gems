@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:47 GMT
+      - Tue, 14 Oct 2014 09:52:28 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:48 GMT
+      - Tue, 14 Oct 2014 09:52:30 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -35,17 +35,17 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Tue, 08 Jul 2014 12:49:30 GMT
-      Etag:
-      - 6a73259168c871a99ecb19a000abb496
+      - Tue, 14 Oct 2014 09:52:27 GMT
       X-Served-From-Cache:
-      - 'true'
+      - 'false'
+      Etag:
+      - 9209c9fa3ba82a712acca9548c84f725
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_page=1","itemsPerPage":"all","startIndex":0,"isPartOf":{"_about":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key","hasPart":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_page=1","definition":"http://www.openphacts.org/api#targetPharmacologyListEndpoint","type":"http://purl.org/linked-data/api/vocab#List"},"modified":"Tuesday,
-        08-Jul-14 12:49:31 UTC","extendedMetadataVersion":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/activity/CHEMBL_ACT_1985117","pmid":"http://identifiers.org/pubmed/17804230","hasAssay":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/assay/CHEMBL899665","description":"Inhibition
+        14-Oct-14 09:52:27 UTC","extendedMetadataVersion":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","items":[{"_about":"http://rdf.ebi.ac.uk/resource/chembl/activity/CHEMBL_ACT_1985117","pmid":"http://identifiers.org/pubmed/17804230","hasAssay":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/assay/CHEMBL899665","description":"Inhibition
         of sodium channel NaV1.8 at 20 ug/mL by HTS assay","assayOrganismName":"Homo
         sapiens","hasTarget":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/target/CHEMBL5451","title":"Sodium
         channel protein type X alpha subunit","hasTargetComponent":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/targetcomponent/CHEMBL_TC_3744","exactMatch":{"_about":"http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291","inDataset":"http://www.conceptwiki.org","prefLabel_en":"Sodium
@@ -1082,5 +1082,5 @@ http_interactions:
         sapiens","inDataset":"http://www.ebi.ac.uk/chembl","type":"http://rdf.ebi.ac.uk/terms/chembl#SingleProtein"},"inDataset":"http://www.ebi.ac.uk/chembl"},"hasMolecule":{"_about":"http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1631104","exactMatch":[{"_about":"http://ops.rsc.org/OPS328531","inDataset":"http://ops.rsc.org","inchi":"InChI=1S/C21H14F8N4O3/c22-19(23,21(27,28)29)9-36-16-12(5-2-6-13(16)20(24,25)26)10-3-1-4-11(7-10)33-15(18(31)35)8-14(32-33)17(30)34/h1-8H,9H2,(H2,30,34)(H2,31,35)","inchikey":"LQBHOJPQVSFKSZ-UHFFFAOYSA-N","molweight":522.348,"ro5_violations":1,"smiles":"C1=CC(=CC(=C1)N2C(=CC(=N2)C(=O)N)C(=O)N)C3=C(C(=CC=C3)C(F)(F)F)OCC(C(F)(F)F)(F)F"},{"_about":"http://www.conceptwiki.org/concept/eac7f47c-28a3-484d-b3cd-c97796f5edbd","inDataset":"http://www.conceptwiki.org","prefLabel_en":"1-[2''-(2,2,3,3,3-Pentafluoropropoxy)-3''-(trifluoromethyl)-3-biphenylyl]-1H-pyrazole-3,5-dicarboxamide","prefLabel":"1-[2''-(2,2,3,3,3-Pentafluoropropoxy)-3''-(trifluoromethyl)-3-biphenylyl]-1H-pyrazole-3,5-dicarboxamide"}]},"activity_unit":{"_about":"http://www.openphacts.org/units/Nanomolar","prefLabel":"nM"},"pChembl":6.52,"publishedRelation":"=","publishedType":"IC50","publishedUnits":"uM","publishedValue":0.299,"activity_relation":"=","activity_type":"IC50","activity_value":299,"inDataset":"http://www.ebi.ac.uk/chembl"}],"type":"http://purl.org/linked-data/api/vocab#Page","first":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_page=1","next":"https://beta.openphacts.org/1.4/target/pharmacology/pages?_pageSize=all&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key&_page=2","label":"Target
         Pharmacology: List"}}'
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:50 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:30 GMT
 recorded_with: VCR 2.9.0

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://beta.openphacts.org/1.4/structure/substructure?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.MolType=0&searchOptions.Molecule=CCC)
+    uri: https://beta.openphacts.org/1.4/structure/exact?_format=json&app_id=secret_id&app_key=secret_key&searchOptions.Molecule=CCC)
     body:
       encoding: US-ASCII
       string: ''
@@ -12,18 +12,18 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 14 Oct 2014 09:52:43 GMT
+      - Tue, 14 Oct 2014 10:26:57 GMT
   response:
     status:
       code: 500
       message: Internal Server Error
     headers:
       Date:
-      - Tue, 14 Oct 2014 09:52:43 GMT
+      - Tue, 14 Oct 2014 10:26:57 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '2739'
+      - '1710'
       Connection:
       - keep-alive
       Server:
@@ -46,24 +46,13 @@ http_interactions:
         \   <p>\n        Sorry, there was an internal error in serving this request,
         possibly due to an upstream server, or a configuration error.\n    </p>\n
         \   \n    <!-- Errors -->\n<p>\n    Unexpected response returned from ChemSpider:
-        &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;\r\n&lt;html
-        xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;\r\n&lt;head&gt;\r\n&lt;meta
-        http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;/&gt;\r\n&lt;title&gt;500
-        - Internal server error.&lt;/title&gt;\r\n&lt;style type=&quot;text/css&quot;&gt;\r\n&lt;!--\r\nbody{margin:0;font-size:.7em;font-family:Verdana,
-        Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\nfieldset{padding:0 15px
-        10px 15px;} \r\nh1{font-size:2.4em;margin:0;color:#FFF;}\r\nh2{font-size:1.7em;margin:0;color:#CC0000;}
-        \r\nh3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n#header{width:96%;margin:0
-        0 0 0;padding:6px 2% 6px 2%;font-family:&quot;trebuchet MS&quot;, Verdana,
-        sans-serif;color:#FFF;\r\nbackground-color:#555555;}\r\n#content{margin:0
-        0 0 2%;position:relative;}\r\n.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n--&gt;\r\n&lt;/style&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;div
-        id=&quot;header&quot;&gt;&lt;h1&gt;Server Error&lt;/h1&gt;&lt;/div&gt;\r\n&lt;div
-        id=&quot;content&quot;&gt;\r\n &lt;div class=&quot;content-container&quot;&gt;&lt;fieldset&gt;\r\n
-        \ &lt;h2&gt;500 - Internal server error.&lt;/h2&gt;\r\n  &lt;h3&gt;There is
-        a problem with the resource you are looking for, and it cannot be displayed.&lt;/h3&gt;\r\n
-        &lt;/fieldset&gt;&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n</p>\n
+        &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot;&quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;\r\n&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Bad
+        Request&lt;/TITLE&gt;\r\n&lt;META HTTP-EQUIV=&quot;Content-Type&quot; Content=&quot;text/html;
+        charset=us-ascii&quot;&gt;&lt;/HEAD&gt;\r\n&lt;BODY&gt;&lt;h2&gt;Bad Request&lt;/h2&gt;\r\n&lt;hr&gt;&lt;p&gt;HTTP
+        Error 400. The request is badly formed.&lt;/p&gt;\r\n&lt;/BODY&gt;&lt;/HTML&gt;\r\n</p>\n
         \   \n</div>\n<div class=\"footer\">\n    <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Tue, 14 Oct 2014 09:52:43 GMT
+  recorded_at: Tue, 14 Oct 2014 10:26:57 GMT
 recorded_with: VCR 2.9.0

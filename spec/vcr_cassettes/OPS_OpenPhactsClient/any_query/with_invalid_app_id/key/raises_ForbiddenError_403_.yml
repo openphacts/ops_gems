@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:19:59 GMT
+      - Tue, 14 Oct 2014 09:52:18 GMT
   response:
     status:
       code: 403
@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:01 GMT
+      - Tue, 14 Oct 2014 09:52:18 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -32,7 +32,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:01 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:18 GMT
 - request:
     method: post
     uri: https://beta.openphacts.org/1.4/compound/batch
@@ -45,7 +45,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:01 GMT
+      - Tue, 14 Oct 2014 09:52:18 GMT
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -56,7 +56,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:02 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -67,7 +67,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:02 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:19 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/compound/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://ops.rsc.org/OPS3
@@ -80,7 +80,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:02 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
   response:
     status:
       code: 403
@@ -89,7 +89,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:03 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -100,7 +100,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:03 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:19 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/compound/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://ops.rsc.org/OPS3
@@ -113,7 +113,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:03 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
   response:
     status:
       code: 403
@@ -122,7 +122,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:04 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -133,7 +133,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:04 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:19 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/target?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
@@ -146,7 +146,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:04 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
   response:
     status:
       code: 403
@@ -155,7 +155,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:05 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -166,7 +166,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:05 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:19 GMT
 - request:
     method: post
     uri: https://beta.openphacts.org/1.4/target/batch
@@ -179,7 +179,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:05 GMT
+      - Tue, 14 Oct 2014 09:52:19 GMT
       Content-Type:
       - application/x-www-form-urlencoded
   response:
@@ -190,7 +190,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:06 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -201,7 +201,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:06 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:20 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/target/pharmacology/pages?_format=json&_pageSize=all&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
@@ -214,7 +214,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:06 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
   response:
     status:
       code: 403
@@ -223,7 +223,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:07 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -234,7 +234,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:07 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:20 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/target/pharmacology/count?_format=json&app_id=foo&app_key=bar&uri=http://www.conceptwiki.org/concept/00059958-a045-4581-9dc5-e5a08bb0c291
@@ -247,7 +247,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:07 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
   response:
     status:
       code: 403
@@ -256,7 +256,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:08 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -267,7 +267,7 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:08 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:20 GMT
 - request:
     method: get
     uri: https://beta.openphacts.org/1.4/structure?_format=json&app_id=foo&app_key=bar&smiles=CC(=O)Oc1ccccc1C(=O)O
@@ -280,7 +280,7 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:08 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
   response:
     status:
       code: 403
@@ -289,7 +289,7 @@ http_interactions:
       Server:
       - ngx_openresty/1.2.6.6
       Date:
-      - Tue, 08 Jul 2014 13:20:09 GMT
+      - Tue, 14 Oct 2014 09:52:20 GMT
       Content-Type:
       - text/plain; charset=us-ascii
       Transfer-Encoding:
@@ -300,5 +300,104 @@ http_interactions:
       encoding: US-ASCII
       string: Authentication failed
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:09 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:20 GMT
+- request:
+    method: get
+    uri: https://beta.openphacts.org/1.4/structure/exact?_format=json&app_id=foo&app_key=bar&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 14 Oct 2014 09:52:20 GMT
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.6.6
+      Date:
+      - Tue, 14 Oct 2014 09:52:21 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Tue, 14 Oct 2014 09:52:21 GMT
+- request:
+    method: get
+    uri: https://beta.openphacts.org/1.4/structure/similarity?_format=json&app_id=foo&app_key=bar&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 14 Oct 2014 09:52:21 GMT
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.6.6
+      Date:
+      - Tue, 14 Oct 2014 09:52:21 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Tue, 14 Oct 2014 09:52:21 GMT
+- request:
+    method: get
+    uri: https://beta.openphacts.org/1.4/structure/substructure?_format=json&app_id=foo&app_key=bar&searchOptions.MolType=0&searchOptions.Molecule=CC(=O)Oc1ccccc1C(=O)O
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.3.4.1, ruby 1.9.3 (2012-04-20))
+      Accept:
+      - ! '*/*'
+      Date:
+      - Tue, 14 Oct 2014 09:52:21 GMT
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - ngx_openresty/1.2.6.6
+      Date:
+      - Tue, 14 Oct 2014 09:52:21 GMT
+      Content-Type:
+      - text/plain; charset=us-ascii
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: Authentication failed
+    http_version: 
+  recorded_at: Tue, 14 Oct 2014 09:52:21 GMT
 recorded_with: VCR 2.9.0

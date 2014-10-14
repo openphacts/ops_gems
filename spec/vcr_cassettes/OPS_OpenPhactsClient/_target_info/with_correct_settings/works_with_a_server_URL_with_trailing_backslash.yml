@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:34 GMT
+      - Tue, 14 Oct 2014 09:52:26 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:35 GMT
+      - Tue, 14 Oct 2014 09:52:26 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Tue, 08 Jul 2014 12:49:15 GMT
+      - Tue, 14 Oct 2014 09:52:24 GMT
       Etag:
       - c43b4edb46e1eafd8aa64d6411bfe1dd
       X-Served-From-Cache:
@@ -59,5 +59,5 @@ http_interactions:
         type 10 subunit alpha (Homo sapiens)","prefLabel":"Sodium channel protein
         type 10 subunit alpha (Homo sapiens)","isPrimaryTopicOf":"https://beta.openphacts.org/1.4/target?uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F00059958-a045-4581-9dc5-e5a08bb0c291&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:35 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:26 GMT
 recorded_with: VCR 2.9.0

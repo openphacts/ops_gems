@@ -98,6 +98,12 @@ module OPS
       query_api('structure', options.merge(:smiles => smiles), Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
     end
 
+    def exact_structure_search(smiles, options={})
+      return nil if not smiles or smiles.blank?
+      opts = options.merge('searchOptions.Molecule' => smiles)
+      query_api('structure/exact', opts, Proc.new{|data| OPS::LDC.parse_primary_topic_json(data)})
+    end
+
     def similarity_search(smiles, options={})
       return nil if not smiles or smiles.blank?
       opts = options.merge('searchOptions.Molecule' => smiles)

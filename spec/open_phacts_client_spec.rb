@@ -142,6 +142,9 @@ describe OPS::OpenPhactsClient, :vcr do
         expect {@client.target_pharmacology(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.target_pharmacology_count(VALID_TARGET_URI)}.to raise_error OPS::ForbiddenError
         expect {@client.smiles_to_url(VALID_SMILES)}.to raise_error OPS::ForbiddenError
+        expect {@client.exact_structure_search(VALID_SMILES)}.to raise_error OPS::ForbiddenError
+        expect {@client.similarity_search(VALID_SMILES)}.to raise_error OPS::ForbiddenError
+        expect {@client.substructure_search(VALID_SMILES)}.to raise_error OPS::ForbiddenError
       end
     end
   end
@@ -240,7 +243,7 @@ describe OPS::OpenPhactsClient, :vcr do
       it "returns the compound info if the compound is known to OPS" do
         @client.compound_info_batch(VALID_COMPOUND_URI).should == {
           :uri=>"https://beta.openphacts.org/1.4/compound/batch",
-          :modified=>"Tuesday, 08-Jul-14 12:48:54 UTC",
+          :modified=>"Tuesday, 14-Oct-14 09:52:21 UTC",
           :definition=>"https://beta.openphacts.org/api-config",
           :extended_metadata_version=>"https://beta.openphacts.org/1.4/compound/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite",
           :type=>"http://purl.org/linked-data/api/vocab#List",
@@ -580,7 +583,7 @@ describe OPS::OpenPhactsClient, :vcr do
       it "returns the target info if the target is known to OPS" do
         @client.target_info_batch(VALID_TARGET_URI).should == {
           :uri=>"https://beta.openphacts.org/1.4/target/batch",
-          :modified=>"Tuesday, 08-Jul-14 12:49:21 UTC",
+          :modified=>"Tuesday, 14-Oct-14 09:52:25 UTC",
           :definition=>"https://beta.openphacts.org/api-config",
           :extended_metadata_version=>"https://beta.openphacts.org/1.4/target/batch?_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite",
           :type=>"http://purl.org/linked-data/api/vocab#List",
@@ -873,7 +876,7 @@ describe OPS::OpenPhactsClient, :vcr do
       end
 
       it "returns the URI if the smiles is known to OPS" do
-        @client.smiles_to_url(VALID_SMILES).should == {:smiles=>VALID_SMILES, :uri=>'http://ops.rsc.org/OPS403534'}
+        @client.smiles_to_url(VALID_SMILES).should == {:smiles=>VALID_SMILES, :uri=>'http://ops.rsc.org/OPS2157'}
       end
 
       it "works with a server URL with trailing backslash" do
@@ -887,6 +890,55 @@ describe OPS::OpenPhactsClient, :vcr do
         stub_request(:get, "#{OPS_SETTINGS[:url]}/structure?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&smiles=#{VALID_SMILES}").
           to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
         expect {@client.smiles_to_url(VALID_SMILES)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
+      end
+    end
+  end
+
+  describe '#exact_structure_search' do
+    context 'with correct settings' do
+      before :each do
+        @client = OPS::OpenPhactsClient.new(OPS_SETTINGS)
+      end
+
+      it 'raises OPS::NotFoundError if the smiles is unknown to OPS' do
+        expect {@client.exact_structure_search(UNKNOWN_SMILES)}.to raise_error OPS::NotFoundError
+      end
+
+      it 'raises InternalServerError if the smiles is invalid' do
+        expect {@client.exact_structure_search(INVALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it 'raises InternalServerError if an OPS internal server error occurs' do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/exact?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:status => 500)
+
+        expect {@client.exact_structure_search(VALID_SMILES)}.to raise_error OPS::InternalServerError
+      end
+
+      it "raises an ArgumentError if no smiles URI is given" do
+        expect {@client.exact_structure_search}.to raise_error(ArgumentError)
+      end
+
+      it "returns results if the smiles is known to OPS" do
+        @client.exact_structure_search(VALID_SMILES).should == {
+          :uri=>"http://www.openphacts.org/api/ChemicalStructureSearch",
+          :result=>"http://ops.rsc.org/OPS403534",
+          :molecule=>"CC(=O)Oc1ccccc1C(=O)O",
+          :type=>"http://www.openphacts.org/api/ExactStructureSearch"
+        }
+      end
+
+      it "works with a server URL with trailing backslash" do
+        config = OPS_SETTINGS.dup
+        config[:url] += '/'
+        @client = OPS::OpenPhactsClient.new(config)
+        @client.exact_structure_search(VALID_SMILES).should_not be_nil
+      end
+
+      it "raises an exception if response can't be parsed" do
+        stub_request(:get, "#{OPS_SETTINGS[:url]}/structure/exact?_format=json&app_id=#{OPS_SETTINGS[:app_id]}&app_key=#{OPS_SETTINGS[:app_key]}&searchOptions.Molecule=#{VALID_SMILES}").
+          to_return(:body => %(bla bla), :headers => {"Content-Type"=>"application/json; charset=utf-8"})
+        expect {@client.exact_structure_search(VALID_SMILES)}.to raise_error(OPS::InvalidJsonResponse, "Could not parse response")
       end
     end
   end

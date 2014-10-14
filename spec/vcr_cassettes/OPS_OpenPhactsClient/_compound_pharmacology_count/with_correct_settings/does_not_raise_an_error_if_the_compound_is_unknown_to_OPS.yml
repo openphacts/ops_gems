@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:27 GMT
+      - Tue, 14 Oct 2014 09:52:25 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:28 GMT
+      - Tue, 14 Oct 2014 09:52:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,16 +33,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Tue, 08 Jul 2014 12:49:09 GMT
+      - Tue, 14 Oct 2014 09:52:23 GMT
+      X-Served-From-Cache:
+      - 'false'
       Etag:
       - 8a8517253d602d6bb818e505c82ff53f
-      X-Served-From-Cache:
-      - 'true'
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Funknown.com%2F1111&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Funknown.com%2F1111&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://unknown.com/1111","compoundPharmacologyTotalResults":0,"isPrimaryTopicOf":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Funknown.com%2F1111&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:28 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:25 GMT
 recorded_with: VCR 2.9.0

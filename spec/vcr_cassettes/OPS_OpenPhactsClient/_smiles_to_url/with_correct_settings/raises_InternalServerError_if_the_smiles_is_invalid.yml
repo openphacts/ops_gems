@@ -12,18 +12,18 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:21:00 GMT
+      - Tue, 14 Oct 2014 09:52:33 GMT
   response:
     status:
       code: 500
       message: Internal Server Error
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:21:01 GMT
+      - Tue, 14 Oct 2014 09:52:33 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Content-Length:
-      - '1321'
+      - '1328'
       Connection:
       - keep-alive
       Server:
@@ -46,10 +46,10 @@ http_interactions:
         \   <p>\n        Sorry, there was an internal error in serving this request,
         possibly due to an upstream server, or a configuration error.\n    </p>\n
         \   \n    <!-- Errors -->\n<p>\n    Results returned from ChemSpider contain
-        warnings or errors: &quot;Cannot parse SMILES: CCC)&quot;</p>\n    \n</div>\n<div
+        warnings or errors: &quot;Cannot do the convertion. Sorry!&quot;</p>\n    \n</div>\n<div
         class=\"footer\">\n    <ul>\n        <li><a href=\"http://code.google.com/p/linked-data-api/\">Google
         Code Project for <em>Linked Data API</em></a></li>\n        <li><a href=\"http://puelia-php.googlecode.com/svn/trunk/\">Google
         Code Project for <em>Puelia</em></a></li>\n    </ul>\n</div>\n\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:21:01 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:33 GMT
 recorded_with: VCR 2.9.0

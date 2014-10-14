@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:20:30 GMT
+      - Tue, 14 Oct 2014 09:52:25 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:20:30 GMT
+      - Tue, 14 Oct 2014 09:52:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,16 +33,16 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Tue, 08 Jul 2014 12:49:11 GMT
+      - Tue, 14 Oct 2014 09:52:24 GMT
+      X-Served-From-Cache:
+      - 'false'
       Etag:
       - 6cca6dd73b0f7c23e6492509c4e2aa89
-      X-Served-From-Cache:
-      - 'true'
       X-3scale-Proxy-Secret-Token:
       - Shared_secret_sent_from_proxy_to_API_backend
     body:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://ops.rsc.org/OPS3","compoundPharmacologyTotalResults":59,"isPrimaryTopicOf":"https://beta.openphacts.org/1.4/compound/pharmacology/count?uri=http%3A%2F%2Fops.rsc.org%2FOPS3&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:20:31 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:25 GMT
 recorded_with: VCR 2.9.0

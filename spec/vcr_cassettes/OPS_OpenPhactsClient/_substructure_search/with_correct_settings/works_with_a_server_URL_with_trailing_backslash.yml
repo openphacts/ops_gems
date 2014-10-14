@@ -12,14 +12,14 @@ http_interactions:
       Accept:
       - ! '*/*'
       Date:
-      - Tue, 08 Jul 2014 13:21:11 GMT
+      - Tue, 14 Oct 2014 09:52:46 GMT
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2014 13:21:12 GMT
+      - Tue, 14 Oct 2014 09:52:46 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - ! '*'
       Last-Modified:
-      - Tue, 08 Jul 2014 12:50:09 GMT
+      - Tue, 14 Oct 2014 09:52:42 GMT
       Etag:
       - 326b7b40e74a0b8737623b160ecb1b46
       X-Served-From-Cache:
@@ -46,5 +46,5 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"format":"linked-data-api","version":"1.4","result":{"_about":"https://beta.openphacts.org/1.4/structure/substructure?resultOptions.Count=5&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&searchOptions.MolType=0&_format=json&app_id=secret_id&app_key=secret_key","definition":"https://beta.openphacts.org/api-config","extendedMetadataVersion":"https://beta.openphacts.org/1.4/structure/substructure?resultOptions.Count=5&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&searchOptions.MolType=0&_format=json&app_id=secret_id&app_key=secret_key&_metadata=all%2Cviews%2Cformats%2Cexecution%2Cbindings%2Csite","primaryTopic":{"_about":"http://www.openphacts.org/api/ChemicalStructureSearch","result":[{"_about":"http://ops.rsc.org/OPS403534","relevance":1},{"_about":"http://ops.rsc.org/OPS666650","relevance":1},{"_about":"http://ops.rsc.org/OPS1056157","relevance":1},{"_about":"http://ops.rsc.org/OPS684682","relevance":0.97727274894714},{"_about":"http://ops.rsc.org/OPS1522274","relevance":0.97727274894714}],"Count":"5","MolType":"0","Molecule":"CC(=O)Oc1ccccc1C(=O)O","type":"http://www.openphacts.org/api/SubstructureSearch","isPrimaryTopicOf":"https://beta.openphacts.org/1.4/structure/substructure?resultOptions.Count=5&searchOptions.Molecule=CC%28%3DO%29Oc1ccccc1C%28%3DO%29O&searchOptions.MolType=0&_format=json&app_id=secret_id&app_key=secret_key"}}}'
     http_version: 
-  recorded_at: Tue, 08 Jul 2014 13:21:12 GMT
+  recorded_at: Tue, 14 Oct 2014 09:52:47 GMT
 recorded_with: VCR 2.9.0
