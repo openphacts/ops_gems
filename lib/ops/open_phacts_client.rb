@@ -32,7 +32,6 @@ require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/object/blank'
 require 'httpclient'
 require 'multi_json'
-require 'awesome_print'
 require 'ops/ldc'
 
 module OPS
