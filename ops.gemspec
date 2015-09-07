@@ -24,7 +24,7 @@
 #
 # For further information please contact:
 # BioSolveIT GmbH, An der Ziegelei 79, 53757 Sankt Augustin, Germany
-# Phone: +49 2241 25 25 0 - Email: license@biosolveit.de
+# Phone: +49 2241 25 25 0 - Email: support@biosolveit.de
 #
 ########################################################################################
 
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.name        = "ops"
   s.version     = OPS::VERSION
   s.authors     = ["Lothar Wissler", "Thomas Marek"]
-  s.email       = "lothar.wissler@biosolveit.de"
+  s.email       = "support@biosolveit.de"
   s.homepage    = ""
   s.summary     = %q{Toolkit for the OPS Platform}
   s.description = %q{Toolkit for the OPS Platform}
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "activesupport", "~> 3.2.0"
   s.add_runtime_dependency "nokogiri", "~> 1.5.10"
-  s.add_runtime_dependency "httpclient", "~> 2.3.4.1"
+  s.add_runtime_dependency "httpclient", "~> 2.6"
   s.add_runtime_dependency "multi_json", ">= 1.8", "<= 1.9.2"
   s.add_runtime_dependency "oj", ">= 1.4.7", "<= 2.6.1"
 
