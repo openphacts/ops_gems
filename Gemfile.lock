@@ -49,6 +49,3 @@ DEPENDENCIES
   rspec (~> 2.14.1)
   vcr (~> 2.9.0)
   webmock (~> 1.17.4)
-
-BUNDLED WITH
-   1.10.6
