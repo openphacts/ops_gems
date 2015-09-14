@@ -9,6 +9,12 @@ About
 This gem has been developed as part of the exemplar tool ChemBioNavigator within Open PHACTS (http://www.openphacts.org/). It is distributed under the MIT license (see LICENSE for more details).
 
 
+Requirements
+------------
+
+* Ruby ~> 1.9.3
+
+
 Installation
 ------------
 
